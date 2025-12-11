@@ -1,0 +1,17 @@
+{
+    "bot_prefixes": ["m"],
+    "monsters": [
+        {
+            "id": 0,
+            "name": "Goblin",
+            "stats": {
+                "hp": {"id": 0, "amount": 5},
+                "strength": {"id": 1, "amount": 2},
+                "strength_defense": {"id": 2, "amount": 1},
+                "mana": {"id": 3, "amount": 0},
+                "mag": {"id": 4, "amount": 0},
+                "mag_defense": {"id": 5, "amount": 0}
+            }
+        }
+    ]
+}
