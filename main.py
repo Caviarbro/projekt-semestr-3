@@ -4,11 +4,11 @@ from discord import app_commands
 from dotenv import load_dotenv
 from os.path import dirname, join, realpath
 from motor.motor_asyncio import AsyncIOMotorClient
+from utils.database import get_db, get_client
 
 # Loading token variable
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
-MONGO_URI = os.getenv('DATABASE_URL')
 
 # Logging bot activity
 CURRENT_DIR = dirname(realpath(__file__))
@@ -28,8 +28,8 @@ class Bot(commands.Bot):
     async def setup_hook(self):
         COGS_DIR = join(CURRENT_DIR, "cogs")
 
-        self.mongo_client = AsyncIOMotorClient(MONGO_URI)
-        self.db = self.mongo_client["monsterbase"]
+        self.mongo_client = get_client()
+        self.db = get_db()
         
         for filename in os.listdir(COGS_DIR):
             if (filename.endswith(".py") and filename != "__init__.py"):
@@ -38,10 +38,10 @@ class Bot(commands.Bot):
         try:
             await self.tree.sync()
 
-            logging.info("Synced commands globally!")
+            # logging.info("Synced commands globally!")
         except:
             print("[BOT]: Error while syncing commands!")
-            logging.info("[ERROR]: While syncing commands!")
+            # logging.info("[ERROR]: While syncing commands!")
 
     async def on_ready(self):
         print(f"[BOT]: {self.user.name} is ready to be deployed!")
