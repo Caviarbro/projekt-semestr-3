@@ -1,8 +1,8 @@
 from __future__ import annotations
-import discord
+import discord, random
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user
+from utils.util_file import get_user, get_config
 
 class Hunt(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -17,11 +17,28 @@ class Hunt(commands.Cog):
             user = await get_user(interaction.user.id)
 
             if (user is not None):
-                await interaction.response.send_message("Hunting for animals!")
+                new_monsters = generate_monster(10)
+
+                monster_emojis = [monster["emoji"] for monster in new_monsters]
+
+                await interaction.response.send_message(f"Hunting for animals! {" ".join(monster_emojis)}")
             else:
                 raise ValueError("Missing user in database!")
         except Exception as e:
             await interaction.response.send_message(f"[ERROR]: While hunting, message: {e}")
+
+def generate_monster(amount):
+    config = get_config()
+
+    monster_list = config["monsters"]
+    new_monsters = []
+
+    for _ in range(0, amount):
+        new_monster = monster_list[random.randrange(0, len(monster_list))]   
+
+        new_monsters.append(new_monster)
+
+    return new_monsters     
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Hunt(bot))

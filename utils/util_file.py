@@ -1,6 +1,6 @@
-import os
+import os, json
 from .database import get_db
-from .models import UserModel
+from .models import UserModel, MonsterModel, MonsterListModel
 
 
 async def create_user(user_id: int):
@@ -34,3 +34,11 @@ async def get_user(user_id: int) -> UserModel:
         print(f"[ERROR]: Getting user, message: {e}!")
 
         return None
+    
+async def save_monster(user_id, monster_type):
+    monster_data = MonsterModel()
+    pass
+
+def get_config():
+    with open("config.json", "r", encoding="utf-8") as f:
+        return json.load(f)
