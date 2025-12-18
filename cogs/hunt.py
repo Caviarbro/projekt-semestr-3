@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config
+from utils.util_file import get_user, get_config, save_monster
 
 class Hunt(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -18,6 +18,10 @@ class Hunt(commands.Cog):
 
             if (user is not None):
                 new_monsters = generate_monster(10)
+
+                for monster in new_monsters:
+                    print("MY MONSTER:", monster)
+                    await save_monster(interaction.user.id, monster["type"])
 
                 monster_emojis = [monster["emoji"] for monster in new_monsters]
 

@@ -9,20 +9,16 @@ class UserModel(BaseModel):
     monsters: List[MonsterModel] = []
     weapons: List[WeaponModel] = []
 
-class WeaponListModel(BaseModel):
-    w_id: int
-    u_id: int
-
-class MonsterListModel(BaseModel):
-    m_id: int
-    u_id: int
+class Counter(BaseModel):
+    c_type: str
+    seq: int = 0
 
 # Monster model
 class MonsterModel(BaseModel):
     m_id: int
     m_type: int
     xp: int = 0
-    stats: List = []
+    seq: int = 0
 
 # Weapon model
 class WeaponModel(BaseModel):

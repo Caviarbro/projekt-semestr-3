@@ -36,7 +36,12 @@ class Bot(commands.Bot):
                 await self.load_extension(f"cogs.{filename[:-3]}")
         
         try:
-            await self.tree.sync()
+            # local updating slash commands so it responds at the start immediately
+            GUILD_ID = "972516464143761418"
+            guild = discord.Object(id=GUILD_ID)
+
+            self.tree.copy_global_to(guild=guild)
+            await self.tree.sync(guild=guild)
 
             # logging.info("Synced commands globally!")
         except:
