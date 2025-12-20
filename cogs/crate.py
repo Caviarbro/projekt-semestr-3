@@ -30,6 +30,7 @@ def generate_weapon(amount):
     weapon_List = config["weapons"]
     new_weapons = []
 
+    # TODO
     for _ in range(0, amount):
         new_weapons = weapon_List[random.randrange(0, len(weapon_List))]   
 
