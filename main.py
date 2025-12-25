@@ -37,7 +37,7 @@ class Bot(commands.Bot):
         
         try:
             # local updating slash commands so it responds at the start immediately
-            GUILD_ID = "972516464143761418"
+            GUILD_ID = 972516464143761418
             guild = discord.Object(id=GUILD_ID)
 
             self.tree.copy_global_to(guild=guild)

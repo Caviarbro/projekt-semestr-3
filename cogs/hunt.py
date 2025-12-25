@@ -14,6 +14,9 @@ class Hunt(commands.Cog):
     )
     async def hunt(self, interaction:discord.Interaction):
         try:
+            # defer the response because we are requesting from the database and the slash command may fail
+            await interaction.response.defer()
+
             user = await get_user(interaction.user.id)
 
             if (user is not None):
@@ -25,11 +28,11 @@ class Hunt(commands.Cog):
 
                 monster_emojis = [monster["emoji"] for monster in new_monsters]
 
-                await interaction.response.send_message(f"Hunting for animals! {" ".join(monster_emojis)}")
+                await interaction.followup.send(f"Hunting for animals! {" ".join(monster_emojis)}")
             else:
                 raise ValueError("Missing user in database!")
         except Exception as e:
-            await interaction.response.send_message(f"[ERROR]: While hunting, message: {e}")
+            await interaction.followup.send(f"[ERROR]: While hunting, message: {e}")
 
 def generate_monster(amount):
     config = get_config()

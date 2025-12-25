@@ -1,9 +1,30 @@
 {
     "bot_prefixes": ["m"],
+    "settings": {
+        "max_quality": 101,
+        "monsters_in_line": 5
+    },
+    "emojis": {
+        "card_box": "🗃️",
+        "monster": "👻",
+        "rarities": { "common": "🇨", "uncommon": "🇺" },
+        "blank": "<:blank:1122536483203584091>"
+    },
+    "rarities": {
+        "common": {
+            "emoji": "🇨",
+            "quality": [0, 20]
+        },
+        "uncommon": {
+            "emoji": "🇺",
+            "quality": [21, 40]
+        }
+    },
     "monsters": [
         {
             "type": 0,
             "name": "Goblin",
+            "rarity": "common",
             "emoji": "<:Goblin:1039672681924145193>",
             "stats": {
                 "hp": {"id": 0, "amount": 5},
@@ -17,7 +38,78 @@
         {
             "type": 1,
             "name": "Pig",
+            "rarity": "uncommon",
             "emoji": ":pig:",
+            "stats": {
+                "hp": {"id": 0, "amount": 5},
+                "strength": {"id": 1, "amount": 2},
+                "strength_defense": {"id": 2, "amount": 1},
+                "mana": {"id": 3, "amount": 0},
+                "mag": {"id": 4, "amount": 0},
+                "mag_defense": {"id": 5, "amount": 0}
+            }
+        },
+        {
+            "type": 2,
+            "name": "Panda",
+            "rarity": "uncommon",
+            "emoji": ":panda_face:",
+            "stats": {
+                "hp": {"id": 0, "amount": 5},
+                "strength": {"id": 1, "amount": 2},
+                "strength_defense": {"id": 2, "amount": 1},
+                "mana": {"id": 3, "amount": 0},
+                "mag": {"id": 4, "amount": 0},
+                "mag_defense": {"id": 5, "amount": 0}
+            }
+        },
+        {
+            "type": 3,
+            "name": "Crocodile",
+            "rarity": "uncommon",
+            "emoji": ":crocodile:",
+            "stats": {
+                "hp": {"id": 0, "amount": 5},
+                "strength": {"id": 1, "amount": 2},
+                "strength_defense": {"id": 2, "amount": 1},
+                "mana": {"id": 3, "amount": 0},
+                "mag": {"id": 4, "amount": 0},
+                "mag_defense": {"id": 5, "amount": 0}
+            }
+        },
+        {
+            "type": 4,
+            "name": "Dove",
+            "rarity": "uncommon",
+            "emoji": ":dove:",
+            "stats": {
+                "hp": {"id": 0, "amount": 5},
+                "strength": {"id": 1, "amount": 2},
+                "strength_defense": {"id": 2, "amount": 1},
+                "mana": {"id": 3, "amount": 0},
+                "mag": {"id": 4, "amount": 0},
+                "mag_defense": {"id": 5, "amount": 0}
+            }
+        },
+        {
+            "type": 5,
+            "name": "Lion",
+            "rarity": "uncommon",
+            "emoji": ":lion:",
+            "stats": {
+                "hp": {"id": 0, "amount": 5},
+                "strength": {"id": 1, "amount": 2},
+                "strength_defense": {"id": 2, "amount": 1},
+                "mana": {"id": 3, "amount": 0},
+                "mag": {"id": 4, "amount": 0},
+                "mag_defense": {"id": 5, "amount": 0}
+            }
+        },
+        {
+            "type": 6,
+            "name": "Whale",
+            "rarity": "uncommon",
+            "emoji": ":whale:",
             "stats": {
                 "hp": {"id": 0, "amount": 5},
                 "strength": {"id": 1, "amount": 2},
@@ -31,9 +123,20 @@
     "weapons": [
         {
             "type": 0,
+            "emojis": ["<:pstaff:1083686801908174899>"],
+            "passive_count": 2,
             "stats": [
                 { "min": 180, "max": 100},
                 { "min": 50, "max": 150}
+            ]
+        }
+    ],
+    "passives": [
+        {
+            "type": 0,
+            "stats": [
+                { "min": 20, "max": 30},
+                { "min": 40, "max": 60}
             ]
         }
     ]
