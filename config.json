@@ -13,11 +13,13 @@
     "rarities": {
         "common": {
             "emoji": "🇨",
-            "quality": [0, 20]
+            "quality": [0, 20],
+            "color": "Red"
         },
         "uncommon": {
             "emoji": "🇺",
-            "quality": [21, 40]
+            "quality": [21, 40],
+            "color": "Blue"
         }
     },
     "monsters": [

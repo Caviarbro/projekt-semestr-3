@@ -5,6 +5,7 @@ from typing import List, Optional
 class MonsterModel(BaseModel):
     m_id: int
     m_type: int
+    e_wid: int = -1
     xp: int = 0
     seq: int = 1
 
