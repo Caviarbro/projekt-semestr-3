@@ -1,6 +1,6 @@
 import os, json, discord
 from .database import get_db
-from .models import UserModel, MonsterModel, WeaponModel, PassiveModel, TeamModel
+from .models import UserModel, MonsterModel, WeaponModel, PassiveModel, TeamModel, TeamMonsterModel
 
 
 def get_config():
@@ -353,7 +353,7 @@ async def get_active_team(user_id):
 
 async def change_team(user_id, team_number):
     db = get_db()
-    team_data = await get_team(user_id, team_number = team_number, create_if_not_exist = True)
+    team_data, team_monsters = await get_team(user_id, team_number = team_number, create_if_not_exist = True)
 
     # only one active team at the time
     await db.teams.update_one(
@@ -388,45 +388,60 @@ async def remove_team_monster(user_id, position):
 
     return f"Successfully removed monster on position: {position}!"
 
-async def add_team_monster(user_id, monster_name, position = None):
+async def add_team_monster(user_id, monster_name, position=None):
     config = get_config()
     db = get_db()
+
     active_team_data, _ = await get_active_team(user_id)
-    monster_data, _ = await get_monster(user_id, name = monster_name)
+    monster_data, _ = await get_monster(user_id, name=monster_name)
 
-    if (len(active_team_data.t_monsters) >= config["settings"]["max_monsters_per_team"]):
-        raise ValueError(f"Monster can't be added because the team has maximum amount of monsters!")
-    
-    position_to_add = int(position) if position is not None else 0
+    max_monsters_per_team = config["settings"]["max_monsters_per_team"]
+    start_index = 1
 
-    # add monster to the furthest position in the team
-    if (position is None):
-        for t_monster in active_team_data.t_monsters:
-            if (position_to_add is None or (position_to_add - 1) < t_monster.pos):
-                # + 1 because we need the position after the monster
-                position_to_add = t_monster.pos + 1
+    if position is None:
+        # can't add monster to team automatically because it's full
+        if len(active_team_data.t_monsters) >= max_monsters_per_team :
+            raise ValueError("Monster can't be added because the team is full!")
+        
+        if not active_team_data.t_monsters:
+            position_to_add = start_index
+        else:
+            position_to_add = max(t_monster.pos for t_monster in active_team_data.t_monsters) + 1
     else:
-        t_monster_on_position = next(
-            (t_m for t_m in active_team_data.t_monsters if t_m.pos == position_to_add),
-            None
-        )
+        position_to_add = int(position)
 
-        # monster can be in team only once
-        t_monster_same_id = next(
-            (t_m for t_m in active_team_data.t_monsters if t_m.m_id == monster_data.m_id),
-            None
-        )
+    if position_to_add > max_monsters_per_team:
+        position_to_add = max_monsters_per_team
 
-        if (t_monster_on_position):
-            remove_team_monster(user_id, position_to_add)
+    if position_to_add < start_index:
+        position_to_add = start_index
 
-        if (t_monster_same_id):
-            remove_team_monster(user_id, t_monster_same_id.pos)
-
-    await db.teams.update_one(
-        {"u_id": user_id, "active": True},  # find the active team
-        {"$push": {"t_monsters": {"pos": position_to_add, "m_id": monster_data.m_id}}}
+    # Remove monster already in team
+    t_monster_same_id = next(
+        (t_monster for t_monster in active_team_data.t_monsters if t_monster.m_id == monster_data.m_id),
+        None
     )
+    if t_monster_same_id:
+        await remove_team_monster(user_id, t_monster_same_id.pos)
+
+    # Remove monster at target position
+    t_monster_on_position = next(
+        (t_monster for t_monster in active_team_data.t_monsters if t_monster.pos == position_to_add),
+        None
+    )
+    if t_monster_on_position:
+        await remove_team_monster(user_id, position_to_add)
+
+    t_monster_data = TeamMonsterModel(
+        pos = position_to_add,
+        m_id = monster_data.m_id
+    )
+    
+    await db.teams.update_one(
+        {"u_id": user_id, "active": True},
+        {"$push": {"t_monsters": t_monster_data.model_dump()}}
+    )
+
 
 
 async def unequip_weapon(user_id, w_id):
@@ -598,12 +613,12 @@ def xp_for_level(level):
 async def get_monster_stats(user_id, m_id):
     config = get_config()
 
-    monster_data, monster_config = get_monster(user_id, id = m_id)
+    monster_data, monster_config = await get_monster(user_id, id = m_id)
     monster_level = get_level(monster_data.xp)
     
     def get_stat(stat_type):
         stat = next(
-            (s["amount"] for s in monster_config["stats"] if s["type"] == stat_type),
+            (s["amount"] for s in monster_config["stats"].values() if s["type"] == stat_type),
             0
         )
 

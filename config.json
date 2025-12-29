@@ -25,7 +25,8 @@
         "blank": "<:blank:1122536483203584091>",
         "weapon": "⚔️",
         "success": "✅",
-        "error": "❎"
+        "error": "❎",
+        "delete": "🗑️"
     },
     "rarities": {
         "common": {
@@ -76,7 +77,7 @@
             "type": 0,
             "name": "Goblin",
             "rarity": "common",
-            "emoji": "<:Goblin:1039672681924145193>",
+            "emoji": "<:goblin:1455318167327998161>",
             "stats": {
                 "hp": {"type": 0, "amount": 5},
                 "strength": {"type": 1, "amount": 2},

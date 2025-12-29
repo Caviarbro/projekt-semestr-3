@@ -36,11 +36,15 @@ class Counter(BaseModel):
     seq: int = 0
 
 # Team model
+class TeamMonsterModel(BaseModel):
+    pos: int 
+    m_id: int 
+
 class TeamModel(BaseModel):
     u_id: int
     t_id: int
     active: bool = False
     streak: int = 0
-    t_monsters: List = []
+    t_monsters: List[TeamMonsterModel] = []
 
 

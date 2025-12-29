@@ -23,7 +23,6 @@ class Hunt(commands.Cog):
                 new_monsters = generate_monster(10)
 
                 for monster in new_monsters:
-                    print("MY MONSTER:", monster)
                     await save_monster(interaction.user.id, monster["type"])
 
                 monster_emojis = [monster["emoji"] for monster in new_monsters]
