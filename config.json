@@ -2,24 +2,67 @@
     "bot_prefixes": ["m"],
     "settings": {
         "max_quality": 101,
-        "monsters_in_line": 5
+        "monsters_in_line": 5,
+        "weapons_per_page": 15
     },
     "emojis": {
         "card_box": "🗃️",
         "monster": "👻",
-        "rarities": { "common": "🇨", "uncommon": "🇺" },
-        "blank": "<:blank:1122536483203584091>"
+        "stats": { 
+            "hp": "💕",
+            "strength": "💪",
+            "strength_defense": "🛡️",
+            "mana": "🏵️",
+            "mag": "🪄",
+            "mag_defense": "⛓️‍💥" 
+        },
+        "blank": "<:blank:1122536483203584091>",
+        "weapon": "⚔️",
+        "success": "✅",
+        "error": "❎"
     },
     "rarities": {
         "common": {
+            "type": 0,
             "emoji": "🇨",
             "quality": [0, 20],
             "color": "Red"
         },
         "uncommon": {
+            "type": 1,
             "emoji": "🇺",
             "quality": [21, 40],
             "color": "Blue"
+        },
+        "rare": {
+            "type": 2,
+            "emoji": "🇷",
+            "quality": [41, 60],
+            "color": "Brown"
+        },
+        "epic": {
+            "type": 3,
+            "emoji": "🇪",
+            "quality": [61, 80],
+            "color": "Purple"
+        },
+        "mythic": {
+            "type": 4,
+            "emoji": "🇲",
+            "quality": [81, 94],
+            "color": "Green"
+        },
+        "legendary": {
+            "type": 5,
+            "emoji": "🇱",
+            "quality": [95, 99],
+            "color": "Yellow"
+        },
+        "platinum": {
+            "type": 6,
+            "emoji": "🇵",
+            "quality": [100, 100],
+            "color": "Orange"
         }
     },
     "monsters": [
@@ -125,20 +168,27 @@
     "weapons": [
         {
             "type": 0,
-            "emojis": ["<:pstaff:1083686801908174899>"],
+            "name": "Sword",
+            "desc": "Deal [1]% of your strength [name(1)] to a random enemy!",
+            "default_emoji": "<:greatsword:1454997369664831529>",
+            "emojis": ["<:cgreatsword:1454945550162985017>","<:ugreatsword:1454945552965042270>","<:rgreatsword:1454945555720573151>","<:egreatsword:1454945557603811451>","<:mgreatsword:1454945559612751906>","<:lgreatsword:1454945564285210727>","<:fgreatsword:1454945566948855828>"],
             "passive_count": 2,
             "stats": [
-                { "min": 180, "max": 100},
-                { "min": 50, "max": 150}
+                { "min": 180, "max": 100, "name": "mana"},
+                { "min": 50, "max": 150, "name": "strength"}
             ]
         }
     ],
     "passives": [
         {
             "type": 0,
+            "name": "Regeneration",
+            "desc": "[0]% chance of healing [1]% of your max hp [name(1)] at the end of the turn!",
+            "default_emoji": "<:chgen:978793463678136330>",
+            "emojis": ["<:chgen:978793463678136330>", "<:uhgen:978794039560241193>", "<:rhgen:978794190781710396>", "<:ehgen:978794333429956618>", "<:mhgen:978794358746804255>", "<:lhgen:978794388601843773>", "<:fhgen:978794409317511208>"],
             "stats": [
                 { "min": 20, "max": 30},
-                { "min": 40, "max": 60}
+                { "min": 40, "max": 60, "name": "hp"}
             ]
         }
     ]

@@ -17,6 +17,7 @@ class PassiveModel(BaseModel):
 class WeaponModel(BaseModel):
     w_id: int
     w_type: int
+    e_mid: int = -1
     qualities: List = []
     passives: List[PassiveModel] = []
 
