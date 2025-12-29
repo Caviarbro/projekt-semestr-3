@@ -91,7 +91,7 @@ class Monster(commands.Cog):
             user = await get_user(interaction.user.id)
 
             if (user is not None):
-                monster_data, monster_config = await get_monster(interaction.user.id, name)
+                monster_data, monster_config = await get_monster(interaction.user.id, name = name)
 
                 if (monster_data is None or monster_config is None):
                     raise ValueError("Monster does not exist!")

@@ -28,7 +28,7 @@ class Hunt(commands.Cog):
 
                 monster_emojis = [monster["emoji"] for monster in new_monsters]
 
-                await interaction.followup.send(f"Hunting for animals! {" ".join(monster_emojis)}")
+                await interaction.followup.send(f"Hunting for monsters! {" ".join(monster_emojis)}")
             else:
                 raise ValueError("Missing user in database!")
         except Exception as e:

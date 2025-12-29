@@ -2,8 +2,14 @@
     "bot_prefixes": ["m"],
     "settings": {
         "max_quality": 101,
+        "max_teams_per_user": 3,
+        "max_monsters_per_team": 4,
         "monsters_in_line": 5,
-        "weapons_per_page": 15
+        "weapons_per_page": 15,
+        "level_base": 100,
+        "level_exponent": 0.6,
+        "stat_bases": [250, 100, 15, 250, 100, 15],
+        "defense_stat_limit": 80
     },
     "emojis": {
         "card_box": "🗃️",
@@ -72,12 +78,12 @@
             "rarity": "common",
             "emoji": "<:Goblin:1039672681924145193>",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         },
         {
@@ -86,12 +92,12 @@
             "rarity": "uncommon",
             "emoji": ":pig:",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         },
         {
@@ -100,12 +106,12 @@
             "rarity": "uncommon",
             "emoji": ":panda_face:",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         },
         {
@@ -114,12 +120,12 @@
             "rarity": "uncommon",
             "emoji": ":crocodile:",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         },
         {
@@ -128,12 +134,12 @@
             "rarity": "uncommon",
             "emoji": ":dove:",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         },
         {
@@ -142,12 +148,12 @@
             "rarity": "uncommon",
             "emoji": ":lion:",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         },
         {
@@ -156,12 +162,12 @@
             "rarity": "uncommon",
             "emoji": ":whale:",
             "stats": {
-                "hp": {"id": 0, "amount": 5},
-                "strength": {"id": 1, "amount": 2},
-                "strength_defense": {"id": 2, "amount": 1},
-                "mana": {"id": 3, "amount": 0},
-                "mag": {"id": 4, "amount": 0},
-                "mag_defense": {"id": 5, "amount": 0}
+                "hp": {"type": 0, "amount": 5},
+                "strength": {"type": 1, "amount": 2},
+                "strength_defense": {"type": 2, "amount": 1},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
             }
         }
     ],

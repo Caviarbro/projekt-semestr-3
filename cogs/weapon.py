@@ -131,7 +131,7 @@ class Weapon(commands.Cog):
 
     @weapon_command.command(
             name = "equip",
-            description = "Equip weapon to animal"
+            description = "Equip weapon to monster"
     )
 
     async def weapon_equip(self, interaction:discord.Interaction, id:str, monster_name:str):
@@ -143,7 +143,7 @@ class Weapon(commands.Cog):
 
             if (user is not None):
                 weapon_string = await get_weapon_string(interaction.user.id, id, "id")
-                _, monster_config = await get_monster(interaction.user.id, monster_name)
+                _, monster_config = await get_monster(interaction.user.id, name = monster_name)
 
                 equipped = await equip_weapon(interaction.user.id, id, monster_name)
 
@@ -245,7 +245,7 @@ async def show_page(interaction: discord.Interaction, pages, page_number):
             equipped_monster_id = weapon_data.e_mid
 
             if (equipped_monster_id != -1):
-                _, monster_config = await get_monster(interaction.user.id, None, equipped_monster_id)
+                _, monster_config = await get_monster(interaction.user.id, id = equipped_monster_id)
 
                 monster_string = f"| {monster_config['emoji']} {monster_config['name']}"
 

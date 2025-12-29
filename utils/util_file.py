@@ -1,6 +1,6 @@
 import os, json, discord
 from .database import get_db
-from .models import UserModel, MonsterModel, WeaponModel, PassiveModel
+from .models import UserModel, MonsterModel, WeaponModel, PassiveModel, TeamModel
 
 
 def get_config():
@@ -43,7 +43,7 @@ async def create_user(user_id: int):
 
         await db.users.insert_one(user_data.model_dump())
 
-        return await db.users.find_one({"u_id": user_id})
+        return user_data
     except Exception as e:
         print(f"[ERROR]: creating user, message: {e}")
 
@@ -178,7 +178,43 @@ async def save_weapon(user_id, weapon_type, weapon_qualities, generated_passives
     except Exception as e:
         raise ValueError(e)
 
-async def get_monster(user_id, name = None, id = None):
+async def save_team(user_id):
+    try:
+        user_data = await get_user(user_id)
+        config = get_config()
+        db = get_db()
+
+        if (not user_data):
+            raise ValueError("No user data found!")
+        
+        if (len(user_data.t_ids) >= config["settings"]["max_teams_per_user"]):
+            raise ValueError("Limit of teams reached!")
+        
+        new_id = await counter("team")
+
+        if (not isinstance(new_id, int)):
+            raise ValueError("Sequence id couldn't be generated!")
+        
+        activate_team = True if len(user_data.t_ids) <= 0 else False 
+
+        team_data = TeamModel(
+            u_id = user_id,
+            t_id = new_id,
+            active = activate_team,
+        )
+
+        await db.users.update_one(
+            {"u_id": user_id},
+            {"$addToSet": {"t_ids": new_id}}
+        )
+        await db.teams.insert_one(team_data.model_dump())
+
+        return team_data
+    except Exception as e:
+        raise ValueError(e)
+
+async def get_monster(user_id, 
+                      *, name = None, id = None):
     config = get_config()
     user_data = await get_user(user_id)
 
@@ -258,6 +294,141 @@ async def get_weapon(user_id, id=None):
     
     return weapon_data, weapon_config  
 
+async def get_team(user_id: int,
+    *,
+    team_number: int | None = None,
+    team_id: int | None = None,
+    create_if_not_exist: bool = False
+):
+    user_data = await get_user(user_id)
+    db = get_db()
+
+    # Resolve team id
+    if team_id is not None:
+        t_id = team_id
+    elif team_number is not None and team_number < len(user_data.t_ids):
+        t_id = user_data.t_ids[team_number]
+    else:
+        t_id = None
+
+    # Fetch or create team
+    if t_id is None:
+        if not create_if_not_exist:
+            raise ValueError(
+                f"Team with number {team_number} does not exist for user <@{user_id}>!"
+            )
+        team_data = await save_team(user_id)  # already a TeamModel
+    else:
+        raw = await db.teams.find_one({"t_id": t_id})
+        if raw is None:
+            raise ValueError(f"Team with id {t_id} does not have any data!")
+        team_data = TeamModel(**raw)
+
+    # Build monster list
+    team_monsters = []
+
+    for t_monster in team_data.t_monsters:
+        monster_data, monster_config = await get_monster(user_id, id = t_monster.m_id)
+
+        weapon_data = weapon_config = None
+        if monster_data.e_wid != -1:
+            weapon_data, weapon_config = await get_weapon(user_id, monster_data.e_wid)
+
+        team_monsters.append(
+            [monster_data, monster_config, t_monster, weapon_data, weapon_config]
+        )
+
+    return team_data, team_monsters
+
+async def get_active_team(user_id):
+    db = get_db()
+
+    team_data = await db.teams.find_one({"u_id": user_id, "active": True})
+
+    if (team_data is None):
+        raise ValueError(f"No active team found for user: <@{user_id}>")
+    
+    team_data = TeamModel(**team_data)
+    return await get_team(user_id, team_id = team_data.t_id)
+
+async def change_team(user_id, team_number):
+    db = get_db()
+    team_data = await get_team(user_id, team_number = team_number, create_if_not_exist = True)
+
+    # only one active team at the time
+    await db.teams.update_one(
+        {"u_id": user_id, "active": True},
+        {"$set": {"active": False}}
+    )
+
+    await db.teams.update_one(
+        {"u_id": user_id, "t_id": team_data.t_id},
+        {"$set": {"active": True}}
+    )
+
+async def remove_team_monster(user_id, position):
+    db = get_db()
+    active_team_data, _ = await get_active_team(user_id)
+
+    if (position is None):
+        raise ValueError("Invalid team position!")
+    
+    t_monster = next(
+        (t_m for t_m in active_team_data.t_monsters if t_m.pos == int(position)),
+        None
+    )
+
+    if (t_monster is None):
+        return f"No monster to remove on position: {position}!"
+    
+    await db.teams.update_one(
+        {"u_id": user_id, "active": True},
+        {"$pull": {"t_monsters": {"pos": int(position)}}}
+    )
+
+    return f"Successfully removed monster on position: {position}!"
+
+async def add_team_monster(user_id, monster_name, position = None):
+    config = get_config()
+    db = get_db()
+    active_team_data, _ = await get_active_team(user_id)
+    monster_data, _ = await get_monster(user_id, name = monster_name)
+
+    if (len(active_team_data.t_monsters) >= config["settings"]["max_monsters_per_team"]):
+        raise ValueError(f"Monster can't be added because the team has maximum amount of monsters!")
+    
+    position_to_add = int(position) if position is not None else 0
+
+    # add monster to the furthest position in the team
+    if (position is None):
+        for t_monster in active_team_data.t_monsters:
+            if (position_to_add is None or (position_to_add - 1) < t_monster.pos):
+                # + 1 because we need the position after the monster
+                position_to_add = t_monster.pos + 1
+    else:
+        t_monster_on_position = next(
+            (t_m for t_m in active_team_data.t_monsters if t_m.pos == position_to_add),
+            None
+        )
+
+        # monster can be in team only once
+        t_monster_same_id = next(
+            (t_m for t_m in active_team_data.t_monsters if t_m.m_id == monster_data.m_id),
+            None
+        )
+
+        if (t_monster_on_position):
+            remove_team_monster(user_id, position_to_add)
+
+        if (t_monster_same_id):
+            remove_team_monster(user_id, t_monster_same_id.pos)
+
+    await db.teams.update_one(
+        {"u_id": user_id, "active": True},  # find the active team
+        {"$push": {"t_monsters": {"pos": position_to_add, "m_id": monster_data.m_id}}}
+    )
+
+
 async def unequip_weapon(user_id, w_id):
     db = get_db()
     weapon_data, _ = await get_weapon(user_id, w_id)
@@ -265,7 +436,7 @@ async def unequip_weapon(user_id, w_id):
     if (weapon_data.e_mid == -1):
         raise ValueError("No weapon to be unequipped!")
     
-    monster_data, _ = await get_monster(user_id, None, weapon_data.e_mid)
+    monster_data, _ = await get_monster(user_id, id = weapon_data.e_mid)
 
     weapon_data.e_mid = -1
     monster_data.e_wid = -1
@@ -288,7 +459,7 @@ async def unequip_weapon(user_id, w_id):
 async def equip_weapon(user_id, w_id, monster_name):
     db = get_db()
 
-    monster_data, _ = await get_monster(user_id, monster_name)
+    monster_data, _ = await get_monster(user_id, name = monster_name)
     weapon_data, _ = await get_weapon(user_id, w_id)
 
     if (monster_data.e_wid != -1):
@@ -402,5 +573,55 @@ async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
             return f"{weapon_rarity_info['emoji']}{weapon_emoji}{''.join(passive_emojis)}"
         if (display == "id"):
             return f"**`{to_base36(weapon_data.w_id)}`** {weapon_rarity_info['emoji']}{weapon_emoji}{''.join(passive_emojis)}"
+        if (display == "full"):
+            return f"**`{to_base36(weapon_data.w_id)}`** {weapon_rarity_info['emoji']}{weapon_emoji}{''.join(passive_emojis)} {weapon_quality}%"
     except Exception as e:
         raise ValueError(f"[ERROR]: While constructing a weapon string, message: {e}")
+
+def get_level(xp):
+    config = get_config()
+
+    base = config["settings"]["level_base"]
+    exp = config["settings"]["level_exponent"]
+
+    level = int((xp / base) ** exp) + 1
+    return level
+
+def xp_for_level(level):
+    config = get_config()
+
+    base = config["settings"]["level_base"]
+    exp = config["settings"]["level_exponent"]
+
+    return int(base * (level ** (1 / exp)))
+
+async def get_monster_stats(user_id, m_id):
+    config = get_config()
+
+    monster_data, monster_config = get_monster(user_id, id = m_id)
+    monster_level = get_level(monster_data.xp)
+    
+    def get_stat(stat_type):
+        stat = next(
+            (s["amount"] for s in monster_config["stats"] if s["type"] == stat_type),
+            0
+        )
+
+        return stat 
+    
+    defense_stat_limit = config["settings"]["defense_stat_limit"]
+    stat_bases = config["settings"]["stat_bases"]
+
+    hp = ((get_stat(0) * 1.5) * (monster_level)) + stat_bases[0]
+    strength = (get_stat(1) * monster_level) + stat_bases[1]
+    strength_defense = min((monster_level ** (0.5 + get_stat(2) * 0.01)) + stat_bases[2], defense_stat_limit)
+    mana = ((get_stat(3) * 1.5) * (monster_level)) + stat_bases[3]
+    mag = (get_stat(4) * monster_level) + stat_bases[4]
+    mag_defense = min((monster_level ** (0.5 + get_stat(5) * 0.01)) + stat_bases[5], defense_stat_limit)
+
+    # TODO: Add permanent bonuses such as passives boosting stats
+    if (monster_data.e_wid != -1):
+        weapon_data, weapon_config = await get_weapon(user_id, monster_data.e_wid)
+        pass
+
+    return [hp, strength, strength_defense, mana, mag, mag_defense]

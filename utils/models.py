@@ -28,9 +28,19 @@ class UserModel(BaseModel):
     cash: int = 0
     monsters: List[MonsterModel] = []
     weapons: List[WeaponModel] = []
+    t_ids: List = []
 
+# Count amount of ids
 class Counter(BaseModel):
     c_type: str
     seq: int = 0
+
+# Team model
+class TeamModel(BaseModel):
+    u_id: int
+    t_id: int
+    active: bool = False
+    streak: int = 0
+    t_monsters: List = []
 
 
