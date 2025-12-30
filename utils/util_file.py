@@ -213,6 +213,50 @@ async def save_team(user_id):
     except Exception as e:
         raise ValueError(e)
 
+def get_monster_config(*, m_type : int = None, monster_name : str = None):
+    config = get_config()
+    
+    monster_config = None 
+
+    if (m_type is None and monster_name is None):
+        raise ValueError("Required at least one argumet (m_type / monster_name)")
+    
+    if (m_type):
+        monster_config = next(
+            (m for m in config["monsters"] if m["type"] == m_type),
+            None 
+        )
+
+    if (monster_name):
+        monster_config = next(
+            (m for m in config["monsters"] if m["name"] == monster_name.lower().strip()),
+            None 
+        )
+
+    return monster_config
+
+def get_weapon_config(*, w_type : int = None, weapon_name : str = None):
+    config = get_config()
+    
+    weapon_config = None 
+
+    if (w_type is None and weapon_name is None):
+        raise ValueError("Required at least one argumet (w_type / weapon_name)")
+    
+    if (w_type):
+        weapon_config = next(
+            (w for w in config["weapons"] if w["type"] == w_type),
+            None 
+        )
+
+    if (weapon_name):
+        weapon_config = next(
+            (w for w in config["weapons"] if w["name"] == weapon_name.lower().strip()),
+            None 
+        )
+
+    return weapon_config
+
 async def get_monster(user_id, 
                       *, name = None, id = None):
     config = get_config()
@@ -230,10 +274,7 @@ async def get_monster(user_id,
         if (monster_in_data is None):
             return ValueError(f"User doesn't own monster with id: {id}")
         
-        monster_config = next(
-            (m for m in config["monsters"] if m["type"] == monster_in_data.m_type),
-            None
-        )
+        monster_config = get_monster_config(m_type = monster_in_data.m_type)
         
         return monster_in_data, monster_config
     
@@ -242,10 +283,7 @@ async def get_monster(user_id,
         return user_data.monsters
     
     # find monster in config
-    monster_config = next(
-        (m for m in config["monsters"] if m["name"].lower() == name.lower().strip()),
-        None
-    )
+    monster_config = get_monster_config(monster_name = name)
 
     if monster_config is None:
         raise ValueError(f"Monster '{name}' not found in config!")
@@ -284,10 +322,7 @@ async def get_weapon(user_id, id=None):
     if (weapon_data is None):
         raise ValueError(f"User does not own this weapon!")
     
-    weapon_config = next(
-        (w for w in config["weapons"] if w["type"] == weapon_data.w_type),
-        None
-    )
+    weapon_config = get_weapon_config(w_type = weapon_data.w_type)
 
     if (weapon_config is None):
         raise ValueError(f"Weapon doesn't exist in config!")
@@ -550,16 +585,13 @@ async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
     try:
         config = get_config()
 
-        weapon_data, weapon_config = None, None
+        weapon_data = weapon_config = None
         
         if (w_id):
             weapon_data, weapon_config = await get_weapon(user_id, w_id)
         elif (passed_data is not None):
             weapon_data = passed_data
-            weapon_config = next(
-                (w for w in config["weapons"] if w["type"] == weapon_data.w_type),
-                None
-            )
+            weapon_config = get_weapon_config(w_type = weapon_data.w_type)
 
             if (weapon_config is None):
                 raise ValueError(f"Weapon with type {weapon_data.w_type} does not exist in config!")
@@ -610,11 +642,25 @@ def xp_for_level(level):
 
     return int(base * (level ** (1 / exp)))
 
-async def get_monster_stats(user_id, m_id):
+async def get_monster_stats(
+        user_id,
+        m_id,
+        *,
+        defined_m_type = None,
+        defined_weapon_data = None,
+        defined_xp = None
+):
     config = get_config()
 
-    monster_data, monster_config = await get_monster(user_id, id = m_id)
-    monster_level = get_level(monster_data.xp)
+    monster_data = monster_config = None
+
+    # this is for monsters that are not be in the database (created in runtime, battle purposes)
+    if (defined_m_type is None):
+        monster_data, monster_config = await get_monster(user_id, id = m_id)
+    else:
+        monster_config = get_monster_config(m_type = defined_m_type)
+        
+    monster_level = get_level(monster_data.xp if defined_xp is None else defined_xp)
     
     def get_stat(stat_type):
         stat = next(
@@ -635,7 +681,9 @@ async def get_monster_stats(user_id, m_id):
     mag_defense = min((monster_level ** (0.5 + get_stat(5) * 0.01)) + stat_bases[5], defense_stat_limit)
 
     # TODO: Add permanent bonuses such as passives boosting stats
-    if (monster_data.e_wid != -1):
+    if (defined_weapon_data):
+        pass
+    elif (monster_data.e_wid != -1):
         weapon_data, weapon_config = await get_weapon(user_id, monster_data.e_wid)
         pass
 
