@@ -8,6 +8,19 @@ from typing import Optional, List
 WEAPON_REGISTRY = load_weapons()
 PASSIVE_REGISTRY = load_passives()
 
+class Effect():
+    def __init__(self, turn_number, actor):
+        # TODO: move to util file, get effect
+        effect_config = next(
+            (e for e in get_config()["effects"] if e["type"] == self.e_type)
+        )
+
+        self.from_turn_number = turn_number
+        self.duration = effect_config["duration"]
+        self.apply_immediately = effect_config["apply_immediately"] 
+        self.apply_at_state = effect_config["apply_at_state"]
+        self.from_actor_id = actor.bm_id
+
 class BattleWeaponPassive:
     def __init__(self, pos, qualities):
         self.pos = pos 
@@ -16,23 +29,23 @@ class BattleWeaponPassive:
         # p_type defined in the subclass
 
     # Turn-based hooks
-    def before_turn(self, action_ctx):
+    def before_turn(self, action_ctx : ActionContext):
         pass
 
-    def during_turn(self, action_ctx):
+    def during_turn(self, action_ctx : ActionContext):
         pass
 
-    def after_turn(self, action_ctx):
+    def after_turn(self, action_ctx : ActionContext):
         pass
 
     # Action-based hooks
-    def before_action(self, action_ctx):
+    def before_action(self, action_ctx : ActionContext):
         pass
 
-    def after_action(self, action_ctx):
+    def after_action(self, action_ctx : ActionContext):
         pass
 
-    def use(self, action_ctx):
+    def use(self, action_ctx : ActionContext):
         pass
 
 class BattleWeapon:
@@ -44,23 +57,23 @@ class BattleWeapon:
         # w_type defined in the subclass
     
      # Turn-based hooks
-    def before_turn(self, action_ctx):
+    def before_turn(self, action_ctx : ActionContext):
         pass
 
-    def during_turn(self, action_ctx):
+    def during_turn(self, action_ctx : ActionContext):
         pass
 
-    def after_turn(self, action_ctx):
+    def after_turn(self, action_ctx : ActionContext):
         pass
 
     # Action-based hooks
-    def before_action(self, action_ctx):
+    def before_action(self, action_ctx : ActionContext):
         pass
 
-    def after_action(self, action_ctx):
+    def after_action(self, action_ctx : ActionContext):
         pass
 
-    def use(self, action_ctx):
+    def use(self, action_ctx : ActionContext):
         pass
 
 class BattleMonster:
@@ -74,11 +87,12 @@ class BattleMonster:
         self.bm_id = m_id if m_id is not None else uuid.uuid4()
         self.name = monster_config["name"]
         self.stats = get_monster_stats(None, None, defined_m_type = self.m_type, defined_weapon_data = self.weapon, defined_xp = self.xp)
+        self.effects : list[Effect] = []
 
 class BattleTeam:
     def __init__(self, monsters = list[BattleMonster], t_id = None):
         self.monsters = monsters
-        self.id = t_id if t_id is not None else uuid.uuid4()
+        self.bt_id = t_id if t_id is not None else uuid.uuid4()
 
 
 def create_from_team_data(team_data, team_monsters):

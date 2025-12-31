@@ -12,26 +12,25 @@ class Regeneration(BattleWeaponPassive):
         super().__init__(pos, qualities)
 
      # Turn-based hooks
-    def before_turn(self, action_ctx):
+    def before_turn(self, action_ctx : ActionContext):
         pass
 
-    def during_turn(self, action_ctx):
+    def during_turn(self, action_ctx : ActionContext):
         self.use(action_ctx)
 
-    def after_turn(self, action_ctx):
+    def after_turn(self, action_ctx : ActionContext):
         pass
 
     # Action-based hooks
-    def before_action(self, action_ctx):
+    def before_action(self, action_ctx : ActionContext):
         pass
 
-    def after_action(self, action_ctx):
+    def after_action(self, action_ctx : ActionContext):
         pass
 
-    def use(self, action_ctx):
+    def use(self, action_ctx : ActionContext):
         self.before_action(action_ctx)
 
         # do something
         
         self.after_action(action_ctx)
-        return action_ctx

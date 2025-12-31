@@ -200,5 +200,14 @@
                 { "min": 40, "max": 60, "name": "hp"}
             ]
         }
+    ],
+    "effects": [
+        {
+            "type": 0,
+            "name": "Freeze",
+            "apply_immediately": false,
+            "duration": 2,
+            "apply_at_state": "pre_turn"
+        }
     ]
 }

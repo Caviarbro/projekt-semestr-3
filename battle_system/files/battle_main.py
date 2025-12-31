@@ -85,7 +85,7 @@ class Battle:
         for turn_number in range(0, MAX_BATTLE_TURNS):
             battle_states = ["pre_turn", "during_turn", "after_turn"]
 
-            # TODO: Check if monsters are alive, to determine the winner of the battle at the end of the turn
+            # TODO: Check if monsters are alive, to determine the winner of the battle at the end of the turn | Add attack without weapon | Check if monster can attack (in individual files) | Effects
             
             for battle_state in battle_states:
                 self.battle_ctx.battle_state = battle_state

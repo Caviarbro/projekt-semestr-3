@@ -5039,3 +5039,1028 @@ aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gatewa
 [2025-12-31 01:07:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
 [2025-12-31 01:08:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
 [2025-12-31 01:08:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:08:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:08:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:09:32] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:09:33] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:10:14] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:10:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:10:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:10:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:11:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:11:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:12:17] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:12:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:12:59] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:12:59] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:13:40] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:13:40] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:14:21] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:14:21] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:15:02] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:15:03] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:15:44] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:15:44] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:16:25] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:16:25] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:17:06] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:17:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:17:48] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:17:48] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:18:29] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:18:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:19:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 15.
+[2025-12-31 01:19:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 7, 'd': None}
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: Received RECONNECT opcode.
+[2025-12-31 01:19:47] [DEBUG   ] discord.client: Got a request to RESUME the websocket.
+[2025-12-31 01:19:47] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-b.discord.gg
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-b-p0p9",{"micros":0.0}]']}}
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: Shard ID None has sent the RESUME payload.
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:19:47] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'RESUMED', 's': 16, 'op': 0, 'd': {'_trace': ['["gateway-prd-arm-us-east1-b-p0p9",{"micros":3958,"calls":["id_created",{"micros":0,"calls":[]},"session_lookup_time",{"micros":2147,"calls":[]},"session_lookup_finished",{"micros":10,"calls":[]},"discord-sessions-prd-2-112",{"micros":14}]}]']}}
+[2025-12-31 01:19:47] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2025-12-31 01:19:47] [INFO    ] discord.gateway: Shard ID None has successfully RESUMED session 8b53595143ac89fa1c43742483ac73d6.
+[2025-12-31 01:19:47] [DEBUG   ] discord.client: Dispatching event resumed
+[2025-12-31 01:20:28] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:20:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:21:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:21:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:21:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:21:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:22:32] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:22:32] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:23:13] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:23:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:23:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:23:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:24:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:24:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:25:17] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:25:17] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:25:58] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:25:59] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:26:40] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:26:40] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:27:21] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:27:21] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:28:02] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:28:02] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:28:44] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:28:44] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:29:25] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:29:25] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:30:06] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:30:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:30:47] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:30:47] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:31:29] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:31:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:32:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:32:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:32:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:32:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:33:32] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:33:32] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:34:14] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:34:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:34:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:34:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:35:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:35:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:36:17] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:36:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:36:59] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:36:59] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:37:40] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:37:40] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:38:21] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:38:21] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:39:02] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:39:03] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:39:44] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:39:44] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:40:25] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:40:25] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:41:06] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:41:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:41:47] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:41:48] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:42:29] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:42:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:43:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:43:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:43:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:43:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:44:32] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:44:33] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:45:14] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:45:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:45:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:45:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:46:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:46:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:47:17] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:47:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:47:59] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:47:59] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:48:40] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:48:40] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:49:21] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:49:21] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:50:03] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:50:03] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:50:44] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:50:44] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:51:25] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:51:25] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:52:06] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:52:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:52:48] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:52:48] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:53:29] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:53:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:54:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:54:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:54:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:54:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:55:33] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:55:33] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:56:14] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:56:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:56:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:56:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:57:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:57:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:58:18] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:58:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 01:58:59] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 16.
+[2025-12-31 01:59:18] [DEBUG   ] discord.gateway: Timed out receiving packet. Attempting a reconnect.
+[2025-12-31 01:59:18] [DEBUG   ] discord.client: Got a request to RESUME the websocket.
+[2025-12-31 01:59:18] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:18] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:18] [ERROR   ] discord.client: Attempting a reconnect in 0.73s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 01:59:19] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:19] [ERROR   ] discord.client: Attempting a reconnect in 0.33s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 01:59:19] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:19] [ERROR   ] discord.client: Attempting a reconnect in 2.46s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 01:59:21] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:21] [ERROR   ] discord.client: Attempting a reconnect in 5.44s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 01:59:27] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:27] [ERROR   ] discord.client: Attempting a reconnect in 10.83s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 01:59:49] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 01:59:49] [ERROR   ] discord.client: Attempting a reconnect in 53.47s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 02:00:42] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 02:00:42] [ERROR   ] discord.client: Attempting a reconnect in 73.71s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 02:01:56] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 02:01:56] [ERROR   ] discord.client: Attempting a reconnect in 137.14s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 02:04:13] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 02:04:13] [ERROR   ] discord.client: Attempting a reconnect in 98.60s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 02:05:52] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 02:05:52] [ERROR   ] discord.client: Attempting a reconnect in 565.29s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 02:15:17] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 02:15:17] [ERROR   ] discord.client: Attempting a reconnect in 138.41s
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1532, in _create_direct_connection
+    hosts = await self._resolve_host(host, port, traces=traces)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1148, in _resolve_host
+    return await asyncio.shield(resolved_host_task)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1179, in _resolve_host_with_throttle
+    addrs = await self._resolver.resolve(host, port, family=self._family)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\resolver.py", line 40, in resolve
+    infos = await self._loop.getaddrinfo(
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+    )
+    ^
+  File "C:\Python313\Lib\asyncio\base_events.py", line 939, in getaddrinfo
+    return await self.run_in_executor(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        None, getaddr_func, host, port, family, type, proto, flags)
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\concurrent\futures\thread.py", line 59, in run
+    result = self.fn(*self.args, **self.kwargs)
+  File "C:\Python313\Lib\socket.py", line 977, in getaddrinfo
+    for res in _socket.getaddrinfo(host, port, family, type, proto, flags):
+               ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+socket.gaierror: [Errno 11001] getaddrinfo failed
+
+The above exception was the direct cause of the following exception:
+
+Traceback (most recent call last):
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\client.py", line 724, in connect
+    self.ws = await asyncio.wait_for(coro, timeout=60.0)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\asyncio\tasks.py", line 507, in wait_for
+    return await fut
+           ^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\gateway.py", line 383, in from_client
+    socket = await client.http.ws_connect(str(url))
+             ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\discord\http.py", line 566, in ws_connect
+    return await self.__session.ws_connect(url, **kwargs)
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 1076, in _ws_connect
+    resp = await self.request(
+           ^^^^^^^^^^^^^^^^^^^
+    ...<11 lines>...
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 779, in _request
+    resp = await handler(req)
+           ^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\client.py", line 734, in _connect_and_send_request
+    conn = await self._connector.connect(
+           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+        req, traces=traces, timeout=real_timeout
+        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+    )
+    ^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 642, in connect
+    proto = await self._create_connection(req, traces, timeout)
+            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1209, in _create_connection
+    _, proto = await self._create_direct_connection(req, traces, timeout)
+               ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Users\Admin_\AppData\Roaming\Python\Python313\site-packages\aiohttp\connector.py", line 1538, in _create_direct_connection
+    raise ClientConnectorDNSError(req.connection_key, exc) from exc
+aiohttp.client_exceptions.ClientConnectorDNSError: Cannot connect to host gateway-us-east1-b.discord.gg:443 ssl:default [getaddrinfo failed]
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-b.discord.gg
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-b-hkdf",{"micros":0.0}]']}}
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: Shard ID None has sent the RESUME payload.
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 9, 'd': False}
+[2025-12-31 02:17:36] [INFO    ] discord.gateway: Shard ID None session has been invalidated.
+[2025-12-31 02:17:36] [DEBUG   ] discord.client: Got a request to IDENTIFY the websocket.
+[2025-12-31 02:17:36] [DEBUG   ] discord.client: Dispatching event disconnect
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: Created websocket connected to wss://gateway-us-east1-b.discord.gg
+[2025-12-31 02:17:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 10, 'd': {'heartbeat_interval': 41250, '_trace': ['["gateway-prd-arm-us-east1-b-nfb9",{"micros":0.0}]']}}
+[2025-12-31 02:17:41] [DEBUG   ] discord.gateway: Shard ID None has sent the IDENTIFY payload.
+[2025-12-31 02:17:41] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:17:41] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'READY', 's': 1, 'op': 0, 'd': {'v': 10, 'user_settings': {}, 'user': {'verified': True, 'username': 'Monster Conquest', 'primary_guild': None, 'mfa_enabled': True, 'id': '1448409221514268724', 'global_name': None, 'flags': 0, 'email': None, 'discriminator': '4144', 'clan': None, 'bot': True, 'avatar': 'a7a92706f197d79e3f3659f7233f4f53'}, 'session_type': 'normal', 'session_id': 'b8a40c9a4acb91207fb012ae87f2c0cc', 'resume_gateway_url': 'wss://gateway-us-east1-b.discord.gg', 'relationships': [], 'private_channels': [], 'presences': [], 'guilds': [{'unavailable': True, 'id': '972516464143761418'}, {'unavailable': True, 'id': '978793150095175760'}], 'guild_join_requests': [], 'geo_ordered_rtc_regions': ['warsaw', 'frankfurt', 'milan', 'bucharest', 'rotterdam'], 'game_relationships': [], 'auth': {}, 'application': {'id': '1448409221514268724', 'flags': 11051008}, '_trace': ['["gateway-prd-arm-us-east1-b-nfb9",{"micros":114463,"calls":["id_created",{"micros":794,"calls":[]},"session_lookup_time",{"micros":267,"calls":[]},"session_lookup_finished",{"micros":17,"calls":[]},"discord-sessions-prd-2-73",{"micros":112902,"calls":["start_session",{"micros":98902,"calls":["discord-api-continuous-canary-rpc-8586f98bf9-dc9s6",{"micros":51438,"calls":["get_user",{"micros":5568},"get_guilds",{"micros":8978},"send_scheduled_deletion_message",{"micros":18},"guild_join_requests",{"micros":4},"authorized_ip_coro",{"micros":11},"pending_payments",{"micros":594},"apex_experiments",{"micros":38632},"user_activities",{"micros":6},"played_application_ids",{"micros":4},"linked_users",{"micros":3}]}]},"starting_guild_connect",{"micros":26,"calls":[]},"presence_started",{"micros":369,"calls":[]},"guilds_started",{"micros":83,"calls":[]},"lobbies_started",{"micros":0,"calls":[]},"guilds_connect",{"micros":1,"calls":[]},"presence_connect",{"micros":13500,"calls":[]},"connect_finished",{"micros":13508,"calls":[]},"build_ready",{"micros":12,"calls":[]},"clean_ready",{"micros":1,"calls":[]},"optimize_ready",{"micros":0,"calls":[]},"split_ready",{"micros":0,"calls":[]}]}]}]']}}
+[2025-12-31 02:17:41] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2025-12-31 02:17:41] [INFO    ] discord.gateway: Shard ID None has connected to Gateway (Session ID: b8a40c9a4acb91207fb012ae87f2c0cc).
+[2025-12-31 02:17:41] [DEBUG   ] discord.client: Dispatching event connect
+[2025-12-31 02:17:41] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'GUILD_CREATE', 's': 2, 'op': 0, 'd': {'member_count': 25, 'afk_channel_id': None, 'premium_features': None, 'nsfw': False, 'nsfw_level': 0, 'discovery_splash': None, 'soundboard_sounds': [], 'application_command_counts': {}, 'profile': None, 'preferred_locale': 'en-US', 'inventory_settings': None, 'icon': '14f5ac408506f00b6415739bc7cfefdb', 'safety_alerts_channel_id': None, 'roles': [{'version': 0, 'unicode_emoji': None, 'tags': {}, 'position': 0, 'permissions': '2248473465835073', 'name': '@everyone', 'mentionable': False, 'managed': False, 'id': '972516464143761418', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004624, 'unicode_emoji': None, 'tags': {'bot_id': '972517310998913024'}, 'position': 16, 'permissions': '26933673327864', 'name': 'Test-Hello', 'mentionable': False, 'managed': True, 'id': '972519540833546324', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004622, 'unicode_emoji': None, 'tags': {'bot_id': '851436490415931422'}, 'position': 15, 'permissions': '274878254144', 'name': 'NeonUtil', 'mentionable': False, 'managed': True, 'id': '983736112868655156', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004618, 'unicode_emoji': None, 'tags': {'bot_id': '781606551349231667'}, 'position': 14, 'permissions': '8934606046208', 'name': 'Remoji', 'mentionable': False, 'managed': True, 'id': '1036385521229910071', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004612, 'unicode_emoji': None, 'tags': {'bot_id': '408785106942164992'}, 'position': 13, 'permissions': '8797167142976', 'name': 'OwO', 'mentionable': False, 'managed': True, 'id': '1041308088990453832', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004604, 'unicode_emoji': None, 'tags': {'bot_id': '968896356083171328'}, 'position': 12, 'permissions': '274878286912', 'name': 'weapons', 'mentionable': False, 'managed': True, 'id': '1042831924344926283', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004600, 'unicode_emoji': None, 'tags': {}, 'position': 11, 'permissions': '1071698660937', 'name': 'admin', 'mentionable': False, 'managed': False, 'id': '1044006363950485515', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 15844367}, 'color': 15844367}, {'version': 1766957004596, 'unicode_emoji': None, 'tags': {'bot_id': '633565743103082527'}, 'position': 10, 'permissions': '805694528', 'name': 'Discobot', 'mentionable': False, 'managed': True, 'id': '1045765223384092694', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004592, 'unicode_emoji': None, 'tags': {'bot_id': '155149108183695360'}, 'position': 9, 'permissions': '10310055718079', 'name': 'Dyno', 'mentionable': False, 'managed': True, 'id': '1075159928467099710', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004585, 'unicode_emoji': None, 'tags': {'bot_id': '1080932501142384710'}, 'position': 8, 'permissions': '8', 'name': 'weapons_chez_testing', 'mentionable': False, 'managed': True, 'id': '1081138114271125508', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004580, 'unicode_emoji': None, 'tags': {'premium_subscriber': None}, 'position': 7, 'permissions': '67042396327489', 'name': 'Server Booster', 'mentionable': False, 'managed': True, 'id': '1093246994539094056', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': 11816191, 'primary_color': 16023551}, 'color': 16023551}, {'version': 1766957004576, 'unicode_emoji': None, 'tags': {'bot_id': '1114853804324704327'}, 'position': 6, 'permissions': '1074120768', 'name': 'Chef', 'mentionable': False, 'managed': True, 'id': '1114855183684485120', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004573, 'unicode_emoji': None, 'tags': {'bot_id': '519287796549156864'}, 'position': 5, 'permissions': '2147830848', 'name': 'reaction bot🎉', 'mentionable': False, 'managed': True, 'id': '1137016033568358483', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004568, 'unicode_emoji': None, 'tags': {}, 'position': 4, 'permissions': '0', 'name': 'new role', 'mentionable': False, 'managed': False, 'id': '1140665183732236298', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004566, 'unicode_emoji': None, 'tags': {'bot_id': '1424045365262422156'}, 'position': 3, 'permissions': '8', 'name': 'Ticket bot', 'mentionable': False, 'managed': True, 'id': '1424075896582701139', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957004561, 'unicode_emoji': None, 'tags': {'bot_id': '792842038332358656'}, 'position': 2, 'permissions': '805694528', 'name': 'Discohook Utils', 'mentionable': False, 'managed': True, 'id': '1424318370332807201', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766957432642, 'unicode_emoji': None, 'tags': {'bot_id': '1448409221514268724'}, 'position': 1, 'permissions': '280584', 'name': 'Monster Conquest', 'mentionable': False, 'managed': True, 'id': '1448416491941789719', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}], 'region': 'deprecated', 'home_header': None, 'splash': None, 'joined_at': '2025-12-10T20:50:02.049000+00:00', 'application_id': None, 'mfa_level': 0, 'id': '972516464143761418', 'max_video_channel_users': 25, 'premium_subscription_count': 0, 'presences': [], 'name': "Cav's testing", 'activity_instances': [], 'emojis': [{'version': 1667163983237, 'roles': [], 'require_colons': True, 'name': 'owohalloween', 'managed': False, 'id': '1036385604331638875', 'available': True, 'animated': False}, {'version': 1667947681227, 'roles': [], 'require_colons': True, 'name': 'fvban', 'managed': False, 'id': '1039672671908147260', 'available': True, 'animated': False}, {'version': 1667947682430, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039672676941307986', 'available': True, 'animated': True}, {'version': 1667949622484, 'roles': [], 'require_colons': True, 'name': 'ACpaul', 'managed': False, 'id': '1039680814218215444', 'available': True, 'animated': False}, {'version': 1667949975351, 'roles': [], 'require_colons': True, 'name': 'ACpaul', 'managed': False, 'id': '1039682294140649544', 'available': True, 'animated': False}, {'version': 1667950102320, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039682826754334790', 'available': True, 'animated': True}, {'version': 1667950199227, 'roles': [], 'require_colons': True, 'name': 'fvban', 'managed': False, 'id': '1039683233253703690', 'available': True, 'animated': False}, {'version': 1667950200125, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039683236995027005', 'available': True, 'animated': True}, {'version': 1667950200707, 'roles': [], 'require_colons': True, 'name': 'Shrug', 'managed': False, 'id': '1039683239444484117', 'available': True, 'animated': False}, {'version': 1667950201214, 'roles': [], 'require_colons': True, 'name': 'woah', 'managed': False, 'id': '1039683241399038082', 'available': True, 'animated': False}, {'version': 1667950637958, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039685073424891995', 'available': True, 'animated': True}, {'version': 1667950639096, 'roles': [], 'require_colons': True, 'name': 'woah', 'managed': False, 'id': '1039685078130888808', 'available': True, 'animated': False}, {'version': 1667950639683, 'roles': [], 'require_colons': True, 'name': 'pepe_cheer', 'managed': False, 'id': '1039685080660054046', 'available': True, 'animated': False}, {'version': 1667951284758, 'roles': [], 'require_colons': True, 'name': 'fvban', 'managed': False, 'id': '1039687786246197308', 'available': True, 'animated': False}, {'version': 1667951412703, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039688322945142814', 'available': True, 'animated': True}, {'version': 1667951631358, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039689240059052073', 'available': True, 'animated': True}, {'version': 1667951726307, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039689638295646208', 'available': True, 'animated': True}, {'version': 1667952024184, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039690887552315535', 'available': True, 'animated': True}, {'version': 1667953614160, 'roles': [], 'require_colons': True, 'name': 'AAGoodJob', 'managed': False, 'id': '1039697556495671296', 'available': True, 'animated': True}, {'version': 1668032604277, 'roles': [], 'require_colons': True, 'name': 'AAthonking', 'managed': False, 'id': '1040028865063563355', 'available': True, 'animated': False}, {'version': 1668035354543, 'roles': [], 'require_colons': True, 'name': 'CoolCatCrySadDepressing', 'managed': False, 'id': '1040040400385232907', 'available': True, 'animated': False}, {'version': 1668035355130, 'roles': [], 'require_colons': True, 'name': 'woah', 'managed': False, 'id': '1040040402637570049', 'available': True, 'animated': False}, {'version': 1695964805260, 'roles': [], 'require_colons': True, 'name': 'https', 'managed': False, 'id': '1040399448804704316', 'available': True, 'animated': False}, {'version': 1668121060734, 'roles': [], 'require_colons': True, 'name': 'AEswagOwO', 'managed': False, 'id': '1040399878322409552', 'available': True, 'animated': False}, {'version': 1668121061353, 'roles': [], 'require_colons': True, 'name': 'CoolCatCrySadDepressing', 'managed': False, 'id': '1040399880952221706', 'available': True, 'animated': False}, {'version': 1668276947132, 'roles': [], 'require_colons': True, 'name': 'fsloth2', 'managed': False, 'id': '1041053713269264524', 'available': True, 'animated': True}, {'version': 1668362548635, 'roles': [], 'require_colons': True, 'name': 'catblob', 'managed': False, 'id': '1041412752008298496', 'available': True, 'animated': True}, {'version': 1668362549942, 'roles': [], 'require_colons': True, 'name': 'catblob', 'managed': False, 'id': '1041412757477654648', 'available': True, 'animated': True}, {'version': 1668760341540, 'roles': [], 'require_colons': True, 'name': 'BHVAkiaraHeart', 'managed': False, 'id': '1043081216406061077', 'available': True, 'animated': False}, {'version': 1669575171324, 'roles': [], 'require_colons': True, 'name': 'favpng_bullet_blue_small', 'managed': False, 'id': '1046498859993530460', 'available': True, 'animated': False}, {'version': 1672355453896, 'roles': [], 'require_colons': True, 'name': 'counting', 'managed': False, 'id': '1058160210516131910', 'available': True, 'animated': True}, {'version': 1678141643619, 'roles': [], 'require_colons': True, 'name': 'tst', 'managed': False, 'id': '1082429249199284245', 'available': True, 'animated': False}, {'version': 1678142602151, 'roles': [], 'require_colons': True, 'name': 's_1', 'managed': False, 'id': '1082433269536141332', 'available': True, 'animated': False}, {'version': 1678437304535, 'roles': [], 'require_colons': True, 'name': 'celeb', 'managed': False, 'id': '1083669340852863067', 'available': True, 'animated': False}, {'version': 1678441467561, 'roles': [], 'require_colons': True, 'name': 'pstaff', 'managed': False, 'id': '1083686801908174899', 'available': True, 'animated': False}, {'version': 1678441523666, 'roles': [], 'require_colons': True, 'name': 'celeb_buff', 'managed': False, 'id': '1083687037267353641', 'available': True, 'animated': False}, {'version': 1683468192088, 'roles': [], 'require_colons': True, 'name': 'fleezord1', 'managed': False, 'id': '1104770332952363018', 'available': True, 'animated': True}, {'version': 1687703953371, 'roles': [], 'require_colons': True, 'name': 'blank', 'managed': False, 'id': '1122536483203584091', 'available': True, 'animated': False}, {'version': 1687854002031, 'roles': [], 'require_colons': True, 'name': 'homeiconblue', 'managed': False, 'id': '1123165832894230619', 'available': True, 'animated': False}, {'version': 1687854356978, 'roles': [], 'require_colons': True, 'name': 'homeiconbluebig', 'managed': False, 'id': '1123167321708576838', 'available': True, 'animated': False}, {'version': 1687854496145, 'roles': [], 'require_colons': True, 'name': 'homeiconbluewider', 'managed': False, 'id': '1123167905396293652', 'available': True, 'animated': False}, {'version': 1692026040110, 'roles': [], 'require_colons': True, 'name': 'pepper', 'managed': False, 'id': '1131948005667393606', 'available': True, 'animated': False}, {'version': 1690203670559, 'roles': [], 'require_colons': True, 'name': 'test_1_pepper', 'managed': False, 'id': '1133020974854438992', 'available': True, 'animated': True}, {'version': 1692261818777, 'roles': [], 'require_colons': True, 'name': 'b_pink', 'managed': False, 'id': '1141653556122877964', 'available': True, 'animated': False}, {'version': 1692555811861, 'roles': [], 'require_colons': True, 'name': 'online', 'managed': False, 'id': '1142886652717564114', 'available': True, 'animated': False}, {'version': 1692556137335, 'roles': [], 'require_colons': True, 'name': 'offline', 'managed': False, 'id': '1142888017850277948', 'available': True, 'animated': False}, {'version': 1696110450839, 'roles': [], 'require_colons': True, 'name': 'check', 'managed': False, 'id': '1157795888798900337', 'available': True, 'animated': False}, {'version': 1696112473590, 'roles': [], 'require_colons': True, 'name': 'check_resivison', 'managed': False, 'id': '1157804373099941920', 'available': True, 'animated': False}, {'version': 1711430116224, 'roles': [], 'require_colons': True, 'name': 'topgg_ico_fire', 'managed': False, 'id': '1222051223016964207', 'available': True, 'animated': False}, {'version': 1727511024764, 'roles': [], 'require_colons': True, 'name': 'FireSticker', 'managed': False, 'id': '1289499442021666816', 'available': True, 'animated': False}, {'version': 1727511190924, 'roles': [], 'require_colons': True, 'name': 'flw', 'managed': False, 'id': '1289500055467855912', 'available': True, 'animated': True}, {'version': 1766956450878, 'roles': [], 'require_colons': True, 'name': 'cgreatsword', 'managed': False, 'id': '1454945550162985017', 'available': True, 'animated': False}, {'version': 1766956451511, 'roles': [], 'require_colons': True, 'name': 'ugreatsword', 'managed': False, 'id': '1454945552965042270', 'available': True, 'animated': False}, {'version': 1766956452102, 'roles': [], 'require_colons': True, 'name': 'rgreatsword', 'managed': False, 'id': '1454945555720573151', 'available': True, 'animated': False}, {'version': 1766956452616, 'roles': [], 'require_colons': True, 'name': 'egreatsword', 'managed': False, 'id': '1454945557603811451', 'available': True, 'animated': False}, {'version': 1766956453137, 'roles': [], 'require_colons': True, 'name': 'mgreatsword', 'managed': False, 'id': '1454945559612751906', 'available': True, 'animated': False}, {'version': 1766956454153, 'roles': [], 'require_colons': True, 'name': 'lgreatsword', 'managed': False, 'id': '1454945564285210727', 'available': True, 'animated': False}, {'version': 1766956454780, 'roles': [], 'require_colons': True, 'name': 'fgreatsword', 'managed': False, 'id': '1454945566948855828', 'available': True, 'animated': False}, {'version': 1766956477159, 'roles': [], 'require_colons': True, 'name': 'uhgen', 'managed': False, 'id': '1454945660804665566', 'available': True, 'animated': False}, {'version': 1766956477768, 'roles': [], 'require_colons': True, 'name': 'rhgen', 'managed': False, 'id': '1454945663283364093', 'available': True, 'animated': False}, {'version': 1766956478345, 'roles': [], 'require_colons': True, 'name': 'ehgen', 'managed': False, 'id': '1454945665749745745', 'available': True, 'animated': False}, {'version': 1766956478964, 'roles': [], 'require_colons': True, 'name': 'mhgen', 'managed': False, 'id': '1454945668148887584', 'available': True, 'animated': False}, {'version': 1766956479568, 'roles': [], 'require_colons': True, 'name': 'lhgen', 'managed': False, 'id': '1454945670917001359', 'available': True, 'animated': False}, {'version': 1766956480302, 'roles': [], 'require_colons': True, 'name': 'fhgen', 'managed': False, 'id': '1454945673597288706', 'available': True, 'animated': False}, {'version': 1766968805518, 'roles': [], 'require_colons': True, 'name': 'greatsword', 'managed': False, 'id': '1454997369664831529', 'available': True, 'animated': False}, {'version': 1767045325991, 'roles': [], 'require_colons': True, 'name': 'goblin', 'managed': False, 'id': '1455318167327998161', 'available': True, 'animated': False}], 'system_channel_flags': 0, 'stage_instances': [], 'threads': [], 'guild_scheduled_events': [], 'vanity_url_code': None, 'owner_configured_content_level': 0, 'hub_type': None, 'unavailable': False, 'incidents_data': None, 'public_updates_channel_id': None, 'lazy': True, 'features': ['CHANNEL_ICON_EMOJIS_GENERATED'], 'description': None, 'members': [{'user': {'username': 'Monster Conquest', 'public_flags': 0, 'primary_guild': None, 'id': '1448409221514268724', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '4144', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'a7a92706f197d79e3f3659f7233f4f53'}, 'roles': ['1448416491941789719'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-12-10T20:50:02.049000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}], 'voice_states': [], 'channels': [{'version': 1688683150975, 'type': 4, 'position': 0, 'permission_overwrites': [], 'name': 'Text Channels', 'id': '972516464613548032', 'flags': 0}, {'version': 1688683151023, 'type': 4, 'position': 0, 'permission_overwrites': [], 'name': 'Voice Channels', 'id': '972516464613548033', 'flags': 0}, {'version': 1757610704735, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 0, 'permission_overwrites': [{'type': 1, 'id': '519287796549156864', 'deny': '0', 'allow': '1024'}, {'type': 1, 'id': '1114853804324704327', 'deny': '0', 'allow': '1024'}, {'type': 1, 'id': '393096318123245578', 'deny': '0', 'allow': '1024'}, {'type': 1, 'id': '656373241144934420', 'deny': '0', 'allow': '1024'}, {'type': 0, 'id': '972516464143761418', 'deny': '1024', 'allow': '0'}, {'type': 1, 'id': '408785106942164992', 'deny': '0', 'allow': '1024'}, {'type': 0, 'id': '1042831924344926283', 'deny': '0', 'allow': '1024'}], 'parent_id': '972516464613548032', 'name': 'the-only-safe-channel', 'last_pin_timestamp': '2025-12-29T21:57:09.178000+00:00', 'last_message_id': '1455341269667811502', 'id': '972516464613548034', 'icon_emoji': {'name': '🔒', 'id': None}, 'flags': 0}, {'version': 1688683151008, 'user_limit': 0, 'type': 2, 'rtc_region': None, 'rate_limit_per_user': 0, 'position': 0, 'permission_overwrites': [], 'parent_id': '972516464613548033', 'name': 'General', 'last_message_id': None, 'id': '972516464613548035', 'icon_emoji': {'name': '🌐', 'id': None}, 'flags': 0, 'bitrate': 64000}, {'version': 1688683150948, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 2, 'permission_overwrites': [], 'parent_id': '972516464613548032', 'name': 'rules', 'last_message_id': '1048453939068149820', 'id': '1008384873947467838', 'icon_emoji': {'name': '📜', 'id': None}, 'flags': 0}, {'version': 1688683150967, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 3, 'permission_overwrites': [{'type': 1, 'id': '408785106942164992', 'deny': '0', 'allow': '1024'}, {'type': 1, 'id': '972517310998913024', 'deny': '0', 'allow': '0'}, {'type': 1, 'id': '968896356083171328', 'deny': '1024', 'allow': '0'}], 'parent_id': '972516464613548032', 'name': 'random', 'last_message_id': '1116099694154764398', 'id': '1050626616096727090', 'icon_emoji': {'name': '🎲', 'id': None}, 'flags': 0}, {'version': 1688683150958, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 4, 'permission_overwrites': [], 'parent_id': '972516464613548032', 'name': 'second-channel-for-tog', 'last_message_id': '1066041461939900516', 'id': '1066036224151785643', 'icon_emoji': {'name': '🕰️', 'id': None}, 'flags': 0}, {'version': 1691425720294, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 1, 'permission_overwrites': [], 'parent_id': '972516464613548032', 'name': 'bot-testing', 'last_pin_timestamp': '2023-06-30T08:22:22+00:00', 'last_message_id': '1135889580546064454', 'id': '1114854809590317136', 'icon_emoji': {'name': '👨\u200d🍳', 'id': None}, 'flags': 0}, {'version': 1688683150937, 'type': 4, 'position': 1, 'permission_overwrites': [], 'name': 'archive', 'id': '1123563301620678756', 'flags': 0}, {'version': 1688683150922, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 6, 'permission_overwrites': [], 'parent_id': '972516464613548032', 'name': 'test2', 'last_message_id': '1424317305415798795', 'id': '1124983162863370291', 'icon_emoji': {'name': '🧪', 'id': None}, 'flags': 0}], 'banner': None, 'moderator_reporting': None, 'premium_tier': 0, 'rules_channel_id': None, 'default_message_notifications': 1, 'embedded_activities': [], 'premium_progress_bar_enabled': False, 'system_channel_id': '972516464613548034', 'max_stage_video_channel_users': 50, 'afk_timeout': 300, 'latest_onboarding_question_id': None, 'max_members': 25000000, 'large': False, 'stickers': [], 'owner_id': '421601642417225728', 'version': 1766956314400, 'verification_level': 0, 'explicit_content_filter': 0}}
+[2025-12-31 02:17:41] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2025-12-31 02:17:41] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'GUILD_CREATE', 's': 3, 'op': 0, 'd': {'member_count': 13, 'afk_channel_id': None, 'premium_features': None, 'nsfw': False, 'nsfw_level': 0, 'discovery_splash': None, 'soundboard_sounds': [], 'application_command_counts': {}, 'profile': None, 'preferred_locale': 'en-US', 'inventory_settings': None, 'icon': None, 'safety_alerts_channel_id': None, 'roles': [{'version': 0, 'unicode_emoji': None, 'tags': {}, 'position': 0, 'permissions': '2248473465835073', 'name': '@everyone', 'mentionable': False, 'managed': False, 'id': '978793150095175760', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 0, 'unicode_emoji': None, 'tags': {'bot_id': '781606551349231667'}, 'position': 4, 'permissions': '8934606046208', 'name': 'Remoji', 'mentionable': False, 'managed': True, 'id': '978793228843233372', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 0, 'unicode_emoji': None, 'tags': {'bot_id': '968896356083171328'}, 'position': 3, 'permissions': '274878286912', 'name': 'weapons', 'mentionable': False, 'managed': True, 'id': '979097039247912965', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 0, 'unicode_emoji': None, 'tags': {'bot_id': '486173614219984907'}, 'position': 2, 'permissions': '274878286912', 'name': 'testing bot', 'mentionable': False, 'managed': True, 'id': '992455053665382502', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 0, 'unicode_emoji': None, 'tags': {}, 'position': 1, 'permissions': '1071698660937', 'name': 'perms', 'mentionable': False, 'managed': False, 'id': '992455852936155176', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 15277667}, 'color': 15277667}, {'version': 0, 'unicode_emoji': None, 'tags': {'bot_id': '519287796549156864'}, 'position': 1, 'permissions': '2147830848', 'name': 'reaction bot🎉', 'mentionable': False, 'managed': True, 'id': '996089273436614786', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1668529843881, 'unicode_emoji': None, 'tags': {'bot_id': '972517310998913024'}, 'position': 1, 'permissions': '8', 'name': "Cav's testing", 'mentionable': False, 'managed': True, 'id': '1042114438943219715', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1678049231818, 'unicode_emoji': None, 'tags': {'bot_id': '1080932501142384710'}, 'position': 1, 'permissions': '8', 'name': 'weapons_chez_testing', 'mentionable': False, 'managed': True, 'id': '1082041646100779100', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1690758958155, 'unicode_emoji': None, 'tags': {'bot_id': '1114853804324704327'}, 'position': 1, 'permissions': '17998329019472', 'name': 'obbe bot', 'mentionable': False, 'managed': True, 'id': '1135350101796212841', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1691171366355, 'unicode_emoji': None, 'tags': {'bot_id': '559426966151757824'}, 'position': 1, 'permissions': '536895488', 'name': 'NQN', 'mentionable': False, 'managed': True, 'id': '1137079867440107522', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}, {'version': 1766959853585, 'unicode_emoji': None, 'tags': {'bot_id': '1448409221514268724'}, 'position': 1, 'permissions': '8', 'name': 'Monster Conquest', 'mentionable': False, 'managed': True, 'id': '1454959822599491667', 'icon': None, 'hoist': False, 'flags': 0, 'colors': {'tertiary_color': None, 'secondary_color': None, 'primary_color': 0}, 'color': 0}], 'region': 'deprecated', 'home_header': None, 'splash': None, 'joined_at': '2025-12-28T22:10:53.598553+00:00', 'application_id': None, 'mfa_level': 0, 'id': '978793150095175760', 'max_video_channel_users': 25, 'premium_subscription_count': 0, 'presences': [], 'name': 'Passive server - 3', 'activity_instances': [], 'emojis': [{'version': 0, 'roles': [], 'require_colons': True, 'name': 'chgen', 'managed': False, 'id': '978793463678136330', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'uhgen', 'managed': False, 'id': '978794039560241193', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'rhgen', 'managed': False, 'id': '978794190781710396', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'rhgen', 'managed': False, 'id': '978794312659775488', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'ehgen', 'managed': False, 'id': '978794333429956618', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'mhgen', 'managed': False, 'id': '978794358746804255', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'lhgen', 'managed': False, 'id': '978794388601843773', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'fhgen', 'managed': False, 'id': '978794409317511208', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'cwgen', 'managed': False, 'id': '978794631280078918', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'uwgen', 'managed': False, 'id': '978794655707693086', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'rwgen', 'managed': False, 'id': '978794670161285140', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'ewgen', 'managed': False, 'id': '978794693229957160', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'mwgen', 'managed': False, 'id': '978794715329724446', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'lwgen', 'managed': False, 'id': '978794741254721556', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'fwgen', 'managed': False, 'id': '978794764893839390', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'csprout', 'managed': False, 'id': '978794970016264202', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'usprout', 'managed': False, 'id': '978794989326843974', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'rsprout', 'managed': False, 'id': '978795010243846184', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'esprout', 'managed': False, 'id': '978795067257004052', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'msprout', 'managed': False, 'id': '978795087171551232', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'lsprout', 'managed': False, 'id': '978795106243055716', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'fsprout', 'managed': False, 'id': '978795125616558121', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'cenrage', 'managed': False, 'id': '978795312258875442', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'uenrage', 'managed': False, 'id': '978795329619099699', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'renrage', 'managed': False, 'id': '978795352213835866', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'eenrage', 'managed': False, 'id': '978795368210890812', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'menrage', 'managed': False, 'id': '978795390566555698', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'lenrage', 'managed': False, 'id': '978795405947064370', 'available': True, 'animated': False}, {'version': 0, 'roles': [], 'require_colons': True, 'name': 'fenrage', 'managed': False, 'id': '978795428264939580', 'available': True, 'animated': False}, {'version': 1676189571843, 'roles': [], 'require_colons': True, 'name': 'str', 'managed': False, 'id': '1074241654820708442', 'available': True, 'animated': False}, {'version': 1676189970308, 'roles': [], 'require_colons': True, 'name': 'mag', 'managed': False, 'id': '1074243338007494727', 'available': True, 'animated': False}, {'version': 1676189988319, 'roles': [], 'require_colons': True, 'name': 'hp', 'managed': False, 'id': '1074243413563670580', 'available': True, 'animated': False}, {'version': 1676189998854, 'roles': [], 'require_colons': True, 'name': 'wp', 'managed': False, 'id': '1074243457796821052', 'available': True, 'animated': False}, {'version': 1676190023294, 'roles': [], 'require_colons': True, 'name': 'pr', 'managed': False, 'id': '1074243560175583262', 'available': True, 'animated': False}, {'version': 1676190037964, 'roles': [], 'require_colons': True, 'name': 'mr', 'managed': False, 'id': '1074243621647302756', 'available': True, 'animated': False}, {'version': 1676190057548, 'roles': [], 'require_colons': True, 'name': 'lifesteal', 'managed': False, 'id': '1074243703981490196', 'available': True, 'animated': False}, {'version': 1676190072061, 'roles': [], 'require_colons': True, 'name': 'thorns', 'managed': False, 'id': '1074243764610158633', 'available': True, 'animated': False}, {'version': 1676190084360, 'roles': [], 'require_colons': True, 'name': 'manatap', 'managed': False, 'id': '1074243816405602324', 'available': True, 'animated': False}, {'version': 1676190096182, 'roles': [], 'require_colons': True, 'name': 'absolve', 'managed': False, 'id': '1074243865978077234', 'available': True, 'animated': False}, {'version': 1676190107794, 'roles': [], 'require_colons': True, 'name': 'safeguard', 'managed': False, 'id': '1074243914627813386', 'available': True, 'animated': False}, {'version': 1676190117820, 'roles': [], 'require_colons': True, 'name': 'critical', 'managed': False, 'id': '1074243956747022396', 'available': True, 'animated': False}, {'version': 1676190131158, 'roles': [], 'require_colons': True, 'name': 'discharge', 'managed': False, 'id': '1074244012694847558', 'available': True, 'animated': False}, {'version': 1676190144846, 'roles': [], 'require_colons': True, 'name': 'kkaze', 'managed': False, 'id': '1074244070056153149', 'available': True, 'animated': False}, {'version': 1676190156679, 'roles': [], 'require_colons': True, 'name': 'hgen', 'managed': False, 'id': '1074244119691542569', 'available': True, 'animated': False}, {'version': 1676190169502, 'roles': [], 'require_colons': True, 'name': 'wgen', 'managed': False, 'id': '1074244173496074311', 'available': True, 'animated': False}, {'version': 1676190177986, 'roles': [], 'require_colons': True, 'name': 'sprout', 'managed': False, 'id': '1074244209126678528', 'available': True, 'animated': False}, {'version': 1676190186682, 'roles': [], 'require_colons': True, 'name': 'enrage', 'managed': False, 'id': '1074244245562605608', 'available': True, 'animated': False}, {'version': 1690226012320, 'roles': [], 'require_colons': True, 'name': 'sac', 'managed': False, 'id': '1133114765170970765', 'available': True, 'animated': False}, {'version': 1692363740814, 'roles': [], 'require_colons': True, 'name': 'snail', 'managed': False, 'id': '1142081047929032859', 'available': True, 'animated': False}], 'system_channel_flags': 0, 'stage_instances': [], 'threads': [], 'guild_scheduled_events': [], 'vanity_url_code': None, 'owner_configured_content_level': 0, 'hub_type': None, 'unavailable': False, 'incidents_data': None, 'public_updates_channel_id': None, 'lazy': True, 'features': ['CHANNEL_ICON_EMOJIS_GENERATED'], 'description': None, 'members': [{'user': {'username': 'Monster Conquest', 'public_flags': 0, 'primary_guild': None, 'id': '1448409221514268724', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '4144', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'a7a92706f197d79e3f3659f7233f4f53'}, 'roles': ['1454959822599491667'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-12-28T22:10:53.598553+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}], 'voice_states': [], 'channels': [{'version': 0, 'type': 4, 'position': 0, 'permission_overwrites': [], 'name': 'Text Channels', 'id': '978793150095175761', 'flags': 0}, {'version': 0, 'type': 4, 'position': 0, 'permission_overwrites': [], 'name': 'Voice Channels', 'id': '978793150095175762', 'flags': 0}, {'version': 1677177738448, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 0, 'permission_overwrites': [{'type': 0, 'id': '978793150095175760', 'deny': '1024', 'allow': '0'}], 'parent_id': '978793150095175761', 'name': 'general', 'last_message_id': '1454959823245414503', 'id': '978793150095175763', 'flags': 0}, {'version': 0, 'user_limit': 0, 'type': 2, 'rtc_region': None, 'rate_limit_per_user': 0, 'position': 0, 'permission_overwrites': [], 'parent_id': '978793150095175762', 'name': 'General', 'last_message_id': None, 'id': '978793150644645938', 'flags': 0, 'bitrate': 64000}, {'version': 1695695250147, 'type': 0, 'topic': None, 'rate_limit_per_user': 0, 'position': 1, 'permission_overwrites': [], 'parent_id': '978793150095175761', 'name': 'hwllo', 'last_message_id': None, 'id': '1156054409848041502', 'icon_emoji': {'name': '🌐', 'id': None}, 'flags': 0}], 'banner': None, 'moderator_reporting': None, 'premium_tier': 0, 'rules_channel_id': None, 'default_message_notifications': 0, 'embedded_activities': [], 'premium_progress_bar_enabled': False, 'system_channel_id': '978793150095175763', 'max_stage_video_channel_users': 50, 'afk_timeout': 300, 'latest_onboarding_question_id': None, 'max_members': 25000000, 'large': False, 'stickers': [], 'owner_id': '421601642417225728', 'version': 1695695158560, 'verification_level': 0, 'explicit_content_filter': 0}}
+[2025-12-31 02:17:41] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2025-12-31 02:17:42] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'GUILD_MEMBERS_CHUNK', 's': 4, 'op': 0, 'd': {'nonce': '14cd61c657c702355b828f3467bcbc9a', 'members': [{'user': {'username': 'Dyno', 'public_flags': 589824, 'primary_guild': None, 'id': '155149108183695360', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '3861', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'b4fdfc64edff74c37e1574d34fad66c2'}, 'roles': ['1075159928467099710'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-02-14T21:01:42.496000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'pinchypheo', 'public_flags': 0, 'primary_guild': {'tag': 'HNS', 'identity_guild_id': '559475774441259008', 'identity_enabled': True, 'badge': '3c017c53b5738c0697c4e215768804c9'}, 'id': '253315149136396299', 'global_name': 'Pinchy', 'display_name_styles': None, 'display_name': 'Pinchy', 'discriminator': '0', 'collectibles': {'nameplate': {'sku_id': '1409983105577783410', 'palette': 'violet', 'label': 'COLLECTIBLES_SEPTEMBER_2025_MARKETING_NAMEPLATE_A11Y', 'expires_at': None, 'asset': 'nameplates/special_events_2/nitro_rocketfuel_nameplate/'}}, 'bot': False, 'avatar_decoration_data': {'sku_id': '1409978159255785652', 'expires_at': None, 'asset': 'a_d1e5d3aabccb3d38f21b5ac8a33fcf4d'}, 'avatar': '1f499ef51a3b70945661b25b10bbde41'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-08-01T10:55:53.420000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'kainey.', 'public_flags': 128, 'primary_guild': {'tag': 'HNS', 'identity_guild_id': '559475774441259008', 'identity_enabled': True, 'badge': '3c017c53b5738c0697c4e215768804c9'}, 'id': '264213981231579147', 'global_name': 'Kainey', 'display_name_styles': {'font_id': 8, 'effect_id': 5, 'colors': [14672098]}, 'display_name': 'Kainey', 'discriminator': '0', 'collectibles': {'nameplate': {'sku_id': '1385035256083648542', 'palette': 'berry', 'label': 'COLLECTIBLES_CHANCE_D20_ROLL_NP_A11Y', 'expires_at': None, 'asset': 'nameplates/chance/d20_roll/'}}, 'bot': False, 'avatar_decoration_data': {'sku_id': '1432550258147328050', 'expires_at': None, 'asset': 'a_2b4b5a191f89c65d042f15e854129822'}, 'avatar': '5e812dac34938308c65934ba709aebfa'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-10-04T15:10:58.968000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'maxieurope', 'public_flags': 131200, 'primary_guild': None, 'id': '393096318123245578', 'global_name': 'maxi', 'display_name_styles': None, 'display_name': 'maxi', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1324454240860766340', 'expires_at': None, 'asset': 'a_57587eee08d2709588773fb20401fe5f'}, 'avatar': 'a_00bbd6e533d033bd4377f792ed81c07c'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-11-13T22:18:19.475000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'OwO', 'public_flags': 65536, 'primary_guild': None, 'id': '408785106942164992', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '8456', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': '1a449430e3a9a830efebb8c57917f943'}, 'roles': ['1041308088990453832'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-11-13T11:06:35.011000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'caviarbro', 'public_flags': 256, 'primary_guild': {'tag': 'HNS', 'identity_guild_id': '559475774441259008', 'identity_enabled': True, 'badge': '3c017c53b5738c0697c4e215768804c9'}, 'id': '421601642417225728', 'global_name': None, 'display_name_styles': {'font_id': 8, 'effect_id': 5, 'colors': [1874155]}, 'display_name': None, 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1440174638930853954', 'expires_at': 1768507200, 'asset': 'a_523d7733d1b88cfbad5b082d062defc4'}, 'avatar': '803f28a13a1b8204d38a0483d9f67e2b'}, 'roles': ['1044006363950485515'], 'premium_since': None, 'pending': False, 'nick': 'cav', 'mute': False, 'joined_at': '2022-05-07T15:13:13.559000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'togira', 'public_flags': 256, 'primary_guild': {'tag': 'ETHZ', 'identity_guild_id': '747752542741725244', 'identity_enabled': True, 'badge': 'dea97e909a0211e2479d75cd11c2ec41'}, 'id': '424510595702718475', 'global_name': 'Togira', 'display_name_styles': None, 'display_name': 'Togira', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1282816431871754281', 'expires_at': None, 'asset': 'a_a44e9335ea869639fdf812f3642a56a6'}, 'avatar': 'a_d75a26440f06a42ab8bab77a0780b762'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-01-15T20:04:12.112000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'testing bot', 'public_flags': 0, 'primary_guild': None, 'id': '486173614219984907', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '7688', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'be500f89f4d020a4458afccadd442c08'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-11-27T23:21:33.899000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'reaction bot 🎉', 'public_flags': 65536, 'primary_guild': None, 'id': '519287796549156864', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '7788', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'ae0d9328bace0b0d64c19784477b7e3c'}, 'roles': ['1137016033568358483'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-08-04T13:35:47.236000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'cyroduck', 'public_flags': 256, 'primary_guild': None, 'id': '520978930681774091', 'global_name': 'Cyro', 'display_name_styles': None, 'display_name': 'Cyro', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': None, 'avatar': 'f276943468591e58385f85d988014023'}, 'roles': ['1044006363950485515'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-06-27T15:30:20.937000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'lilywtf', 'public_flags': 64, 'primary_guild': None, 'id': '547859446047440915', 'global_name': 'Bit', 'display_name_styles': None, 'display_name': 'Bit', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': None, 'avatar': 'fefe9f11d0d751d17bb8607869f7b406'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-04-05T18:53:13.421000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'eurabyn', 'public_flags': 128, 'primary_guild': {'tag': 'HNS', 'identity_guild_id': '559475774441259008', 'identity_enabled': True, 'badge': '3c017c53b5738c0697c4e215768804c9'}, 'id': '583075683945807887', 'global_name': 'eurabyn', 'display_name_styles': None, 'display_name': 'eurabyn', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1440174638930853953', 'expires_at': 1768507200, 'asset': 'a_f507d774257b88d47b3531e8afa46259'}, 'avatar': '3e78c55f693522c483df4ba4fce3c2d0'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-10-14T16:07:34.342000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'hsse', 'public_flags': 0, 'primary_guild': None, 'id': '598993979266170939', 'global_name': 'Heather', 'display_name_styles': None, 'display_name': 'Heather', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': None, 'avatar': 'b163e1dae3f579653f390b837943326b'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-10-07T19:38:37.049000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Discobot', 'public_flags': 65536, 'primary_guild': None, 'id': '633565743103082527', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '9898', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'b51b6cb2e2de52808bd31d30fe9135a3'}, 'roles': ['1045765223384092694'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-11-25T18:17:38.671000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'moltencheesebestcheese', 'public_flags': 64, 'primary_guild': None, 'id': '656373241144934420', 'global_name': 'MoltenCheeseBestCheese', 'display_name_styles': None, 'display_name': 'MoltenCheeseBestCheese', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': None, 'avatar': '75b208c1a2309f448ac84b076cc41537'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': 'chez', 'mute': False, 'joined_at': '2022-11-17T13:18:00.040000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Remoji', 'public_flags': 65536, 'primary_guild': None, 'id': '781606551349231667', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '1279', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'a_8f19d18a138ffa25a24a5da989ac48e9'}, 'roles': ['1036385521229910071'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-10-30T21:06:03.461000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Discohook Utils', 'public_flags': 589824, 'primary_guild': None, 'id': '792842038332358656', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '4333', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'da056550fd65a4d7e4636cb1707ca801'}, 'roles': ['1424318370332807201'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-10-05T08:52:42.115000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'NeonUtil', 'public_flags': 65536, 'primary_guild': None, 'id': '851436490415931422', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '1109', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': '2af9b9fd509337b6fa36aa411c2f08cc'}, 'roles': ['983736112868655156'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-06-07T14:16:06.291000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'youfoundlegend', 'public_flags': 128, 'primary_guild': {'tag': 'MLID', 'identity_guild_id': '1032196828017463336', 'identity_enabled': True, 'badge': '6473797948e6d36a991e425c8b7c353c'}, 'id': '883789745107382372', 'global_name': 'youfoundlegend', 'display_name_styles': None, 'display_name': 'youfoundlegend', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': None, 'avatar': '1de1986b16057c600a91c8d248e43515'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-03-16T12:06:34.184000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'weapons', 'public_flags': 65536, 'primary_guild': None, 'id': '968896356083171328', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '6637', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': '25067c2b645ec60c7fc91d4cbbdad46a'}, 'roles': ['1042831924344926283'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-11-17T16:01:45.718000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': "Cav's testing", 'public_flags': 0, 'primary_guild': None, 'id': '972517310998913024', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '6554', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'b9cf60351779a515deadc12c46b37322'}, 'roles': ['972519540833546324'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-05-07T15:25:27.150000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'weapons_chez_testing', 'public_flags': 0, 'primary_guild': None, 'id': '1080932501142384710', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '9445', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': None}, 'roles': ['1081138114271125508'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-03-03T08:56:53.117000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'obbe bot', 'public_flags': 0, 'primary_guild': None, 'id': '1114853804324704327', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '8315', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'c648c942c5a77c8b6802faa657246d28'}, 'roles': ['1114855183684485120'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-06-04T09:56:28.849000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Ticket bot', 'public_flags': 0, 'primary_guild': None, 'id': '1424045365262422156', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '9102', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': None}, 'roles': ['1424075896582701139'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-10-04T16:49:11.905000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Monster Conquest', 'public_flags': 0, 'primary_guild': None, 'id': '1448409221514268724', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '4144', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'a7a92706f197d79e3f3659f7233f4f53'}, 'roles': ['1448416491941789719'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-12-10T20:50:02.049000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}], 'guild_id': '972516464143761418', 'chunk_index': 0, 'chunk_count': 1}}
+[2025-12-31 02:17:42] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2025-12-31 02:17:42] [DEBUG   ] discord.state: Processed a chunk for 25 members in guild ID 972516464143761418.
+[2025-12-31 02:17:42] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': 'GUILD_MEMBERS_CHUNK', 's': 5, 'op': 0, 'd': {'nonce': '3d8b34f7ab0e5c530e6923a9b57d7f35', 'members': [{'user': {'username': 'maxieurope', 'public_flags': 131200, 'primary_guild': None, 'id': '393096318123245578', 'global_name': 'maxi', 'display_name_styles': None, 'display_name': 'maxi', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1324454240860766340', 'expires_at': None, 'asset': 'a_57587eee08d2709588773fb20401fe5f'}, 'avatar': 'a_00bbd6e533d033bd4377f792ed81c07c'}, 'roles': ['992455852936155176'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-05-25T18:35:20.619000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'caviarbro', 'public_flags': 256, 'primary_guild': {'tag': 'HNS', 'identity_guild_id': '559475774441259008', 'identity_enabled': True, 'badge': '3c017c53b5738c0697c4e215768804c9'}, 'id': '421601642417225728', 'global_name': None, 'display_name_styles': {'font_id': 8, 'effect_id': 5, 'colors': [1874155]}, 'display_name': None, 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1440174638930853954', 'expires_at': 1768507200, 'asset': 'a_523d7733d1b88cfbad5b082d062defc4'}, 'avatar': '803f28a13a1b8204d38a0483d9f67e2b'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-05-24T22:54:32.105000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'bxw_quincey', 'public_flags': 128, 'primary_guild': {'tag': None, 'identity_guild_id': None, 'identity_enabled': False, 'badge': None}, 'id': '459469724091154433', 'global_name': 'Quincey', 'display_name_styles': None, 'display_name': 'Quincey', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': {'sku_id': '1314020996327542894', 'expires_at': None, 'asset': 'a_386445551be850bb16b73a225d0d0602'}, 'avatar': '017bbc12dbce50e7f1dd01f733730e26'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-12-11T21:41:57.608000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'testing bot', 'public_flags': 0, 'primary_guild': None, 'id': '486173614219984907', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '7688', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'be500f89f4d020a4458afccadd442c08'}, 'roles': ['992455053665382502'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-07-01T15:42:03.816000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'reaction bot 🎉', 'public_flags': 65536, 'primary_guild': None, 'id': '519287796549156864', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '7788', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'ae0d9328bace0b0d64c19784477b7e3c'}, 'roles': ['996089273436614786'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-07-11T16:23:09.252000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'cyroduck', 'public_flags': 256, 'primary_guild': None, 'id': '520978930681774091', 'global_name': 'Cyro', 'display_name_styles': None, 'display_name': 'Cyro', 'discriminator': '0', 'collectibles': None, 'bot': False, 'avatar_decoration_data': None, 'avatar': 'f276943468591e58385f85d988014023'}, 'roles': [], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-05-25T05:33:01.115000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'NQN', 'public_flags': 65536, 'primary_guild': None, 'id': '559426966151757824', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '3454', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'c7c54eb85e591ced4c2f0864b7ea4e3e'}, 'roles': ['1137079867440107522'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-08-04T17:49:26.373000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Remoji', 'public_flags': 65536, 'primary_guild': None, 'id': '781606551349231667', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '1279', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'a_8f19d18a138ffa25a24a5da989ac48e9'}, 'roles': ['978793228843233372'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-05-24T22:54:50.882000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'weapons', 'public_flags': 65536, 'primary_guild': None, 'id': '968896356083171328', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '6637', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': '25067c2b645ec60c7fc91d4cbbdad46a'}, 'roles': ['979097039247912965'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-05-25T19:02:04.974000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': "Cav's testing", 'public_flags': 0, 'primary_guild': None, 'id': '972517310998913024', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '6554', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'b9cf60351779a515deadc12c46b37322'}, 'roles': ['1042114438943219715'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2022-11-15T16:30:43.900000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'weapons_chez_testing', 'public_flags': 0, 'primary_guild': None, 'id': '1080932501142384710', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '9445', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': None}, 'roles': ['1082041646100779100'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-03-05T20:47:11.848000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'obbe bot', 'public_flags': 0, 'primary_guild': None, 'id': '1114853804324704327', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '8315', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'c648c942c5a77c8b6802faa657246d28'}, 'roles': ['1135350101796212841'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2023-07-30T23:15:58.194000+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}, {'user': {'username': 'Monster Conquest', 'public_flags': 0, 'primary_guild': None, 'id': '1448409221514268724', 'global_name': None, 'display_name_styles': None, 'display_name': None, 'discriminator': '4144', 'collectibles': None, 'bot': True, 'avatar_decoration_data': None, 'avatar': 'a7a92706f197d79e3f3659f7233f4f53'}, 'roles': ['1454959822599491667'], 'premium_since': None, 'pending': False, 'nick': None, 'mute': False, 'joined_at': '2025-12-28T22:10:53.598553+00:00', 'flags': 0, 'deaf': False, 'communication_disabled_until': None, 'banner': None, 'avatar': None}], 'guild_id': '978793150095175760', 'chunk_index': 0, 'chunk_count': 1}}
+[2025-12-31 02:17:42] [DEBUG   ] discord.client: Dispatching event socket_event_type
+[2025-12-31 02:17:42] [DEBUG   ] discord.state: Processed a chunk for 13 members in guild ID 978793150095175760.
+[2025-12-31 02:17:43] [DEBUG   ] discord.client: Dispatching event guild_available
+[2025-12-31 02:17:43] [DEBUG   ] discord.client: Dispatching event guild_available
+[2025-12-31 02:17:43] [DEBUG   ] discord.client: Dispatching event ready
+[2025-12-31 02:18:17] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:18:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:18:59] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:18:59] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:19:40] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:19:40] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:20:21] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:20:21] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:21:02] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:21:03] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:21:44] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:21:44] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:22:25] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:22:25] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:23:06] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:23:06] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:23:47] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:23:48] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:24:29] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:24:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:25:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:25:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:25:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:25:51] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:26:33] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:26:33] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:27:14] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:27:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:27:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:27:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:28:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:28:36] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:29:18] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:29:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:29:59] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:29:59] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:30:40] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:30:41] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:31:21] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:31:21] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:32:03] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:32:03] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:32:44] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:32:44] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:33:25] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:33:25] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:34:06] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:34:07] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:34:48] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:34:48] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:35:29] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:35:29] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:36:10] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:36:10] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:36:51] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:36:52] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:37:33] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:37:33] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:38:14] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:38:14] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:38:55] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:38:55] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:39:36] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:39:37] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
+[2025-12-31 02:40:18] [DEBUG   ] discord.gateway: Keeping shard ID None websocket alive with sequence 5.
+[2025-12-31 02:40:18] [DEBUG   ] discord.gateway: For Shard ID None: WebSocket Event: {'t': None, 's': None, 'op': 11, 'd': None}
