@@ -257,9 +257,30 @@ def get_weapon_config(*, w_type : int = None, weapon_name : str = None):
 
     return weapon_config
 
+def get_passive_config(*, p_type : int = None, passive_name : str = None):
+    config = get_config()
+    
+    passive_config = None 
+
+    if (p_type is None and passive_name is None):
+        raise ValueError("Required at least one argumet (p_type / passive_name)")
+    
+    if (p_type):
+        passive_config = next(
+            (p for p in config["passives"] if p["type"] == p_type),
+            None 
+        )
+
+    if (passive_name):
+        passive_config = next(
+            (p for p in config["passives"] if p["name"] == passive_name.lower().strip()),
+            None 
+        )
+
+    return passive_config
+
 async def get_monster(user_id, 
                       *, name = None, id = None):
-    config = get_config()
     user_data = await get_user(user_id)
 
     if (not user_data):
@@ -604,10 +625,7 @@ async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
 
         passive_emojis = []
         for passive_data in weapon_data.passives:
-            passive_config = next(
-                (p for p in config["passives"] if p["type"] == passive_data.p_type),
-                None
-            )
+            passive_config = get_passive_config(p_type = passed_data.p_type)
 
             if (not passive_config):
                 raise ValueError(f"Passive with type {passive_data.p_type} does not exist in config!")
@@ -642,25 +660,10 @@ def xp_for_level(level):
 
     return int(base * (level ** (1 / exp)))
 
-async def get_monster_stats(
-        user_id,
-        m_id,
-        *,
-        defined_m_type = None,
-        defined_weapon_data = None,
-        defined_xp = None
-):
+def get_monster_stats_raw(m_type, xp, weapon_data : WeaponModel = None):
     config = get_config()
-
-    monster_data = monster_config = None
-
-    # this is for monsters that are not be in the database (created in runtime, battle purposes)
-    if (defined_m_type is None):
-        monster_data, monster_config = await get_monster(user_id, id = m_id)
-    else:
-        monster_config = get_monster_config(m_type = defined_m_type)
-        
-    monster_level = get_level(monster_data.xp if defined_xp is None else defined_xp)
+    monster_config = get_monster_config(m_type = m_type)
+    monster_level = get_level(xp)
     
     def get_stat(stat_type):
         stat = next(
@@ -680,11 +683,49 @@ async def get_monster_stats(
     mag = (get_stat(4) * monster_level) + stat_bases[4]
     mag_defense = min((monster_level ** (0.5 + get_stat(5) * 0.01)) + stat_bases[5], defense_stat_limit)
 
-    # TODO: Add permanent bonuses such as passives boosting stats
-    if (defined_weapon_data):
-        pass
-    elif (monster_data.e_wid != -1):
-        weapon_data, weapon_config = await get_weapon(user_id, monster_data.e_wid)
+    if (weapon_data):
+        # TODO: increase stats from passives etc.
         pass
 
     return [hp, strength, strength_defense, mana, mag, mag_defense]
+
+async def get_monster_stats(user_id, m_id):
+    monster_data, _ = await get_monster(user_id, id = m_id)
+
+    weapon_data = None 
+
+    if (monster_data.e_wid != -1):
+        weapon_data, _ = await get_weapon(user_id, monster_data.e_wid)
+
+    return get_monster_stats_raw(monster_data.m_type, monster_data.xp, weapon_data)
+
+def get_weapon_stats_raw(w_type, qualities):
+    weapon_config = get_weapon_config(w_type = w_type)
+    stats = []
+
+    # converting qualities from % to actually stat numbers
+    for index, quality in enumerate(qualities):
+        stat = weapon_config["stats"][index]
+        value = stat["min"] + (stat["max"] - stat["min"]) * (quality / 100)
+
+        stats.append(value)
+    
+    return stats
+
+async def get_weapon_stats(user_id, w_id):
+    weapon_data, weapon_config = await get_weapon(user_id, w_id)
+    
+    return get_weapon_stats_raw(weapon_data.w_type, weapon_data.qualities)
+
+async def get_passive_stats_raw(p_type : int = None, qualities : list[int] = None):
+    passive_config = get_passive_config(p_type = p_type)
+    stats = []
+
+    # converting qualities from % to actually stat numbers
+    for index, quality in enumerate(qualities):
+        stat = passive_config["stats"][index]
+        value = stat["min"] + (stat["max"] - stat["min"]) * (quality / 100)
+
+        stats.append(value)
+    
+    return stats
