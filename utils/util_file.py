@@ -431,7 +431,7 @@ async def add_team_monster(user_id, monster_name, position=None):
     monster_data, _ = await get_monster(user_id, name=monster_name)
 
     max_monsters_per_team = config["settings"]["max_monsters_per_team"]
-    start_index = 1
+    team_position_start_index = config["settings"]["team_position_start_index"]
 
     if position is None:
         # can't add monster to team automatically because it's full
@@ -439,7 +439,7 @@ async def add_team_monster(user_id, monster_name, position=None):
             raise ValueError("Monster can't be added because the team is full!")
         
         if not active_team_data.t_monsters:
-            position_to_add = start_index
+            position_to_add = team_position_start_index
         else:
             position_to_add = max(t_monster.pos for t_monster in active_team_data.t_monsters) + 1
     else:
@@ -448,8 +448,8 @@ async def add_team_monster(user_id, monster_name, position=None):
     if position_to_add > max_monsters_per_team:
         position_to_add = max_monsters_per_team
 
-    if position_to_add < start_index:
-        position_to_add = start_index
+    if position_to_add < team_position_start_index:
+        position_to_add = team_position_start_index
 
     # Remove monster already in team
     t_monster_same_id = next(

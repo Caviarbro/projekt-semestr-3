@@ -2,6 +2,7 @@ from utils.util_file import get_config, get_active_team, get_monster_stats, get_
 from battle_main import ActionContext
 from file_loader import load_weapons, load_passives
 import uuid
+from typing import Optional, List
 
 # Load classes for all weapon files and passive files
 WEAPON_REGISTRY = load_weapons()
@@ -35,7 +36,7 @@ class BattleWeaponPassive:
         pass
 
 class BattleWeapon:
-    def __init__(self, pos, qualities, passives):
+    def __init__(self, pos, qualities, passives : Optional[List[BattleWeaponPassive]]):
         self.pos = pos
         self.qualities = qualities
         self.passives = passives
