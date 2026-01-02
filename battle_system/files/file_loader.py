@@ -2,7 +2,7 @@ import pkgutil
 import importlib
 import inspect
 
-from battle_system.files.battle_util import BattleWeapon, BattleWeaponPassive
+from battle_classes import BattleWeapon, BattleWeaponPassive
 import battle_system.weapons as weapons_pkg
 import battle_system.passives as passives_pkg
 

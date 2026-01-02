@@ -1,6 +1,5 @@
 from utils.util_file import get_config
-from battle_system.files.battle_util import Effect, BattleMonster
-from battle_system.files.battle_main import BattleContext, ActionContext, BattleLogEntry
+from battle_system.files.battle_classes import Effect, BattleMonster, BattleContext, ActionContext, BattleLogEntry
 from typing import List, Optional
 
 class Freeze(Effect):
@@ -9,14 +8,14 @@ class Freeze(Effect):
 
     # METHODS
     def __init__(self, turn_number : int, actor : BattleMonster):
-        super().__init__(turn_number)
+        super().__init__(turn_number, actor)
 
      # Turn-based hooks
     def before_turn(self, action_ctx : ActionContext):
-        pass
+        self.use(action_ctx)
 
     def during_turn(self, action_ctx : ActionContext):
-        self.use(action_ctx)
+        pass
 
     def after_turn(self, action_ctx : ActionContext):
         pass
@@ -29,20 +28,31 @@ class Freeze(Effect):
         pass
 
     def attach(self, action_ctx : ActionContext):
-        battle_ctx : BattleContext = action_ctx.battle_ctx
-        actor : BattleMonster = action_ctx.actor
-        target : list[BattleMonster] = action_ctx.target
+        battle_ctx = action_ctx.battle_ctx
 
-        turn_number = battle_ctx.turn_number
-        
-        # TODO: Add log
-
-        for battle_monster in target:
-            battle_monster.effects.append(Freeze(turn_number, actor))
+        super().attach(action_ctx, Freeze(battle_ctx.turn_number, action_ctx.actor))
 
     def use(self, action_ctx : ActionContext):
+        battle_ctx = action_ctx.battle_ctx
+        actor = action_ctx.actor
+
+        # freeze effect is negative effect, that is directly affecting the actor
+        action_ctx.target = [actor]
+
         self.before_action(action_ctx)
 
-        # do something
+        # it's a negative effect that's why it yields the actor's weapon unusable (and not using any target)
+        actor.weapon.unusable = True
+
+        battle_ctx.logs.add_entry(BattleLogEntry(
+            battle_ctx.turn_number,
+            action_ctx,
+            actor,
+            actor,
+            f"{actor.name} is frozen and can't attack!"
+        ))
         
         self.after_action(action_ctx)
+
+    def on_remove(self, actor : BattleMonster):
+        actor.weapon.unusable = False

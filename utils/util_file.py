@@ -77,7 +77,15 @@ async def counter(type):
         return counter["seq"]
     except Exception as e:
         raise ValueError(f"[ERROR]: while getting id, message: {e}")
-   
+
+async def get_counter(type):
+    try:
+        db = get_db()
+        counter = await db.counters.find_one({"c_type": type})
+        
+        return counter["seq"]
+    except Exception as e:
+        raise ValueError(f"[ERROR]: while getting id, message: {e}")
 
 async def save_monster(user_id, monster_type):
     try:
@@ -356,14 +364,16 @@ async def get_team(user_id: int,
     team_id: int | None = None,
     create_if_not_exist: bool = False
 ):
-    user_data = await get_user(user_id)
     db = get_db()
 
     # Resolve team id
-    if team_id is not None:
+    if team_id:
         t_id = team_id
-    elif team_number is not None and team_number < len(user_data.t_ids):
-        t_id = user_data.t_ids[team_number]
+    elif team_number:
+        user_data = await get_user(user_id)
+
+        if (team_number < len(user_data.t_ids)):
+            t_id = user_data.t_ids[team_number]
     else:
         t_id = None
 
@@ -379,6 +389,7 @@ async def get_team(user_id: int,
         if raw is None:
             raise ValueError(f"Team with id {t_id} does not have any data!")
         team_data = TeamModel(**raw)
+        user_id = team_data.u_id # user id is not always passed
 
     # Build monster list
     team_monsters = []
@@ -386,7 +397,9 @@ async def get_team(user_id: int,
     for t_monster in team_data.t_monsters:
         monster_data, monster_config = await get_monster(user_id, id = t_monster.m_id)
 
-        weapon_data = weapon_config = None
+        weapon_data = None
+        weapon_config = None 
+
         if monster_data.e_wid != -1:
             weapon_data, weapon_config = await get_weapon(user_id, monster_data.e_wid)
 
@@ -606,7 +619,8 @@ async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
     try:
         config = get_config()
 
-        weapon_data = weapon_config = None
+        weapon_data = None
+        weapon_config = None
         
         if (w_id):
             weapon_data, weapon_config = await get_weapon(user_id, w_id)

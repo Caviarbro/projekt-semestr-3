@@ -11,7 +11,8 @@
         "stat_bases": [250, 100, 15, 250, 100, 15],
         "defense_stat_limit": 80,
         "max_battle_turns": 20,
-        "team_position_start_index": 1
+        "team_position_start_index": 1,
+        "stat_names": ["hp", "strength", "strength_defense", "mana", "mag", "mag_defense"]
     },
     "emojis": {
         "card_box": "🗃️",

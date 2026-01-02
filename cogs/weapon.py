@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_weapon, get_emoji, get_monster, equip_weapon, unequip_weapon, get_weapon_string, get_quality_info, to_base36_spaced, to_base36
+from utils.util_file import get_user, get_config, get_weapon, get_emoji, get_monster, equip_weapon, unequip_weapon, get_weapon_string, get_quality_info, to_base36_spaced, to_base36, get_monster_config
 
 class Weapon(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -143,7 +143,7 @@ class Weapon(commands.Cog):
 
             if (user is not None):
                 weapon_string = await get_weapon_string(interaction.user.id, id, "id")
-                _, monster_config = await get_monster(interaction.user.id, name = monster_name)
+                monster_config = get_monster_config(monster_name = monster_name)
 
                 equipped = await equip_weapon(interaction.user.id, id, monster_name)
 
