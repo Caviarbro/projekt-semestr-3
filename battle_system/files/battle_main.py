@@ -24,7 +24,11 @@ class Battle:
             battle_states = ["pre_turn", "during_turn", "after_turn"]
 
             self.battle_ctx.turn_number = turn_number
-            # TODO:  Add attack without weapon | Check if monster can attack (in individual files) | Add mana consumption and corresponding stuff (can't attack if mana is less than..)
+
+             # remove inactive effects
+             # for example: start_turn = 5, duration = 2, so it is used at turn 5, 6 and if it wasn't here before everything else it would also be used in the turn 7
+            for battle_monster in [*self.actor_team.monsters, *self.target_team.monsters]:
+                battle_monster.remove_effects(inactive = True, current_turn_number = turn_number)
             
             for battle_state in battle_states:
                 self.battle_ctx.battle_state = battle_state
@@ -46,10 +50,6 @@ class Battle:
                     snapshot_after_turn = BattleLogSnapshot(self.battle_ctx)
 
                     self.battle_ctx.logs.add_snapshot(snapshot_after_turn)
-
-                    # remove inactive effects
-                    for battle_monster in [*self.actor_team.monsters, *self.target_team.monsters]:
-                        battle_monster.remove_effects(inactive = True, current_turn_number = turn_number)
 
                     # check if teams are alive to determine user
                     is_actor_team_alive = self.actor_team.is_alive()
@@ -73,38 +73,48 @@ class Battle:
         actor_effects : list[Effect] = actor_battle_monster.effects
 
         battle_state = self.battle_ctx.battle_state
+        current_turn_number = self.battle_ctx.turn_number
 
         if (not actor_battle_monster.is_alive()):
             return action_ctx
-        
-        if (actor_battle_weapon is None or not actor_battle_monster.can_use_weapon()):
-            actor_battle_monster.basic_attack(action_ctx)
 
         match(battle_state):
             case "pre_turn":
                 for effect in actor_effects:
+                    if (effect.start_turn > current_turn_number):
+                        continue
                     effect.before_turn(action_ctx)
 
-                if (actor_battle_monster.can_use_weapon()):
-                    actor_battle_weapon.before_turn(action_ctx)
+                if (actor_battle_weapon):
+                    if (actor_battle_monster.can_use_weapon()):
+                        actor_battle_weapon.before_turn(action_ctx)
 
+                    # passives work regardlessly on weapon
                     for passive in actor_battle_weapon.passives:
                         passive.before_turn(action_ctx)
             case "during_turn":
                 for effect in actor_effects:
+                    if (effect.start_turn > current_turn_number):
+                        continue
                     effect.during_turn(action_ctx)
 
                 if (actor_battle_monster.can_use_weapon()):
                     actor_battle_weapon.during_turn(action_ctx)
+                else:
+                    actor_battle_monster.basic_attack(action_ctx)
 
+                if (actor_battle_weapon):
                     for passive in actor_battle_weapon.passives:
                         passive.during_turn(action_ctx)
             case "after_turn":
                 for effect in actor_effects:
+                    if (effect.start_turn > current_turn_number):
+                        continue
                     effect.after_turn(action_ctx)
 
-                if (actor_battle_monster.can_use_weapon()):
-                    actor_battle_weapon.after_turn(action_ctx)
+                if (actor_battle_weapon):
+                    if (actor_battle_monster.can_use_weapon()):
+                        actor_battle_weapon.after_turn(action_ctx)
 
                     for passive in actor_battle_weapon.passives:
                         passive.after_turn(action_ctx)

@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, save_weapon
+from utils.util_file import get_user, get_config, save_weapon, get_quality_info
 
 class Crate(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -22,28 +22,43 @@ class Crate(commands.Cog):
             if (user is not None):
                 generated_items = generate_weapon(amount)
 
-                weapon_emojis = []
+                found_weapons_text = []
 
                 for weapon_item in generated_items:
                     [weapon_config, weapon_qualities] = weapon_item[0]
                     generated_passives = weapon_item[1]
 
-                    # TODO: Change to more scalable approach and use quality emojis
-                    weapon_emojis.append(weapon_config["emojis"][0])
-                    # print(f"[NEW WEAPON]: weapon_config: {weapon_config}\n, w_qualities: {weapon_qualities}\n, passives: {generated_passives}\n")
+                    weapon_quality, weapon_rarity_info = get_quality_info(weapon_qualities)
 
+                    weapon_text = ""
+                    weapon_emoji = weapon_config["emojis"][weapon_rarity_info["type"]]
+
+                    passives_text = ""
+                    for passive_item in generated_passives:
+                        [passive_config, passive_qualities] = passive_item
+
+                        passive_quality, passive_rarity_info = get_quality_info(passive_qualities)
+                        passive_emoji = passive_config["emojis"][passive_rarity_info["type"]]
+
+                        passives_text += passive_emoji
+
+                    weapon_text = f"{weapon_emoji}{passives_text}"
+
+                    found_weapons_text.append(weapon_text)
                     await save_weapon(interaction.user.id, weapon_config["type"], weapon_qualities, generated_passives)
 
-                await interaction.followup.send(f"You found following items: {", ".join(weapon_emojis)}!")
+                await interaction.followup.send(f"You found following items: {", ".join(found_weapons_text)}!")
             else:
                 raise ValueError("Missing user in database!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While opening crate, message: {e}")
 
+# TODO: add generating qualities function which will make it harder to get better qualities
+
 def generate_weapon(amount):
     config = get_config()
 
-    weapon_List = config["weapons"]
+    weapon_list = config["weapons"]
     passive_list = config["passives"]
 
     new_weapons = []
@@ -52,13 +67,13 @@ def generate_weapon(amount):
         weapon_qualities = []
         new_passives = []
 
-        new_weapon = weapon_List[random.randrange(0, len(weapon_List))]   
+        new_weapon = weapon_list[random.randrange(0, len(weapon_list))]   
 
         # generate qualities depending on how many stats the weapon has
-        for _ in range(0, len(new_weapon["stats"])):
+        for _ in range(len(new_weapon["stats"])):
             weapon_qualities.append(random.randrange(0, config["settings"]["max_quality"]))
 
-        for _ in range(0, new_weapon["passive_count"]):
+        for _ in range(new_weapon["passive_count"]):
             new_passive = passive_list[random.randrange(0, len(passive_list))]
             passive_qualities = []
 

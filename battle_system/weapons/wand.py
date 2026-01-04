@@ -55,7 +55,7 @@ class Wand(BattleWeapon):
             actor,
             target,
             "damage",
-            f"**{actor.emoji} {actor.name}** damaged {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in action_ctx.target])} for **`{round(damage, 1)}`** HP!"
+            f"**{actor.emoji} {actor.name} {self.emoji}** damaged {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in action_ctx.target])} for **`{round(damage, 1)}`** HP!"
         ))
 
         weapon_config = get_weapon_config(w_type = self.w_type)

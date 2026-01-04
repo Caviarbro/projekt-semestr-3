@@ -1,5 +1,5 @@
 from __future__ import annotations
-from utils.util_file import get_config, get_active_team, get_monster_stats_raw, get_monster_config, get_weapon_stats_raw, get_passive_stats_raw, get_weapon_config, get_passive_config, xp_for_level
+from utils.util_file import get_config, get_active_team, get_monster_stats_raw, get_monster_config, get_weapon_stats_raw, get_passive_stats_raw, get_weapon_config, get_passive_config, xp_for_level, get_effect_config
 import uuid, copy
 from typing import Optional, List
 from random import sample
@@ -7,22 +7,18 @@ from utils.models import WeaponModel, PassiveModel
 
 class Effect():
     def __init__(self, turn_number, actor):
-        # TODO: move to util file, get effect
-        effect_config = next(
-            (e for e in get_config()["effects"] if e["type"] == self.e_type)
-        )
-
-        print("ACTOR", actor)
+        effect_config = get_effect_config(e_type = self.e_type)
 
         self.from_turn_number = turn_number
         self.duration = effect_config["duration"]
         self.apply_immediately = effect_config["apply_immediately"] 
         self.can_stack = effect_config["can_stack"]
-        self.apply_at_state = effect_config["apply_at_state"]
         self.from_actor_id = actor.bm_id
         self.e_id = uuid.uuid4()
         self.name = effect_config["name"]
         self.emoji = effect_config["emoji"]
+
+        self.start_turn = self.from_turn_number if self.apply_immediately else self.from_turn_number + 1
 
         # Turn-based hooks
     def before_turn(self, action_ctx : ActionContext):
@@ -84,10 +80,14 @@ class Effect():
 
 class BattleWeaponPassive:
     def __init__(self, pos, qualities):
+        passive_config = get_passive_config(p_type = self.p_type)
+
         self.pos = pos 
         self.qualities = qualities
         self.stats = get_passive_stats_raw(self.p_type, self.qualities)
 
+        self.emoji = passive_config["default_emoji"]
+        self.monster_stat_types = [stat["monster_stat_type"] for stat in passive_config["stats"] if "monster_stat_type" in stat]
         # p_type defined in the subclass
 
         self.passive_model = PassiveModel(
@@ -115,14 +115,20 @@ class BattleWeaponPassive:
     def use(self, action_ctx : ActionContext):
         pass
 
+    def bonus(self, monster_stats : list[int] = None, *, stat_value : int = None):
+        pass
+
 class BattleWeapon:
     def __init__(self, pos, qualities, passives : Optional[List[BattleWeaponPassive]]):
+        weapon_config = get_weapon_config(w_type = self.w_type)
+
         self.pos = pos
         self.qualities = qualities
         self.passives = passives or []
         self.stats = get_weapon_stats_raw(self.w_type, self.qualities)
         self.unusable = False
 
+        self.emoji = weapon_config["default_emoji"]
         # w_type defined in the subclass
 
      # Turn-based hooks
@@ -180,10 +186,19 @@ class BattleMonster:
         STAT_NAMES = config["settings"]["stat_names"]
 
         try:
-            stat = self.stats[STAT_NAMES.index(stat_name)] 
+            stat_index = STAT_NAMES.index(stat_name)
+            stat = self.stats[stat_index] 
+            bonus = 0
 
-            # TODO: Add bonus
-            return { "current": stat[0], "total": stat[1], "bonus": 0}
+            if (self.weapon):
+                if (self.weapon.passives):
+                    for battle_passive in self.weapon.passives:
+                        if (stat_index in battle_passive.monster_stat_types):
+                            passive_bonus = battle_passive.bonus(None, stat_value = stat[1])
+
+                            bonus += passive_bonus or 0
+            
+            return { "current": stat[0], "total": stat[1], "bonus": bonus}
         except Exception:
             raise ValueError(f"Stat {stat_name} does not exist!")
 
@@ -210,7 +225,6 @@ class BattleMonster:
     def can_use_weapon(self):
         mana = self.get_stat("mana")
 
-        # TODO: Add freeze
         if (self.weapon is None):
             return False 
         
@@ -222,7 +236,6 @@ class BattleMonster:
         
         return False
     
-    # BUG: lasts more turns than it should
     def remove_effects(self, *, effects : list[Effect] = None, effect_ids : list[int] = None, effect_types : list[int] = None, inactive = False, current_turn_number : int = None):
         def should_remove(effect: Effect) -> bool:
             if (effects is not None and effect in effects):
@@ -235,7 +248,7 @@ class BattleMonster:
                 return True
 
             if (inactive and current_turn_number is not None):
-                end_turn = effect.from_turn_number + effect.duration + (0 if effect.apply_immediately else 1)
+                end_turn = effect.start_turn + effect.duration
 
                 return current_turn_number >= end_turn
 

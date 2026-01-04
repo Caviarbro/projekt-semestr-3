@@ -106,6 +106,7 @@ class Monster(commands.Cog):
                 def get_stat(name):
                     return monster_config["stats"][name]["amount"]
 
+                # TODO: change stat names to emojis
                 embed.add_field(name = "", value = f"**Rarity:** {rarity_info['emoji']} {monster_config['rarity']} \n", inline = False)
                 embed.add_field(name = "", value = f"**Amount:** {monster_data.seq} \n", inline = False)
                 embed.add_field(name = "", value = f"**ID:** `{monster_data.m_id}`", inline = False)

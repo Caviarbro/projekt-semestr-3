@@ -52,7 +52,7 @@ class Sword(BattleWeapon):
             actor,
             target,
             "damage",
-            f"**{actor.emoji} {actor.name}** damaged {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in action_ctx.target])} for **`{round(damage, 1)}`** HP!"
+            f"**{actor.emoji} {actor.name} {self.emoji}** damaged {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in action_ctx.target])} for **`{round(damage, 1)}`** HP!"
         ))
 
         self.after_action(action_ctx)

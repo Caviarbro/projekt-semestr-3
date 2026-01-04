@@ -1,5 +1,5 @@
 from __future__ import annotations
-import discord, random, sys
+import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
 from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_rarity_info, get_level, save_team, xp_for_level, get_monster_stats, get_weapon_string, change_team, add_team_monster, remove_team_monster
@@ -188,9 +188,6 @@ async def show_page(interaction : discord.Interaction, team_number = None):
             stat_emojis = get_emoji("stats")
             monster_stats = await get_monster_stats(interaction.user.id, monster_data.m_id)
 
-            
-            # TODO: Fix padding
-            # Adjust padding for monster stats
             monster_stats = [round(stat) for stat in monster_stats]
             max_len = max(len(str(stat)) for idx, stat in enumerate(monster_stats) if not idx in [2,5]) # 2 is strength_defense and 5 is mag_defense, they have additional % after the numbers
 
@@ -206,18 +203,26 @@ async def show_page(interaction : discord.Interaction, team_number = None):
                 name = f"[{position_in_team}] {monster_config['emoji']} {monster_config['name']}", 
                 value = f"""Level **{monster_level}**
                 [**{monster_data.xp}**/**{next_level_xp}**]
-                > {stat_emojis['hp']}**: `{stats_padding[0]}`**{spacing}{stat_emojis['mana']}**: `{stats_padding[3]}`**
-                > {stat_emojis['strength']}**: `{stats_padding[1]}`**{spacing}{stat_emojis['mag']}**: `{stats_padding[4]}`**
-                > {stat_emojis['strength_defense']}**: `{monster_stats[2]}%`**{spacing}{stat_emojis['mag_defense']}**: `{monster_stats[5]}%`**
+                > {stat_emojis[0]}**: `{stats_padding[0]}`**{spacing}{stat_emojis[3]}**: `{stats_padding[3]}`**
+                > {stat_emojis[1]}**: `{stats_padding[1]}`**{spacing}{stat_emojis[4]}**: `{stats_padding[4]}`**
+                > {stat_emojis[2]}**: `{monster_stats[2]}%`**{spacing}{stat_emojis[5]}**: `{monster_stats[5]}%`**
                 {weapon_string}
                 """
             )
 
-        # TODO: Add streak info
-        embed.set_footer(text = f"Team {team_number + 1} / {len(user_team_ids)}")
+        embed.set_footer(text = f"Team {team_number + 1} / {len(user_team_ids)} | Streak: {team_data.streak}")
 
         return embed, team_number, user_team_ids
     except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        line = exc_tb.tb_lineno
+
+        full_traceback = ''.join(
+            traceback.format_exception(exc_type, exc_obj, exc_tb)
+        )
+
+        print("ERROR WHILE SHOWING", full_traceback, "at line:", line)
+
         raise ValueError(f"[ERROR]: While showing team, message: {e}")
 
 async def setup(bot: commands.Bot):

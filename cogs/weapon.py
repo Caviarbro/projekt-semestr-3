@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_weapon, get_emoji, get_monster, equip_weapon, unequip_weapon, get_weapon_string, get_quality_info, to_base36_spaced, to_base36, get_monster_config
+from utils.util_file import get_user, get_config, get_weapon, get_emoji, get_monster, equip_weapon, unequip_weapon, get_weapon_string, get_quality_info, to_base36_spaced, to_base36, get_monster_config, get_passive_config, get_effect_config
 
 class Weapon(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -88,16 +88,15 @@ class Weapon(commands.Cog):
 
                     weapon_description = weapon_description.replace(f"[{index}]", f"**{quality}**")
                     
-                    if ("name" in stat):
-                        weapon_description = weapon_description.replace(f"[name({index})]", stat_emojis[stat["name"]])
+                    if ("monster_stat_type" in stat):
+                         # finds stat at index, and checks if it has monster_stat_type 
+                        # if it does have monster_stat_type(weapon_stat_index) in description, it will convert it to the emoji
+                        weapon_description = weapon_description.replace(f"[monster_stat_type({index})]", stat_emojis[stat["monster_stat_type"]])
 
                 passive_descriptions = []
 
                 for passive_data in weapon_data.passives:
-                    passive_config = next(
-                        (p for p in config["passives"] if p["type"] == passive_data.p_type),
-                        None
-                    )
+                    passive_config = get_passive_config(p_type = passive_data.p_type)
 
                     if (not passive_config):
                         raise ValueError(f"Passive with type {passive_data.p_type} does not exist in config!")
@@ -111,19 +110,35 @@ class Weapon(commands.Cog):
                         stat = passive_config["stats"][index]
                         passive_description = passive_description.replace(f"[{index}]", f"**{quality}**")
                         
-                        if ("name" in stat):
-                            passive_description = passive_description.replace(f"[name({index})]", stat_emojis[stat["name"]])
+                        if ("monster_stat_type" in stat):
+                            # finds stat at index, and checks if it has monster_stat_type 
+                            # if it does have monster_stat_type(passive_stat_index) in description, it will convert it to the emoji
+                            passive_description = passive_description.replace(f"[monster_stat_type({index})]", stat_emojis[stat["monster_stat_type"]])
 
                     passive_description = f"{passive_emoji} **{passive_config["name"]}:**\n > {passive_description}\n"
                     passive_descriptions.append(passive_description)
 
-                # TODO: Add effects to the description
+                effect_descriptions = []
+                for e_type in weapon_config["effect_types"]:
+                    effect_config = get_effect_config(e_type = e_type)
+
+                    effect_description = f"{effect_config['emoji']} **{effect_config['name']}:**\n > {effect_config['desc']}"
+                    effect_description = effect_description.replace(f"[duration]", f"**{effect_config['duration']}**")
+
+                    effect_descriptions.append(effect_description)
+                
                 embed.add_field(name = "", value = f"**ID:** **`{to_base36(weapon_data.w_id)}`**", inline = False)
                 embed.add_field(name = "", value = f"**Owner:** {interaction.user.name}", inline = False)
-                embed.add_field(name = "", value = f"**Mana cost:** {stats[0]} {stat_emojis["mana"]}", inline = False)
+                embed.add_field(name = "", value = f"**Mana cost:** {stats[0]} {stat_emojis[3]}", inline = False)
                 embed.add_field(name = "", value = f"**Description:**\n > {weapon_description}", inline = False)
-                embed.add_field(name = "", value = "".join(passive_descriptions), inline = False)
 
+                if (passive_descriptions):
+                    embed.add_field(name = "", value = f"**Passives:**\n {''.join(passive_descriptions)}", inline = False)
+                else:
+                    embed.add_field(name = "", value = f"**Passives:**\n None", inline = False)
+
+                if (effect_descriptions):
+                    embed.add_field(name = "", value = f"**Effects:**\n {''.join(effect_descriptions)}", inline = False)
                 await interaction.followup.send(embed = embed)
             else:
                 raise ValueError("Missing user in database!")

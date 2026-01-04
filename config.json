@@ -18,14 +18,7 @@
     "emojis": {
         "card_box": "🗃️",
         "monster": "👻",
-        "stats": { 
-            "hp": "💕",
-            "strength": "💪",
-            "strength_defense": "🛡️",
-            "mana": "🏵️",
-            "mag": "🪄",
-            "mag_defense": "⛓️‍💥" 
-        },
+        "stats": ["💕", "💪", "🛡️", "🏵️", "🪄", "⛓️‍💥"],
         "blank": "<:blank:1122536483203584091>",
         "weapon": "⚔️",
         "success": "✅",
@@ -180,27 +173,27 @@
         {
             "type": 0,
             "name": "Sword",
-            "desc": "Deals [1]% of your strength [name(1)] to a random enemy!",
+            "desc": "Deals [1]% of your strength [monster_stat_type(1)] to a random enemy!",
             "default_emoji": "<:greatsword:1454997369664831529>",
-            "emojis": ["<:cgreatsword:1454945550162985017>","<:ugreatsword:1454945552965042270>","<:rgreatsword:1454945555720573151>","<:egreatsword:1454945557603811451>","<:mgreatsword:1454945559612751906>","<:lgreatsword:1454945564285210727>","<:fgreatsword:1454945566948855828>"],
+            "emojis": ["<:csword:1454945550162985017>","<:usword:1454945552965042270>","<:rsword:1454945555720573151>","<:esword:1454945557603811451>","<:msword:1454945559612751906>","<:lsword:1454945564285210727>","<:psword:1454945566948855828>"],
             "passive_count": 2,
             "effect_types": [],
             "stats": [
-                { "min": 180, "max": 100, "name": "mana"},
-                { "min": 50, "max": 150, "name": "strength"}
+                { "min": 180, "max": 100, "monster_stat_type": 3},
+                { "min": 50, "max": 150, "monster_stat_type": 1}
             ]
         },
         {
             "type": 1,
             "name": "Wand",
-            "desc": "Deals [1]% of your mag [name(1)] to a random enemy and freezes them for 2 turns!",
+            "desc": "Deals [1]% of your mag [monster_stat_type(1)] to a random enemy and freezes them for 2 turns!",
             "default_emoji": "<:wand:1032863727931883541>",
-            "emojis": ["<:cwand:979029556843405332>","<:uwand:979029576917344256>","<:rwand:979029581757554738>","<:ewand:979029599574974564>","<:mwand:979029623008551042>","<:lwand:979029626443690004>","<:fwand:979029648501510195>"],
+            "emojis": ["<:cwand:979029556843405332>","<:uwand:979029576917344256>","<:rwand:979029581757554738>","<:ewand:979029599574974564>","<:mwand:979029623008551042>","<:lwand:979029626443690004>","<:pwand:979029648501510195>"],
             "passive_count": 1,
             "effect_types": [0],
             "stats": [
-                { "min": 180, "max": 100, "name": "mana"},
-                { "min": 10, "max": 25, "name": "mag"}
+                { "min": 180, "max": 100, "monster_stat_type": 3},
+                { "min": 10, "max": 25, "monster_stat_type": 4}
             ]
         }
     ],
@@ -208,12 +201,22 @@
         {
             "type": 0,
             "name": "Regeneration",
-            "desc": "[0]% chance of healing [1]% of your max hp [name(1)] at the end of the turn!",
-            "default_emoji": "<:chgen:978793463678136330>",
-            "emojis": ["<:chgen:978793463678136330>", "<:uhgen:978794039560241193>", "<:rhgen:978794190781710396>", "<:ehgen:978794333429956618>", "<:mhgen:978794358746804255>", "<:lhgen:978794388601843773>", "<:fhgen:978794409317511208>"],
+            "desc": "[0]% chance of healing [1]% of your max hp [monster_stat_type(1)] at the end of the turn!",
+            "default_emoji": "<:regeneration:1074244119691542569>",
+            "emojis": ["<:cregeneration:978793463678136330>", "<:uregeneration:978794039560241193>", "<:rregeneration:978794190781710396>", "<:eregeneration:978794333429956618>", "<:mregeneration:978794358746804255>", "<:lregeneration:978794388601843773>", "<:pregeneration:978794409317511208>"],
             "stats": [
                 { "min": 20, "max": 30},
-                { "min": 40, "max": 60, "name": "hp"}
+                { "min": 40, "max": 60, "monster_stat_type": 0}
+            ]
+        },
+        {
+            "type": 1,
+            "name": "Manapoint",
+            "desc": "Adds +[0]% of your max mana [monster_stat_type(0)]!",
+            "default_emoji": "<:manapoint:1074243457796821052>",
+            "emojis": ["<:cmanapoint:978784334465089636>","<:umanapoint:978784393722232892>","<:rmanapoint:978784441537265664>","<:emanapoint:978784497220857877>","<:mmanapoint:978784566909206530>","<:lmanapoint:978784619136692264>","<:pmanapoint:978784674329550880>"],
+            "stats": [
+                { "min": 40, "max": 60, "monster_stat_type": 3}
             ]
         }
     ],
@@ -221,11 +224,11 @@
         {
             "type": 0,
             "name": "Freeze",
+            "desc": "Prevents the target from attacking for [duration] turns.",
             "emoji": "🥶",
             "can_stack": false,
             "apply_immediately": false,
-            "duration": 2,
-            "apply_at_state": "pre_turn"
+            "duration": 2
         }
     ]
 }

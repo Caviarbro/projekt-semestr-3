@@ -2,7 +2,6 @@ import os, json, discord
 from .database import get_db
 from .models import UserModel, MonsterModel, WeaponModel, PassiveModel, TeamModel, TeamMonsterModel
 
-
 def get_config():
     with open("config.json", "r", encoding="utf-8") as f:
         return json.load(f)
@@ -113,8 +112,6 @@ async def save_monster(user_id, monster_type):
 
             user_data.monsters.append(monster_data)
 
-        print(f"NEW DATA: {user_data.monsters}")
-
         await db.users.update_one(
             {"u_id": user_id}, 
             {"$set": {"monsters": [m.model_dump() for m in user_data.monsters]}}
@@ -175,8 +172,6 @@ async def save_weapon(user_id, weapon_type, weapon_qualities, generated_passives
 
         user_data.weapons.append(weapon_data)
 
-        # print(f"NEW DATA: {user_data.weapons}")
-
         await db.users.update_one(
             {"u_id": user_id}, 
             {"$set": {"weapons": [w.model_dump() for w in user_data.weapons]}}
@@ -227,7 +222,7 @@ def get_monster_config(*, m_type : int = None, monster_name : str = None):
     monster_config = None 
 
     if (m_type is None and monster_name is None):
-        raise ValueError("Required at least one argumet (m_type / monster_name)")
+        raise ValueError("Required at least one argument (m_type / monster_name)")
     
     if (m_type is not None):
         monster_config = next(
@@ -249,7 +244,7 @@ def get_weapon_config(*, w_type : int = None, weapon_name : str = None):
     weapon_config = None 
 
     if (w_type is None and weapon_name is None):
-        raise ValueError("Required at least one argumet (w_type / weapon_name)")
+        raise ValueError("Required at least one argument (w_type / weapon_name)")
     
     if (w_type is not None):
         weapon_config = next(
@@ -271,7 +266,7 @@ def get_passive_config(*, p_type : int = None, passive_name : str = None):
     passive_config = None 
 
     if (p_type is None and passive_name is None):
-        raise ValueError("Required at least one argumet (p_type / passive_name)")
+        raise ValueError("Required at least one argument (p_type / passive_name)")
     
     if (p_type is not None):
         passive_config = next(
@@ -286,6 +281,28 @@ def get_passive_config(*, p_type : int = None, passive_name : str = None):
         )
 
     return passive_config
+
+def get_effect_config(*, e_type : int = None, effect_name : str = None):
+    config = get_config()
+    
+    effect_config = None 
+
+    if (e_type is None and effect_name is None):
+        raise ValueError("Required at least one argument (e_type / effect_name)")
+    
+    if (e_type is not None):
+        effect_config = next(
+            (e for e in config["effects"] if e["type"] == e_type),
+            None 
+        )
+
+    if (effect_name):
+        effect_config = next(
+            (e for e in config["effects"] if e["name"].lower().strip() == effect_name.lower().strip()),
+            None 
+        )
+
+    return effect_config
 
 async def get_monster(user_id, 
                       *, name = None, id = None):
@@ -698,11 +715,22 @@ def get_monster_stats_raw(m_type, xp, weapon_data : WeaponModel = None):
     mag = (get_stat(4) * monster_level) + stat_bases[4]
     mag_defense = min((monster_level ** (0.5 + get_stat(5) * 0.01)) + stat_bases[5], defense_stat_limit)
 
-    if (weapon_data):
-        # TODO: increase stats from passives etc.
-        pass
+    stats = [hp, strength, strength_defense, mana, mag, mag_defense]
 
-    return [hp, strength, strength_defense, mana, mag, mag_defense]
+    # give passive bonuses
+    if (weapon_data):
+        from battle_system.files.file_loader import load_passives
+    
+        PASSIVE_REGISTRY = load_passives()
+
+        for passive in weapon_data.passives:
+            if (passive.p_type in PASSIVE_REGISTRY):
+                passive_class = PASSIVE_REGISTRY[passive.p_type]
+                battle_passive = passive_class(None, passive.qualities)
+
+                battle_passive.bonus(stats)
+
+    return stats
 
 async def get_monster_stats(user_id, m_id):
     monster_data, _ = await get_monster(user_id, id = m_id)

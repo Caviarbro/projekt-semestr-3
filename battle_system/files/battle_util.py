@@ -195,7 +195,6 @@ async def execute_battle(*, actor_user_id : int = None, target_user_id : int = N
             match(end_state):
                 case "actor_win":
                     if (count_streak):
-                        # TODO: Make streaks work
                         await db.teams.update_one(
                             {"t_id": actor_team.t_id},
                             {"$inc": {"streak": 1}}
