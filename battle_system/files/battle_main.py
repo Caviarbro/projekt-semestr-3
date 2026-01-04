@@ -1,6 +1,6 @@
 from random import sample
 from utils.util_file import get_config
-from battle_classes import BattleMonster, BattleWeapon, BattleWeaponPassive, BattleTeam, Effect, BattleContext, ActionContext, BattleLogSnapshot
+from .battle_classes import BattleMonster, BattleWeapon, BattleWeaponPassive, BattleTeam, Effect, BattleContext, ActionContext, BattleLogSnapshot
 
 class Battle:
     def __init__(self, actor_team, target_team):
@@ -20,7 +20,7 @@ class Battle:
         self.actor_team.monsters.sort(key=lambda m: m.pos)
         self.target_team.monsters.sort(key=lambda m: m.pos)
 
-        for turn_number in range(0, MAX_BATTLE_TURNS):
+        for turn_number in range(MAX_BATTLE_TURNS):
             battle_states = ["pre_turn", "during_turn", "after_turn"]
 
             self.battle_ctx.turn_number = turn_number
@@ -29,7 +29,8 @@ class Battle:
             for battle_state in battle_states:
                 self.battle_ctx.battle_state = battle_state
                 
-                for pos in range(TEAM_POSITION_START_INDEX, MAX_MONSTERS_PER_TEAM):
+                # TODO: maybe redo the logic for position using weapons, so even if monster is not present on certain position it gets the next one that is in the team?
+                for pos in range(TEAM_POSITION_START_INDEX, MAX_MONSTERS_PER_TEAM + 1):
                     actor_battle_monster : BattleMonster = self.actor_team.get_monster(position = pos)
                     target_battle_monster : BattleMonster = self.target_team.get_monster(position = pos)
 
@@ -60,7 +61,7 @@ class Battle:
                         self.end_state = "target_win"
                     elif (not is_actor_team_alive and not is_target_team_alive): # both died = tie
                         self.end_state = "tie_death"
-                    elif ((turn_number + 1) >= MAX_BATTLE_TURNS): # turn limit = tie
+                    elif (turn_number + 1 >= MAX_BATTLE_TURNS): # turn limit = tie
                         self.end_state = "tie"
 
                     if (self.end_state):
@@ -76,9 +77,8 @@ class Battle:
         if (not actor_battle_monster.is_alive()):
             return action_ctx
         
-        if (actor_battle_weapon is None):
-            # deal basic damage
-            pass
+        if (actor_battle_weapon is None or not actor_battle_monster.can_use_weapon()):
+            actor_battle_monster.basic_attack(action_ctx)
 
         match(battle_state):
             case "pre_turn":

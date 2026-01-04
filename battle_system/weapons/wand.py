@@ -1,10 +1,13 @@
-from utils.util_file import get_config
-from battle_system.files.battle_classes import BattleWeapon, BattleWeaponPassive, BattleMonster, ActionContext, BattleLogEntry
+from utils.util_file import get_config, get_weapon_config
+from battle_system.files.battle_classes import BattleWeapon, BattleWeaponPassive, BattleMonster, ActionContext, BattleLogEntry, Effect
 from typing import List, Optional
+from battle_system.files.file_loader import load_effects
 
-class Sword(BattleWeapon):
+EFFECTS_REGISTRY = load_effects()
+
+class Wand(BattleWeapon):
     # CONSTANTS
-    w_type = 0
+    w_type = 1
 
     # METHODS
     def __init__(self, pos: int, qualities: list, passives: Optional[List[BattleWeaponPassive]] = None):
@@ -39,13 +42,13 @@ class Sword(BattleWeapon):
 
         self.before_action(action_ctx)
 
-        # % of str
-        strength = actor.get_stat("strength")
-        damage = (self.stats[1] / 100) * strength["total"]
+        # % of mag
+        mag = actor.get_stat("mag")
+        damage = (self.stats[1] / 100) * mag["total"]
 
         for battle_monster in target:
             # damage gets negated etc. so we overwrite the value with what return
-            damage = battle_monster.deal_damage("strength", damage)
+            damage = battle_monster.deal_damage("mag", damage)
         
         battle_ctx.logs.add_entry(BattleLogEntry(
             battle_ctx.turn_number,
@@ -54,6 +57,14 @@ class Sword(BattleWeapon):
             "damage",
             f"**{actor.emoji} {actor.name}** damaged {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in action_ctx.target])} for **`{round(damage, 1)}`** HP!"
         ))
+
+        weapon_config = get_weapon_config(w_type = self.w_type)
+        freeze_e_type = weapon_config["effect_types"][0]
+        freeze : Effect = EFFECTS_REGISTRY[freeze_e_type]
+
+        if (freeze):
+            new_freeze : Effect = freeze(battle_ctx.turn_number, actor)
+            new_freeze.attach(action_ctx)
 
         self.after_action(action_ctx)
 

@@ -229,15 +229,15 @@ def get_monster_config(*, m_type : int = None, monster_name : str = None):
     if (m_type is None and monster_name is None):
         raise ValueError("Required at least one argumet (m_type / monster_name)")
     
-    if (m_type):
+    if (m_type is not None):
         monster_config = next(
             (m for m in config["monsters"] if m["type"] == m_type),
             None 
         )
 
-    if (monster_name):
+    if (isinstance(monster_name, str)):
         monster_config = next(
-            (m for m in config["monsters"] if m["name"] == monster_name.lower().strip()),
+            (m for m in config["monsters"] if m["name"].lower().strip() == monster_name.lower().strip()),
             None 
         )
 
@@ -251,7 +251,7 @@ def get_weapon_config(*, w_type : int = None, weapon_name : str = None):
     if (w_type is None and weapon_name is None):
         raise ValueError("Required at least one argumet (w_type / weapon_name)")
     
-    if (w_type):
+    if (w_type is not None):
         weapon_config = next(
             (w for w in config["weapons"] if w["type"] == w_type),
             None 
@@ -259,7 +259,7 @@ def get_weapon_config(*, w_type : int = None, weapon_name : str = None):
 
     if (weapon_name):
         weapon_config = next(
-            (w for w in config["weapons"] if w["name"] == weapon_name.lower().strip()),
+            (w for w in config["weapons"] if w["name"].lower().strip() == weapon_name.lower().strip()),
             None 
         )
 
@@ -273,7 +273,7 @@ def get_passive_config(*, p_type : int = None, passive_name : str = None):
     if (p_type is None and passive_name is None):
         raise ValueError("Required at least one argumet (p_type / passive_name)")
     
-    if (p_type):
+    if (p_type is not None):
         passive_config = next(
             (p for p in config["passives"] if p["type"] == p_type),
             None 
@@ -281,7 +281,7 @@ def get_passive_config(*, p_type : int = None, passive_name : str = None):
 
     if (passive_name):
         passive_config = next(
-            (p for p in config["passives"] if p["name"] == passive_name.lower().strip()),
+            (p for p in config["passives"] if p["name"].lower().strip() == passive_name.lower().strip()),
             None 
         )
 
@@ -365,11 +365,12 @@ async def get_team(user_id: int,
     create_if_not_exist: bool = False
 ):
     db = get_db()
+    t_id = None 
 
     # Resolve team id
-    if team_id:
+    if isinstance(team_id, int):
         t_id = team_id
-    elif team_number:
+    elif isinstance(team_number, int):
         user_data = await get_user(user_id)
 
         if (team_number < len(user_data.t_ids)):
@@ -615,7 +616,7 @@ def get_quality_info(quality_data):
 
     return quality, rarity_info
 
-async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
+async def get_weapon_string(user_id, w_id, display = "normal", *, defined_data = None):
     try:
         config = get_config()
 
@@ -624,8 +625,8 @@ async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
         
         if (w_id):
             weapon_data, weapon_config = await get_weapon(user_id, w_id)
-        elif (passed_data is not None):
-            weapon_data = passed_data
+        elif (defined_data is not None):
+            weapon_data = defined_data
             weapon_config = get_weapon_config(w_type = weapon_data.w_type)
 
             if (weapon_config is None):
@@ -639,7 +640,7 @@ async def get_weapon_string(user_id, w_id, display="normal", passed_data=None):
 
         passive_emojis = []
         for passive_data in weapon_data.passives:
-            passive_config = get_passive_config(p_type = passed_data.p_type)
+            passive_config = get_passive_config(p_type = passive_data.p_type)
 
             if (not passive_config):
                 raise ValueError(f"Passive with type {passive_data.p_type} does not exist in config!")
@@ -731,7 +732,7 @@ async def get_weapon_stats(user_id, w_id):
     
     return get_weapon_stats_raw(weapon_data.w_type, weapon_data.qualities)
 
-async def get_passive_stats_raw(p_type : int = None, qualities : list[int] = None):
+def get_passive_stats_raw(p_type : int = None, qualities : list[int] = None):
     passive_config = get_passive_config(p_type = p_type)
     stats = []
 
@@ -743,3 +744,20 @@ async def get_passive_stats_raw(p_type : int = None, qualities : list[int] = Non
         stats.append(value)
     
     return stats
+
+async def add_xp(user_id, m_id, xp_amount):
+    db = get_db()
+    monster_data, monster_config = await get_monster(user_id, id = m_id)
+
+    if (monster_data and monster_config):
+        await db.users.update_one(
+            {
+                "u_id": user_id,
+                "monsters.m_id": m_id
+            },
+            {
+                "$inc": {
+                    "monsters.$.xp": xp_amount
+                }
+            }
+        )

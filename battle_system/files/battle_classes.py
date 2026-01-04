@@ -1,9 +1,9 @@
 from __future__ import annotations
 from utils.util_file import get_config, get_active_team, get_monster_stats_raw, get_monster_config, get_weapon_stats_raw, get_passive_stats_raw, get_weapon_config, get_passive_config, xp_for_level
-import uuid
+import uuid, copy
 from typing import Optional, List
 from random import sample
-from utils.models import WeaponModel
+from utils.models import WeaponModel, PassiveModel
 
 class Effect():
     def __init__(self, turn_number, actor):
@@ -12,13 +12,17 @@ class Effect():
             (e for e in get_config()["effects"] if e["type"] == self.e_type)
         )
 
+        print("ACTOR", actor)
+
         self.from_turn_number = turn_number
         self.duration = effect_config["duration"]
         self.apply_immediately = effect_config["apply_immediately"] 
+        self.can_stack = effect_config["can_stack"]
         self.apply_at_state = effect_config["apply_at_state"]
         self.from_actor_id = actor.bm_id
         self.e_id = uuid.uuid4()
         self.name = effect_config["name"]
+        self.emoji = effect_config["emoji"]
 
         # Turn-based hooks
     def before_turn(self, action_ctx : ActionContext):
@@ -40,21 +44,40 @@ class Effect():
     def use(self, action_ctx : ActionContext):
         pass
 
-    def attach(self, action_ctx : ActionContext, effect : Effect):
+    def attach(self, action_ctx : ActionContext):
         battle_ctx = action_ctx.battle_ctx
         actor = action_ctx.actor        
         target = action_ctx.target
+
+        target_to_remove = []
+        for battle_monster in target:
+            same_effect = next(
+                (effect for effect in battle_monster.effects if (effect.e_type == self.e_type)),
+                None
+            )
+
+            if (same_effect and not self.can_stack):
+                target_to_remove.append(battle_monster)
+                continue
+
+            battle_monster.effects.append(self.__class__(battle_ctx.turn_number, actor))
+
+        # removing targets if they had for example the same effect already applied and effect couldn't be stacked
+        for battle_monster in target_to_remove:
+            action_ctx.target.remove(battle_monster)
+
+        target = action_ctx.target
+
+        if (not target):
+            return
 
         battle_ctx.logs.add_entry(BattleLogEntry(
             battle_ctx.turn_number,
             actor,
             target,
-            action_name = effect,
-            result = f"{actor.name} applied {effect.name} to {target.name} for {effect.duration} turns!"
+            action_name = self.name,
+            result = f"**{actor.emoji} {actor.name}** applied **`{self.name}`** to {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in target])} for **`{self.duration}`** turns!"
         ))
-
-        for battle_monster in target:
-            battle_monster.effects.append(effect.__class__(action_ctx.battle_ctx.turn_number, actor))
         
     def on_remove(self, actor):
         pass
@@ -66,6 +89,11 @@ class BattleWeaponPassive:
         self.stats = get_passive_stats_raw(self.p_type, self.qualities)
 
         # p_type defined in the subclass
+
+        self.passive_model = PassiveModel(
+            p_type = self.p_type,
+            qualities = self.qualities
+        )
 
     # Turn-based hooks
     def before_turn(self, action_ctx : ActionContext):
@@ -93,6 +121,7 @@ class BattleWeapon:
         self.qualities = qualities
         self.passives = passives or []
         self.stats = get_weapon_stats_raw(self.w_type, self.qualities)
+        self.unusable = False
 
         # w_type defined in the subclass
 
@@ -127,20 +156,23 @@ class BattleMonster:
         self.m_type = m_type
         self.xp = xp 
         self.weapon = weapon
-        self.bm_id = m_id if m_id is not None else uuid.uuid4()
+        self.m_id = m_id if m_id is not None else None
+        self.bm_id = uuid.uuid4()
         self.name = monster_config["name"]
+        self.emoji = monster_config["emoji"]
         self.effects : list[Effect] = []
 
-        weapon_data = None 
+        self.weapon_model = None
 
         if (self.weapon):
-            weapon_data = WeaponModel(
+            self.weapon_model = WeaponModel(
+                w_id = 0,
                 w_type = self.weapon.w_type,
                 qualities = self.weapon.qualities,
-                passives = self.weapon.passives
+                passives = [p.passive_model for p in self.weapon.passives]
             )
 
-        self.stats = get_monster_stats_raw(self.m_type, self.xp, weapon_data)
+        self.stats = get_monster_stats_raw(self.m_type, self.xp, self.weapon_model)
         self.stats = [[stat, stat] for stat in self.stats] # first element is current stat, second total stat
 
     def get_stat(self, stat_name):
@@ -190,6 +222,7 @@ class BattleMonster:
         
         return False
     
+    # BUG: lasts more turns than it should
     def remove_effects(self, *, effects : list[Effect] = None, effect_ids : list[int] = None, effect_types : list[int] = None, inactive = False, current_turn_number : int = None):
         def should_remove(effect: Effect) -> bool:
             if (effects is not None and effect in effects):
@@ -230,11 +263,14 @@ class BattleMonster:
             case "true":
                 damage = amount
             case "strength":
-                damage = amount * (strength_defense / 100)
+                damage = amount * (strength_defense["total"] / 100)
             case "mag":
-                damage = amount * (mag_defense / 100)
+                damage = amount * (mag_defense["total"] / 100)
 
-        self.set_stat("hp", hp["current"] - damage)
+        new_hp = hp["current"] - damage 
+        new_hp = new_hp if new_hp > 0 else 0 
+
+        self.set_stat("hp", new_hp)
 
         return damage
 
@@ -246,14 +282,14 @@ class BattleMonster:
         if (not isinstance(amount, (int, float))):
             raise ValueError(f"Amount for mana constumption expected int got {type(amount)}")
 
-        mana["current"] -= amount
+        self.set_stat("mana", mana["current"] - amount)
 
         battle_ctx.logs.add_entry(BattleLogEntry(
             battle_ctx.turn_number,
             actor,
-            actor,
+            [actor],
             "mana",
-            f"{actor.name} used {amount} mana!"
+            f"**{actor.emoji} {actor.name}** used **`{round(amount, 1)}`** mana!"
         ))
 
     def heal(self, amount : int, *, over_heal = False):
@@ -269,11 +305,60 @@ class BattleMonster:
                 self.set_stat("hp", hp["total"])
 
         return to_heal
+    
+    def basic_attack(self, action_ctx : ActionContext):
+        battle_ctx = action_ctx.battle_ctx
+        actor = action_ctx.actor
+
+        # freeze or another effect blocking weapon is active
+        if (actor.weapon and actor.weapon.unusable):
+            return
+
+        current_target_team = action_ctx.target_team if (action_ctx.get_team(actor) == action_ctx.actor_team) else action_ctx.actor_team
+        target = current_target_team.get_target(random = True)
+
+        if (not target):
+            return
+
+        # set new target
+        action_ctx.target = target 
+
+        damage = 100
+
+        for battle_monster in target:
+            # damage gets negated etc. so we overwrite the value with what return
+            damage = battle_monster.deal_damage("strength", damage)
+        
+        battle_ctx.logs.add_entry(BattleLogEntry(
+            battle_ctx.turn_number,
+            actor,
+            target,
+            "damage",
+            f"**{actor.emoji} {actor.name}** used basic attack and damaged {''.join([f'**{battle_monster.emoji} {battle_monster.name}**' for battle_monster in target])} for **`{round(damage, 1)}`** HP!"
+        ))
+
+        # death message
+        for battle_monster in target:
+            battle_monster.on_dead(action_ctx)
+
+    def on_dead(self, action_ctx : ActionContext):
+        battle_ctx = action_ctx.battle_ctx
+
+        if (not self.is_alive()):
+            battle_ctx.logs.add_entry(BattleLogEntry(
+                battle_ctx.turn_number,
+                self,
+                [self],
+                "dead",
+                f"**{self.emoji} {self.name}** has died!"
+            ))
+
 
 class BattleTeam:
     def __init__(self, monsters: list[BattleMonster], t_id = None):
         self.monsters : list[BattleMonster] = monsters
-        self.bt_id : int | str = t_id if t_id is not None else uuid.uuid4()
+        self.t_id = t_id if t_id is not None else None
+        self.bt_id = uuid.uuid4()
 
     def is_alive(self):
         for battle_monster in self.monsters:
@@ -341,8 +426,8 @@ class BattleLogEntry:
 class BattleLogSnapshot:
     def __init__(self, battle_ctx : BattleContext):
         self.turn_number = battle_ctx.turn_number
-        self.actor_team = battle_ctx.actor_team
-        self.target_team = battle_ctx.target_team
+        self.actor_team = copy.deepcopy(battle_ctx.actor_team)
+        self.target_team = copy.deepcopy(battle_ctx.target_team)
         pass 
 
 class BattleLog:
@@ -360,19 +445,22 @@ class BattleLog:
         turn_number = snapshot.turn_number
         turn_log = self._get_turn_log(turn_number)
 
-        turn_log["snapshot"].append(snapshot)
+        turn_log["snapshots"].append(snapshot)
         pass 
 
-    def _get_turn_log(self, turn_number):
+    def _get_turn_log(self, turn_number, *, create_new = True):
         if (not isinstance(turn_number, int)):
             raise ValueError(f"turn_number expected int got {type(turn_number)}")
         
         if (turn_number > (len(self.logs) - 1)):
-            self.logs.append({
-                "turn_number": turn_number,
-                "entries": [],
-                "snapshots": []
-            })
+            if (create_new):
+                self.logs.append({
+                    "turn_number": turn_number,
+                    "entries": [],
+                    "snapshots": []
+                })
+            else:
+                raise ValueError(f"turn_number: {turn_number} is not in log and can't be created")
 
         turn_log = self.logs[turn_number]
 

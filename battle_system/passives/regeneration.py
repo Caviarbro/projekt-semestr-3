@@ -47,9 +47,9 @@ class Regeneration(BattleWeaponPassive):
             battle_ctx.logs.add_entry(BattleLogEntry(
                 battle_ctx.turn_number,
                 actor,
-                actor,
-                "heal"
-                f"{actor.name} got lucky and healed for {to_heal} HP!"
+                action_ctx.target,
+                "heal",
+                f"**{actor.emoji} {actor.name}** got lucky and healed for **`{round(to_heal, 1)}`** HP!"
             ))
 
         self.after_action(action_ctx)

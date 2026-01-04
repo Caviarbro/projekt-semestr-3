@@ -2,22 +2,19 @@ from __future__ import annotations
 import discord, random, sys
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_rarity_info, get_level, save_team, xp_for_level, get_monster_stats, get_weapon_string, change_team, add_team_monster, remove_team_monster
+from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_rarity_info, get_level, save_team, xp_for_level, get_monster_stats_raw, get_weapon_string, change_team, add_team_monster, remove_team_monster, get_monster_config
+from battle_system.files.battle_util import execute_battle, Battle, create_from_team_data
+from battle_system.files.battle_classes import BattleContext, BattleLog, BattleLogSnapshot, BattleLogEntry
 
 class Battle(commands.Cog):
     def __init__(self, bot: commands.Bot):
         self.bot = bot 
 
-    battle_command = app_commands.Group(
-            name="battle", 
-            description="Battle related commands"
-    )
-
-    @battle_command.command(
+    @app_commands.command(
         name = "battle",
-        description = "Battle"
+        description = "Battle with other teams!"
     )
-    async def team_remove(self, interaction:discord.Interaction, user:discord.User = None):
+    async def battle(self, interaction:discord.Interaction, user:discord.User = None, team_number : int = None):
         try:
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
@@ -25,28 +22,278 @@ class Battle(commands.Cog):
             user_data = await get_user(interaction.user.id)
 
             if (user_data is not None):
-                team_data, team_monsters = await get_active_team(interaction.user.id)
+                interact_allow_user_ids = []
+                battle_result : Battle = None 
+                new_streak : int = None
 
+                if (user):
+                    battle_result, new_streak = await execute_battle(actor_user_id = interaction.user.id, target_user_id = user.id)
+                    interact_allow_user_ids.extend([interaction.user.id, user.id])
+                elif (team_number):
+                    team_number_zero_index = team_number - 1
+                    team_data, team_monsters = await get_team(interaction.user.id, team_number = team_number_zero_index)
+                    target_battle_team = create_from_team_data(team_data, team_monsters)
+    
+                    battle_result, new_streak = await execute_battle(actor_user_id = interaction.user.id, target_team_data = target_battle_team)
+                    interact_allow_user_ids.append(interaction.user.id)
+                else:
+                    battle_result, new_streak = await execute_battle(actor_user_id = interaction.user.id, random_target = True, count_streak = True)
+                    interact_allow_user_ids.append(interaction.user.id)
+
+                view = InteractionHandler(battle_result, battle_result.battle_ctx.turn_number, user_ids = interact_allow_user_ids, streak = new_streak)
+                embeds = await view.refresh_page(interaction)
+
+                await interaction.followup.send(embeds = embeds, view = view)
             else:
                 raise ValueError("Missing user in database!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While battling, message: {e}")
 
-class battle_team():
-    def __init__(self, monsters, weapons):
-        self.monsters = monsters
-        self.weapons = weapons
+class InteractionHandler(discord.ui.View):
+    def __init__(self, battle_result, turn_number, *, user_ids, streak):
+        super().__init__(timeout = 120)
         
-async def create_battle_team_data(user_id):
-    team_data, team_monsters = await get_active_team(user_id)
+        self.battle_result = battle_result
+        self.current_page = turn_number
+        self.max_battle_turns = battle_result.battle_ctx.turn_number
+        self.user_ids = user_ids
+        self.streak = streak
+        self.show_logs = False
+        
+    async def refresh_page(self, interaction: discord.Interaction):
+        # Fetch the current page embed and update the user_team_ids dynamically.
+        embeds = []
+        battle_embed = await show_page(self.battle_result, self.current_page, interaction = interaction, user_ids = self.user_ids, streak = self.streak)
 
-    battle_monsters = []
-    battle_weapons = []
+        embeds.append(battle_embed)
+
+        if (self.show_logs):
+            log_embeds = show_logs(self.battle_result, self.current_page)
+
+            embeds.extend(log_embeds)
+
+        return embeds
+
+    async def can_interact(self, interaction : discord.Interaction):
+        is_able = True if interaction.user.id in self.user_ids else False 
+
+        if (not is_able):
+            await interaction.response.send_message(ephemeral = True, content = "You can't interact with this component!")
+
+        return is_able
     
-    for monster in team_monsters:
-         [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
+    # move five previous pages
+    @discord.ui.button(emoji="⏪", style=discord.ButtonStyle.secondary)
+    async def fast_prev(self, interaction: discord.Interaction, button: discord.ui.Button):
+        can_interact = await self.can_interact(interaction)
 
+        if (not can_interact):
+            return
+        
+        self.current_page -= 5
 
+        if (self.current_page < 0):
+            self.current_page = self.max_battle_turns
+
+        embeds = await self.refresh_page(interaction)
+        await interaction.response.edit_message(embeds = embeds, view=self)
+
+    # move to previous page
+    @discord.ui.button(emoji="⬅️", style=discord.ButtonStyle.secondary)
+    async def prev(self, interaction: discord.Interaction, button: discord.ui.Button):
+        can_interact = await self.can_interact(interaction)
+
+        if (not can_interact):
+            return
+        
+        self.current_page -= 1
+
+        if (self.current_page < 0):
+            self.current_page = self.max_battle_turns
+
+        embeds = await self.refresh_page(interaction)
+        await interaction.response.edit_message(embeds = embeds, view=self)
+
+    # move to next page
+    @discord.ui.button(emoji="➡️", style=discord.ButtonStyle.secondary)
+    async def next(self, interaction: discord.Interaction, button: discord.ui.Button):
+        can_interact = await self.can_interact(interaction)
+
+        if (not can_interact):
+            return
+        
+        self.current_page += 1
+        
+        if (self.current_page > self.max_battle_turns):
+            self.current_page = 0
+
+        embeds = await self.refresh_page(interaction)
+        await interaction.response.edit_message(embeds = embeds, view = self)
+
+    # move five pages next
+    @discord.ui.button(emoji="⏩", style=discord.ButtonStyle.secondary)
+    async def fast_next(self, interaction: discord.Interaction, button: discord.ui.Button):
+        can_interact = await self.can_interact(interaction)
+
+        if (not can_interact):
+            return
+        
+        self.current_page += 5
+        
+        if (self.current_page > self.max_battle_turns):
+            self.current_page = 0
+
+        embeds = await self.refresh_page(interaction)
+        await interaction.response.edit_message(embeds = embeds, view = self)
+
+    # show logs
+    @discord.ui.button(emoji="🗃️", style=discord.ButtonStyle.danger)
+    async def logs(self, interaction: discord.Interaction, button: discord.ui.Button):
+        can_interact = await self.can_interact(interaction)
+
+        if (not can_interact):
+            return
+        
+        self.show_logs = not self.show_logs
+
+        if (self.show_logs):
+            button.style = discord.ButtonStyle.success
+        else:
+            button.style = discord.ButtonStyle.danger
+
+        embeds = await self.refresh_page(interaction)
+        
+        await interaction.response.edit_message(embeds = embeds, view = self)
+
+def show_logs(battle_result : Battle, current_turn_number :int):
+    battle_ctx : BattleContext = battle_result.battle_ctx
+    turn_log : BattleLog  = battle_ctx.logs._get_turn_log(current_turn_number, create_new = False)
+
+    actor_team = battle_ctx.actor_team
+    target_team = battle_ctx.target_team
+
+    description_texts = []
+
+    for entry in turn_log["entries"]:
+        entry : BattleLogEntry = entry 
+
+        is_default_actor = True if (actor_team.get_monster(id = entry.actor_id)) else False 
+
+        new_text = f"**[{'ACTOR' if is_default_actor else 'TARGET'}]:** {entry.result}\n"
+
+        if (description_texts):
+            if ((len(description_texts[-1]) + len(new_text)) <= 4096):
+                description_texts[-1] += new_text
+            else:
+                description_texts.append(new_text)
+        else:
+            description_texts.append(new_text)
+    
+    if (not description_texts):
+        description_texts.append("No logs for this turn!")
+
+    embeds = []
+
+    for index, description_text in enumerate(description_texts):
+        embed = discord.Embed()
+
+        if (index == 0):
+            embed.title = f"Battle log [{current_turn_number + 1} / {battle_ctx.turn_number + 1}]"
+
+        embed.description = description_text
+        embed.color = discord.Colour.blue()
+
+        embeds.append(embed)
+
+    return embeds
+
+async def show_page(battle_result : Battle, current_turn_number : int, *, interaction : discord.Interaction, user_ids : list[int] = [], streak : int):
+    try:
+        end_state = battle_result.end_state
+        battle_ctx : BattleContext = battle_result.battle_ctx
+
+        if (not end_state):
+            raise ValueError("No battle end state found!")
+        
+        turn_log : BattleLog  = battle_ctx.logs._get_turn_log(current_turn_number, create_new = False)
+        turn_snapshot : BattleLogSnapshot = turn_log["snapshots"]
+
+        if (turn_snapshot):
+            turn_snapshot = turn_snapshot[0]
+
+        embed = discord.Embed()
+
+        fetched_users : list[discord.User]= []
+
+        if (len(user_ids) == 1):
+            fetched_users.append(interaction.user)
+
+            embed.set_author(name = f"{interaction.user.name}'s Monster battle", icon_url = interaction.user.display_avatar)
+        elif (len(user_ids) > 1):
+            actor_user = await interaction.client.fetch_user(user_ids[0])
+            target_user = await interaction.client.fetch_user(user_ids[1])
+
+            fetched_users.extend([actor_user, target_user])
+
+            embed.set_author(name = f"Friendly battle, {actor_user.name} vs {target_user.name}", icon_url = actor_user.display_avatar)
+        else:
+            embed.set_author(name = "Monster battle")
+
+        final_turn_display = battle_ctx.turn_number + 1
+        streak_text = f" - Streak: {streak}" if (isinstance(streak, int)) else ""
+        footer_text = ""
+
+        match(end_state):
+            case "actor_win":
+                if (len(user_ids) > 1):
+                    footer_text = f"{fetched_users[0].name} won against {fetched_users[1].name} in {final_turn_display} turns!"
+                else:
+                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns!"
+                embed.color = discord.Colour.green()
+            case "target_win":
+                if (len(user_ids) > 1):
+                    footer_text = f"{fetched_users[0].name} lost against {fetched_users[1].name} in {final_turn_display} turns!"
+                else:
+                    footer_text = f"You lost in {final_turn_display} turns!"
+                embed.color = discord.Colour.red()
+            case "tie":
+                footer_text = f"The battle was too long, it's a tie!"
+                embed.color = discord.Colour.light_gray()
+            case "tie_death":
+                footer_text = f"Both teams died, it's a tie!"
+                embed.color = discord.Colour.light_gray()
+
+        embed.set_footer(text = f"{footer_text} [{current_turn_number + 1}/{final_turn_display}]{streak_text}")
+
+        for battle_team in [turn_snapshot.actor_team, turn_snapshot.target_team]:
+            team_name = battle_team.bt_id
+            embed_value = ""
+
+            for battle_monster in battle_team.monsters:
+                weapon_string = "No weapon"
+
+                if (battle_monster.weapon is not None):
+                    weapon_string = await get_weapon_string(None, None, defined_data = battle_monster.weapon_model)
+
+                monster_config = get_monster_config(m_type = battle_monster.m_type)
+                monster_hp = round(battle_monster.get_stat("hp")["current"])
+                monster_mana = round(battle_monster.get_stat("mana")["current"])
+                monster_lvl = get_level(battle_monster.xp)
+                
+                effect_emojis = [effect.emoji for effect in battle_monster.effects]
+                stat_emojis = get_emoji("stats")
+
+                effect_string = f"\n> {''.join(effect_emojis)}" if effect_emojis else "\n"
+
+                embed_value += f"""L.{monster_lvl} {monster_config["emoji"]} **{battle_monster.name}** {weapon_string} 
+                > {stat_emojis["hp"]}: **`{monster_hp}`** {stat_emojis["mana"]}: **`{monster_mana}`**{effect_string}
+                """
+
+            embed.add_field(name = f"**{team_name}**", value = f"\n{embed_value}", inline = True)
+
+        return embed
+    except Exception as e:
+        raise ValueError(f"[ERROR]: While showing battle embed, message: {e}")
 
 async def setup(bot: commands.Bot):
     await bot.add_cog(Battle(bot))

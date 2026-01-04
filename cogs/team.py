@@ -94,6 +94,7 @@ class Team(commands.Cog):
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While removing from team, message: {e}")
 
+    # TODO: add team naming
 class InteractionHandler(discord.ui.View):
     def __init__(self, *, team_number, user_team_ids):
         super().__init__(timeout=120)
@@ -105,6 +106,7 @@ class InteractionHandler(discord.ui.View):
 
     async def refresh_page(self, interaction: discord.Interaction):
         # Fetch the current page embed and update the user_team_ids dynamically.
+        print("current page", self.current_page)
         embed, team_number, user_team_ids = await show_page(interaction, self.current_page)
         self.user_team_ids = user_team_ids
 
@@ -115,10 +117,10 @@ class InteractionHandler(discord.ui.View):
     # move to previous page
     @discord.ui.button(emoji="⬅️", style=discord.ButtonStyle.secondary)
     async def prev(self, interaction: discord.Interaction, button: discord.ui.Button):
-        self.current_page = (self.current_page - 1) % (len(self.user_team_ids) + 1)
+        self.current_page -= 1
 
-        if (self.current_page >= self.max_teams_per_user):
-            self.current_page = len(self.user_team_ids) - 1
+        if (self.current_page < 0):
+            self.current_page = len(self.user_team_ids)
 
         embed = await self.refresh_page(interaction)
         await interaction.response.edit_message(embed=embed, view=self)
@@ -127,7 +129,7 @@ class InteractionHandler(discord.ui.View):
     @discord.ui.button(emoji="➡️", style=discord.ButtonStyle.secondary)
     async def next(self, interaction: discord.Interaction, button: discord.ui.Button):
         try:
-            self.current_page = (self.current_page + 1) % (len(self.user_team_ids) + 1)
+            self.current_page += 1
             
             if (self.current_page >= self.max_teams_per_user):
                 self.current_page = 0
@@ -157,7 +159,7 @@ async def show_page(interaction : discord.Interaction, team_number = None):
 
         if user_data is None:
             raise ValueError("No user to display team for!")
-        
+
         team_data, team_monsters = (
             await get_active_team(interaction.user.id) if team_number is None else 
             await get_team(interaction.user.id, team_number = team_number, create_if_not_exist = True)
@@ -211,6 +213,7 @@ async def show_page(interaction : discord.Interaction, team_number = None):
                 """
             )
 
+        # TODO: Add streak info
         embed.set_footer(text = f"Team {team_number + 1} / {len(user_team_ids)}")
 
         return embed, team_number, user_team_ids

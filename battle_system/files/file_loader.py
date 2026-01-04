@@ -2,9 +2,10 @@ import pkgutil
 import importlib
 import inspect
 
-from battle_classes import BattleWeapon, BattleWeaponPassive
+from .battle_classes import BattleWeapon, BattleWeaponPassive, Effect
 import battle_system.weapons as weapons_pkg
 import battle_system.passives as passives_pkg
+import battle_system.effects as effects_pkg
 
 def load_weapons():
     weapons = {}
@@ -29,3 +30,15 @@ def load_passives():
                 passives[obj.p_type] = obj  # map type -> class
 
     return passives
+
+def load_effects():
+    effects = {}
+
+    for _, module_name, _ in pkgutil.iter_modules(effects_pkg.__path__):
+        module = importlib.import_module(f"{effects_pkg.__name__}.{module_name}")
+
+        for _, obj in inspect.getmembers(module, inspect.isclass):
+            if issubclass(obj, Effect) and obj is not Effect:
+                effects[obj.e_type] = obj  # map type -> class
+
+    return effects

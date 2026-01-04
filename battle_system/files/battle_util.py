@@ -1,49 +1,58 @@
 from __future__ import annotations
-from utils.util_file import get_config, get_active_team, get_team, get_weapon_config, get_passive_config, xp_for_level, get_counter, get_db
-from file_loader import load_weapons, load_passives
+from utils.util_file import get_config, get_active_team, get_team, get_weapon_config, get_passive_config, xp_for_level, get_counter, get_db, add_xp
+from .file_loader import load_weapons, load_passives
 from typing import Optional, List
-from utils.models import WeaponModel
-from battle_classes import BattleTeam, BattleMonster, BattleWeapon, BattleWeaponPassive
-from battle_main import Battle
+from utils.models import TeamModel
+from .battle_classes import BattleTeam, BattleMonster, BattleWeapon, BattleWeaponPassive
+from .battle_main import Battle
 from random import randint
+from pymongo import ReturnDocument
+import sys, traceback
 
 # Load classes for all weapon files and passive files
 WEAPON_REGISTRY = load_weapons()
 PASSIVE_REGISTRY = load_passives()
 
 def create_from_team_data(team_data, team_monsters):
-    battle_monsters = []
+    try:
+        battle_monsters = []
 
-    for monster in team_monsters:
-        [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
+        for monster in team_monsters:
+            [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
 
-        position_in_team = t_monster.pos
-        battle_weapon = None 
-        battle_weapon_passives = []
+            position_in_team = t_monster.pos
+            battle_weapon = None 
+            battle_weapon_passives = []
 
-        if (monster_data.e_wid != -1):
-            if (not weapon_data.w_type in WEAPON_REGISTRY):
-                raise ValueError(f"Missing file for weapon type: {weapon_data.w_type}")
-            
-            weapon_class : BattleWeapon = WEAPON_REGISTRY[weapon_data.w_type]
-
-            for passive_data in weapon_data.passives:
-                if (not passive_data.p_type in PASSIVE_REGISTRY):
-                    raise ValueError(f"Missing file for passive type: {passive_data.p_type}")
+            if (monster_data.e_wid != -1):
+                if (not weapon_data.w_type in WEAPON_REGISTRY):
+                    raise ValueError(f"Missing file for weapon type: {weapon_data.w_type}")
                 
-                passive_class : BattleWeaponPassive = PASSIVE_REGISTRY[passive_data.p_type]
+                weapon_class : BattleWeapon = WEAPON_REGISTRY[weapon_data.w_type]
 
-                battle_weapon_passive = passive_class(position_in_team, passive_data.qualities)
-                battle_weapon_passives.append(battle_weapon_passive)
+                for passive_data in weapon_data.passives:
+                    if (not passive_data.p_type in PASSIVE_REGISTRY):
+                        raise ValueError(f"Missing file for passive type: {passive_data.p_type}")
 
-            battle_weapon = weapon_class(position_in_team, weapon_data.qualities, battle_weapon_passives)
+                    passive_class : BattleWeaponPassive = PASSIVE_REGISTRY[passive_data.p_type]
 
-        battle_monster = BattleMonster(position_in_team, monster_data.m_type, monster_data.xp, battle_weapon, monster_data.m_id)
-        battle_monsters.append(battle_monster)
+                    battle_weapon_passive = passive_class(position_in_team, passive_data.qualities)
+                    battle_weapon_passives.append(battle_weapon_passive)
 
-    battle_team = BattleTeam(battle_monsters, team_data.t_id)
+                battle_weapon = weapon_class(position_in_team, weapon_data.qualities, battle_weapon_passives)
 
-    return 
+            battle_monster = BattleMonster(position_in_team, monster_data.m_type, monster_data.xp, battle_weapon, monster_data.m_id)
+            battle_monsters.append(battle_monster)
+
+        battle_team = BattleTeam(battle_monsters, team_data.t_id)
+
+        return battle_team
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        line = exc_tb.tb_lineno
+
+        print(f"ERROR while creating team from data: {e} at line: {line}")
+        raise ValueError(e)
 
 # examples: 
     # info_monsters = [{"pos": 1, "m_type": 3, "level": 4}] 
@@ -131,55 +140,109 @@ def create_team(info_monsters, info_weapons, info_passives):
     return BattleTeam(battle_monsters)
 
 async def execute_battle(*, actor_user_id : int = None, target_user_id : int = None, actor_team_data : BattleTeam = None, target_team_data : BattleTeam = None, random_target : bool = None, count_streak : bool = False):
-    actor_team : BattleTeam = None
-    target_team : BattleTeam = None 
+    try:
+        actor_team : BattleTeam = None
+        target_team : BattleTeam = None 
 
-    if (actor_user_id):
-        actor_team = create_from_team_data(await get_active_team(actor_user_id))
+        if (actor_user_id):
+            team_data, team_monsters = await get_active_team(actor_user_id)
 
-    if (actor_team_data):
-        actor_team = actor_team_data
+            actor_team = create_from_team_data(team_data, team_monsters)
 
-    if (target_user_id):
-        target_team = create_from_team_data(await get_active_team(target_user_id))
+        if (actor_team_data):
+            actor_team = actor_team_data
 
-    if (target_team_data):
-        target_team = target_team_data
+        if (target_user_id):
+            team_data, team_monsters = await get_active_team(target_user_id)
 
-    if (random_target):
-        team_seq = await get_counter("team")
+            target_team = create_from_team_data(team_data, team_monsters)
 
-        random_t_id = randint(1, team_seq)
-        target_team = create_from_team_data(await get_team(None, team_id = random_t_id))
+        if (target_team_data):
+            target_team = target_team_data
 
-    if (actor_team and target_team):
-        new_battle = Battle(actor_team, target_team)
-        db = get_db()
+        if (random_target):
+            team_seq = await get_counter("team")
 
-        end_state = new_battle.process()
+            team_data = None
+            team_monsters = None 
+            found = False
+
+            while (not found):
+                random_t_id = randint(1, team_seq)
+                team_data, team_monsters = await get_team(None, team_id = random_t_id)
+
+                if (len(team_monsters) > 0):
+                    found = True
+
+            target_team = create_from_team_data(team_data, team_monsters)
+
+        if (not actor_team or not target_team):
+            raise ValueError("Team is missing for battle!")
+
+        if (len(actor_team.monsters) < 1 or len(target_team.monsters) < 1):
+            raise ValueError("Team doesn't have any monsters!")
         
-        match(end_state):
-            case "actor_win":
-                if (count_streak):
-                    await db.teams.find_one_and_update(
-                        {"t_id": actor_team.bt_id},
-                        {"$inc": {"streak": 1}},
-                    )
-                pass
-            case "target_win":
-                if (count_streak):
-                    await db.teams.find_one_and_update(
-                        {"t_id": actor_team.bt_id},
-                        {"$set": {"streak": 0}},
-                    )
-                pass
-            case "tie":
-                pass 
-            case "tie_death":
-                pass
-        
-        return new_battle
+        if (actor_team and target_team):
+            new_battle = Battle(actor_team, target_team)
+            new_streak = None
+            config = get_config()
+            db = get_db()
+
+            end_state = new_battle.process()
             
+            xp_to_add = 0
+
+            match(end_state):
+                case "actor_win":
+                    if (count_streak):
+                        # TODO: Make streaks work
+                        await db.teams.update_one(
+                            {"t_id": actor_team.t_id},
+                            {"$inc": {"streak": 1}}
+                        )
+
+                        if (actor_user_id):
+                            WIN_XP = config["settings"]["xp_amounts"]["win"]
+                            
+                            xp_to_add += WIN_XP
+                    pass
+                case "target_win":
+                    if (count_streak):
+                        await db.teams.update_one(
+                            {"t_id": actor_team.t_id},
+                            {"$set": {"streak": 0}}
+                        )
+
+                        if (actor_user_id):
+                            LOSS_XP = config["settings"]["xp_amounts"]["loss"]
+                            
+                            xp_to_add += LOSS_XP
+                    pass
+                case "tie" | "tie_death":
+                    if (count_streak and actor_user_id):
+                        TIE_XP = config["settings"]["xp_amounts"]["tie"]
+                        
+                        xp_to_add += TIE_XP
+        
+            if (actor_user_id and count_streak):
+                team_data, _ = await get_team(actor_user_id, team_id = actor_team.t_id)
+
+                for battle_monster in actor_team.monsters:
+                    await add_xp(actor_user_id, battle_monster.m_id, xp_to_add)
+                
+                new_streak = team_data.streak
+
+            return new_battle, new_streak
+    except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        line = exc_tb.tb_lineno
+
+        full_traceback = ''.join(
+            traceback.format_exception(exc_type, exc_obj, exc_tb)
+        )
+
+        print(f"ERROR while battling: {full_traceback} at line: {line}")
+        raise ValueError(e)
             
 
 

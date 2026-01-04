@@ -3,7 +3,6 @@ from discord.ext import commands
 from discord import app_commands
 from dotenv import load_dotenv
 from os.path import dirname, join, realpath
-from motor.motor_asyncio import AsyncIOMotorClient
 from utils.database import get_db, get_client
 
 # Loading token variable

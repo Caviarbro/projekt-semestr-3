@@ -117,6 +117,7 @@ class Weapon(commands.Cog):
                     passive_description = f"{passive_emoji} **{passive_config["name"]}:**\n > {passive_description}\n"
                     passive_descriptions.append(passive_description)
 
+                # TODO: Add effects to the description
                 embed.add_field(name = "", value = f"**ID:** **`{to_base36(weapon_data.w_id)}`**", inline = False)
                 embed.add_field(name = "", value = f"**Owner:** {interaction.user.name}", inline = False)
                 embed.add_field(name = "", value = f"**Mana cost:** {stats[0]} {stat_emojis["mana"]}", inline = False)

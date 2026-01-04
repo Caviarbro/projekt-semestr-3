@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_monster, get_emoji, get_rarity_info
+from utils.util_file import get_user, get_config, get_monster, get_emoji, get_rarity_info, get_monster_config
 
 class Monster(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -40,10 +40,7 @@ class Monster(commands.Cog):
                 monsters_in_config = {}
 
                 for monster_data in user_owned_monsters:
-                    monster_config = next(
-                        (m for m in config["monsters"] if monster_data.m_type == m["type"]), 
-                        None
-                    )
+                    monster_config = get_monster_config(m_type = monster_data.m_type)
 
                     if (monster_config is None):
                         raise ValueError(f"Monster is missing in config!")
@@ -52,6 +49,7 @@ class Monster(commands.Cog):
                     monster_config["seq"] = monster_data.seq
                     monster_rarity = monster_config["rarity"]
 
+                    # TODO: sort from common to uncommon and so on..
                     if monster_rarity not in monsters_in_config:
                         monsters_in_config[monster_rarity] = []
 
@@ -68,9 +66,9 @@ class Monster(commands.Cog):
                         string_to_display = " ".join(emojis_of_monsters)
 
                         if (index ==  0):
-                            string_to_display = rarity_emoji + " " + string_to_display
+                            string_to_display = f"{rarity_emoji} {string_to_display}"
                         else:
-                            string_to_display = get_emoji("blank") + string_to_display
+                            string_to_display = f"{get_emoji("blank")} {string_to_display}"
 
                         embed.add_field(name = "", value = string_to_display + "\n", inline = False)
                 await interaction.followup.send(embed = embed)

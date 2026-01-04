@@ -27,11 +27,6 @@ class Freeze(Effect):
     def after_action(self, action_ctx : ActionContext):
         pass
 
-    def attach(self, action_ctx : ActionContext):
-        battle_ctx = action_ctx.battle_ctx
-
-        super().attach(action_ctx, Freeze(battle_ctx.turn_number, action_ctx.actor))
-
     def use(self, action_ctx : ActionContext):
         battle_ctx = action_ctx.battle_ctx
         actor = action_ctx.actor
@@ -46,10 +41,10 @@ class Freeze(Effect):
 
         battle_ctx.logs.add_entry(BattleLogEntry(
             battle_ctx.turn_number,
-            action_ctx,
             actor,
-            actor,
-            f"{actor.name} is frozen and can't attack!"
+            action_ctx.target,
+            "freeze",
+            f"**{actor.emoji} {actor.name}** is frozen and can't attack!"
         ))
         
         self.after_action(action_ctx)
