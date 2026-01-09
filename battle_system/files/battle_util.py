@@ -1,5 +1,5 @@
 from __future__ import annotations
-from utils.util_file import get_config, get_active_team, get_team, get_weapon_config, get_passive_config, xp_for_level, get_counter, get_db, add_xp
+from utils.util_file import get_config, get_active_team, get_team, get_weapon_config, get_passive_config, xp_for_level, get_counter, get_db, add_xp, get_setting
 from .file_loader import load_weapons, load_passives
 from typing import Optional, List
 from utils.models import TeamModel
@@ -60,8 +60,7 @@ def create_from_team_data(team_data, team_monsters):
     # info_passives = [[{"pos": 2, "p_type": 1, "qualities": [20]}, {"pos": 2, "p_type": 2, "qualities": [40, 100]}]]
 
 def create_team(info_monsters, info_weapons, info_passives):
-    config = get_config()
-    MAX_QUALITY = config["settings"]["max_quality"]
+    MAX_QUALITY = get_setting("max_quality")
 
     battle_monsters = []
 
@@ -201,7 +200,7 @@ async def execute_battle(*, actor_user_id : int = None, target_user_id : int = N
                         )
 
                         if (actor_user_id):
-                            WIN_XP = config["settings"]["xp_amounts"]["win"]
+                            WIN_XP = get_setting("xp_amounts", setting_index = "win")
                             
                             xp_to_add += WIN_XP
                     pass
@@ -213,13 +212,13 @@ async def execute_battle(*, actor_user_id : int = None, target_user_id : int = N
                         )
 
                         if (actor_user_id):
-                            LOSS_XP = config["settings"]["xp_amounts"]["loss"]
+                            LOSS_XP = get_setting("xp_amounts", setting_index = "loss")
                             
                             xp_to_add += LOSS_XP
                     pass
                 case "tie" | "tie_death":
                     if (count_streak and actor_user_id):
-                        TIE_XP = config["settings"]["xp_amounts"]["tie"]
+                        TIE_XP = get_setting("xp_amounts", setting_index = "tie")
                         
                         xp_to_add += TIE_XP
         

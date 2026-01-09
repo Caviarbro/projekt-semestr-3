@@ -1,5 +1,5 @@
 from __future__ import annotations
-from utils.util_file import get_config, get_active_team, get_monster_stats_raw, get_monster_config, get_weapon_stats_raw, get_passive_stats_raw, get_weapon_config, get_passive_config, xp_for_level, get_effect_config
+from utils.util_file import get_config, get_active_team, get_monster_stats_raw, get_monster_config, get_weapon_stats_raw, get_passive_stats_raw, get_weapon_config, get_passive_config, xp_for_level, get_effect_config, get_setting
 import uuid, copy
 from typing import Optional, List
 from random import sample
@@ -126,7 +126,6 @@ class BattleWeapon:
         self.qualities = qualities
         self.passives = passives or []
         self.stats = get_weapon_stats_raw(self.w_type, self.qualities)
-        self.unusable = False
 
         self.emoji = weapon_config["default_emoji"]
         # w_type defined in the subclass
@@ -167,6 +166,7 @@ class BattleMonster:
         self.name = monster_config["name"]
         self.emoji = monster_config["emoji"]
         self.effects : list[Effect] = []
+        self.weapon_unusable = False
 
         self.weapon_model = None
 
@@ -183,7 +183,7 @@ class BattleMonster:
 
     def get_stat(self, stat_name):
         config = get_config()
-        STAT_NAMES = config["settings"]["stat_names"]
+        STAT_NAMES = get_setting("stat_names")
 
         try:
             stat_index = STAT_NAMES.index(stat_name)
@@ -204,7 +204,7 @@ class BattleMonster:
 
     def set_stat(self, stat_name, value):
         config = get_config()
-        STAT_NAMES = config["settings"]["stat_names"]
+        STAT_NAMES = get_setting("stat_names")
 
         try:
             stat = self.stats[STAT_NAMES.index(stat_name)] 
@@ -228,7 +228,7 @@ class BattleMonster:
         if (self.weapon is None):
             return False 
         
-        if (self.weapon.unusable):
+        if (self.weapon_unusable):
             return False
         
         if (mana["current"] >= self.weapon.get_mana_cost()):
@@ -324,7 +324,7 @@ class BattleMonster:
         actor = action_ctx.actor
 
         # freeze or another effect blocking weapon is active
-        if (actor.weapon and actor.weapon.unusable):
+        if (actor.weapon_unusable):
             return
 
         current_target_team = action_ctx.target_team if (action_ctx.get_team(actor) == action_ctx.actor_team) else action_ctx.actor_team

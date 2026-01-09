@@ -1,4 +1,5 @@
-import os, json, discord
+import json, time, random
+from pymongo import ReturnDocument
 from .database import get_db
 from .models import UserModel, MonsterModel, WeaponModel, PassiveModel, TeamModel, TeamMonsterModel
 
@@ -190,7 +191,7 @@ async def save_team(user_id):
         if (not user_data):
             raise ValueError("No user data found!")
         
-        if (len(user_data.t_ids) >= config["settings"]["max_teams_per_user"]):
+        if (len(user_data.t_ids) >= get_setting("max_teams_per_user")):
             raise ValueError("Limit of teams reached!")
         
         new_id = await counter("team")
@@ -427,12 +428,14 @@ async def get_team(user_id: int,
 
     return team_data, team_monsters
 
-async def get_active_team(user_id):
+async def get_active_team(user_id, *, create_if_not_exist = False):
     db = get_db()
 
     team_data = await db.teams.find_one({"u_id": user_id, "active": True})
 
-    if (team_data is None):
+    if (not team_data):
+        if (create_if_not_exist):
+            return await get_team(user_id, create_if_not_exist = True)
         raise ValueError(f"No active team found for user: <@{user_id}>")
     
     team_data = TeamModel(**team_data)
@@ -479,11 +482,11 @@ async def add_team_monster(user_id, monster_name, position=None):
     config = get_config()
     db = get_db()
 
-    active_team_data, _ = await get_active_team(user_id)
+    active_team_data, _ = await get_active_team(user_id, create_if_not_exist = True)
     monster_data, _ = await get_monster(user_id, name=monster_name)
 
-    max_monsters_per_team = config["settings"]["max_monsters_per_team"]
-    team_position_start_index = config["settings"]["team_position_start_index"]
+    max_monsters_per_team = get_setting("max_monsters_per_team")
+    team_position_start_index = get_setting("team_position_start_index")
 
     if position is None:
         # can't add monster to team automatically because it's full
@@ -676,19 +679,15 @@ async def get_weapon_string(user_id, w_id, display = "normal", *, defined_data =
         raise ValueError(f"[ERROR]: While constructing a weapon string, message: {e}")
 
 def get_level(xp):
-    config = get_config()
-
-    base = config["settings"]["level_base"]
-    exp = config["settings"]["level_exponent"]
+    base = get_setting("level_base")
+    exp = get_setting("level_exponent")
 
     level = int((xp / base) ** exp) + 1
     return level
 
 def xp_for_level(level):
-    config = get_config()
-
-    base = config["settings"]["level_base"]
-    exp = config["settings"]["level_exponent"]
+    base = get_setting("level_base")
+    exp = get_setting("level_exponent")
 
     return int(base * (level ** (1 / exp)))
 
@@ -705,8 +704,8 @@ def get_monster_stats_raw(m_type, xp, weapon_data : WeaponModel = None):
 
         return stat 
     
-    defense_stat_limit = config["settings"]["defense_stat_limit"]
-    stat_bases = config["settings"]["stat_bases"]
+    defense_stat_limit = get_setting("defense_stat_limit")
+    stat_bases = get_setting("stat_bases")
 
     hp = ((get_stat(0) * 1.5) * (monster_level)) + stat_bases[0]
     strength = (get_stat(1) * monster_level) + stat_bases[1]
@@ -789,3 +788,88 @@ async def add_xp(user_id, m_id, xp_amount):
                 }
             }
         )
+
+def get_setting(setting_name : str, *, setting_index : str = None):
+    config = get_config()
+    settings = config["settings"]
+
+    if (not settings):
+        raise ValueError("Settings don't exist in config!")
+    
+    if (setting_name in settings):
+        setting_to_return = settings[setting_name]
+
+        if (setting_index):
+            if (not setting_index in setting_to_return):
+                raise ValueError(f"Index {setting_index} in setting doesn't exist!")
+            return setting_to_return[setting_index]
+        
+        return setting_to_return
+
+async def get_cooldown(user_id, command_name, *, set = False, message = False):
+    user_data = await get_user(user_id)
+
+    current_time = int(time.time())
+
+    if (set):
+        await set_cooldown(user_id, command_name)
+
+    for command_data_name, timestamp in user_data.cd.items():
+        if (command_data_name != command_name):
+            continue
+
+        if (timestamp < current_time):
+            return False
+
+        if (message):
+            return f"<@{user_id}> is in cooldown till <t:{timestamp}:R>" 
+        
+        return timestamp
+
+    return False
+
+async def set_cooldown(user_id, command_name : str, *, set_time : int = 60):
+    db = get_db()
+    cooldown_time = get_setting("cooldowns", setting_index = command_name)
+
+    current_time = int(time.time())
+    end_time = cooldown_time + current_time if cooldown_time else set_time + current_time
+
+    await db.users.find_one_and_update(
+        {
+            "u_id": user_id,
+            "$or": [
+                {f"cd.{command_name}": {"$lte": current_time}},
+                {f"cd.{command_name}": {"$exists": False}}
+            ]
+        },
+        {"$set": {f"cd.{command_name}": end_time}},
+
+        upsert=True,
+        return_document=ReturnDocument.AFTER
+    )
+
+def roll_quality(*, only_rarity : bool = False):
+    config = get_config()
+    config_rarities = config["rarities"]
+
+    rarities = list(config_rarities.keys())
+    chances = [rarity["chance"] for rarity in config_rarities.values()]
+
+    generated_rarity = random.choices(rarities, weights=chances, k=1)[0]
+
+    if (not generated_rarity in config_rarities):
+        raise ValueError("Rarity wasn't found!")
+
+    if (only_rarity):
+        return generated_rarity
+
+    rarity_config = config_rarities[generated_rarity]
+
+    min_quality = rarity_config["quality"][0]
+    max_quality = rarity_config["quality"][1]
+
+    random_quality = random.randint(min_quality, max_quality)
+
+    return random_quality
+    

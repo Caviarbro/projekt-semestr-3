@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_rarity_info, get_level, save_team, xp_for_level, get_monster_stats_raw, get_weapon_string, change_team, add_team_monster, remove_team_monster, get_monster_config
+from utils.util_file import get_user, get_config, get_team, get_emoji, get_level, get_weapon_string, get_monster_config, get_setting, get_cooldown, set_cooldown
 from battle_system.files.battle_util import execute_battle, Battle, create_from_team_data
 from battle_system.files.battle_classes import BattleContext, BattleLog, BattleLogSnapshot, BattleLogEntry
 
@@ -16,36 +16,63 @@ class Battle(commands.Cog):
     )
     async def battle(self, interaction:discord.Interaction, user:discord.User = None, team_number : int = None):
         try:
-            # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
+
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.name, set = True, message = True)
+
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
 
             user_data = await get_user(interaction.user.id)
 
-            if (user_data is not None):
-                interact_allow_user_ids = []
-                battle_result : Battle = None 
-                new_streak : int = None
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            interact_allow_user_ids = []
 
-                if (user):
-                    battle_result, new_streak = await execute_battle(actor_user_id = interaction.user.id, target_user_id = user.id)
-                    interact_allow_user_ids.extend([interaction.user.id, user.id])
-                elif (team_number):
-                    team_number_zero_index = team_number - 1
-                    team_data, team_monsters = await get_team(interaction.user.id, team_number = team_number_zero_index)
-                    target_battle_team = create_from_team_data(team_data, team_monsters)
-    
-                    battle_result, new_streak = await execute_battle(actor_user_id = interaction.user.id, target_team_data = target_battle_team)
-                    interact_allow_user_ids.append(interaction.user.id)
-                else:
-                    battle_result, new_streak = await execute_battle(actor_user_id = interaction.user.id, random_target = True, count_streak = True)
-                    interact_allow_user_ids.append(interaction.user.id)
+            battle_result: Battle = None
+            new_streak: int = None
 
-                view = InteractionHandler(battle_result, battle_result.battle_ctx.turn_number, user_ids = interact_allow_user_ids, streak = new_streak)
-                embeds = await view.refresh_page(interaction)
+            target_user_id = None
+            target_team_data = None
+            random_target = False
+            count_streak = False
 
-                await interaction.followup.send(embeds = embeds, view = view)
+            interact_allow_user_ids.append(interaction.user.id)
+            
+            if (user):
+                target_user_id = user.id
+                interact_allow_user_ids.append(target_user_id)
+
+            elif (team_number):
+                team_number_zero_index = team_number - 1
+                team_data, team_monsters = await get_team(
+                    interaction.user.id,
+                    team_number = team_number_zero_index
+                )
+                target_team_data = create_from_team_data(team_data, team_monsters)
+
             else:
-                raise ValueError("Missing user in database!")
+                random_target = True
+                count_streak = True
+
+            battle_result, new_streak = await execute_battle(
+                actor_user_id = interaction.user.id,
+                target_user_id = target_user_id,
+                target_team_data = target_team_data,
+                random_target = random_target,
+                count_streak = count_streak
+            )
+
+            view = InteractionHandler(
+                battle_result,
+                battle_result.battle_ctx.turn_number,
+                user_ids = interact_allow_user_ids,
+                streak = new_streak
+            )
+
+            embeds = await view.refresh_page(interaction)
+            await interaction.followup.send(embeds = embeds, view = view)
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While battling, message: {e}")
 
@@ -245,8 +272,9 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
 
         config = get_config()
 
-        XP_AMOUNTS = config["settings"]["xp_amounts"]
-        [WIN_XP, TIE_XP, LOSS_XP] = [XP_AMOUNTS["win"], XP_AMOUNTS["tie"], XP_AMOUNTS["loss"]]
+        WIN_XP = get_setting("xp_amounts", setting_index = "win")
+        TIE_XP = get_setting("xp_amounts", setting_index = "tie")
+        LOSS_XP = get_setting("xp_amounts", setting_index = "loss")
 
         match(end_state):
             case "actor_win":

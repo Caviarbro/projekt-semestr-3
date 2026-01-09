@@ -29,6 +29,7 @@ class UserModel(BaseModel):
     monsters: List[MonsterModel] = []
     weapons: List[WeaponModel] = []
     t_ids: List = []
+    cd: dict[str, int] = {}
 
 # Count amount of ids
 class Counter(BaseModel):

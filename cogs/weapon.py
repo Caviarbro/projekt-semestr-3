@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_weapon, get_emoji, get_monster, equip_weapon, unequip_weapon, get_weapon_string, get_quality_info, to_base36_spaced, to_base36, get_monster_config, get_passive_config, get_effect_config
+from utils.util_file import get_user, get_config, get_weapon, get_emoji, get_monster, equip_weapon, unequip_weapon, get_weapon_string, get_quality_info, to_base36_spaced, to_base36, get_monster_config, get_passive_config, get_effect_config, get_setting, get_cooldown
 
 class Weapon(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -22,32 +22,35 @@ class Weapon(commands.Cog):
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
-            user = await get_user(interaction.user.id)
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
 
-            if (user is not None):
-                user_owned_weapons = await get_weapon(interaction.user.id)
-                config = get_config()
-                
-                pages = []
-                MAX_PER_PAGE = config["settings"]["weapons_per_page"]
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
+            user_data = await get_user(interaction.user.id)
 
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            user_owned_weapons = await get_weapon(interaction.user.id)
 
-                for index, weapon in enumerate(user_owned_weapons):
-                    current_page = index // MAX_PER_PAGE
+            pages = []
+            MAX_PER_PAGE = get_setting("weapons_per_page")
 
-                    while len(pages) <= current_page:
-                        pages.append([])
+            for index, weapon in enumerate(user_owned_weapons):
+                current_page = index // MAX_PER_PAGE
 
-                    pages[current_page].append(weapon)
+                while len(pages) <= current_page:
+                    pages.append([])
 
-                if (not pages):
-                    pages = [[]]
+                pages[current_page].append(weapon)
 
-                embed = await show_page(interaction, pages, 0)
+            if (not pages):
+                pages = [[]]
 
-                await interaction.followup.send(embed = embed, view = InteractionHandler(pages))
-            else:
-                raise ValueError("Missing user in database!")
+            embed = await show_page(interaction, pages, 0)
+
+            await interaction.followup.send(embed = embed, view = InteractionHandler(pages))
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While listing weapons, message: {e}")
 
@@ -60,88 +63,93 @@ class Weapon(commands.Cog):
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
-            user = await get_user(interaction.user.id)
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
 
-            if (user is not None):
-                weapon_data, weapon_config = await get_weapon(interaction.user.id, id)
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
+            user_data = await get_user(interaction.user.id)
 
-                if (weapon_data is None or weapon_config is None):
-                    raise ValueError("Monster does not exist!")
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            weapon_data, weapon_config = await get_weapon(interaction.user.id, id)
 
-                config = get_config()
+            if (weapon_data is None or weapon_config is None):
+                raise ValueError("Monster does not exist!")
 
-                embed = discord.Embed(
-                    title = f"{weapon_config['default_emoji']} {weapon_config["name"]}",
-                    color = discord.Color.dark_blue()
-                )
+            config = get_config()
 
-                stats = []
-                stat_emojis = get_emoji("stats")
-                weapon_description : str = weapon_config["desc"]
+            embed = discord.Embed(
+                title = f"{weapon_config['default_emoji']} {weapon_config["name"]}",
+                color = discord.Color.dark_blue()
+            )
 
-                # converting qualities from % to actually stat numbers
-                for index, quality in enumerate(weapon_data.qualities):
-                    stat = weapon_config["stats"][index]
-                    value = stat["min"] + (stat["max"] - stat["min"]) * (quality / 100)
+            stats = []
+            stat_emojis = get_emoji("stats")
+            weapon_description : str = weapon_config["desc"]
 
-                    stats.append(value)
+            # converting qualities from % to actually stat numbers
+            for index, quality in enumerate(weapon_data.qualities):
+                stat = weapon_config["stats"][index]
+                value = stat["min"] + (stat["max"] - stat["min"]) * (quality / 100)
 
-                    weapon_description = weapon_description.replace(f"[{index}]", f"**{quality}**")
+                stats.append(value)
+
+                weapon_description = weapon_description.replace(f"[{index}]", f"**{quality}**")
+                
+                if ("monster_stat_type" in stat):
+                        # finds stat at index, and checks if it has monster_stat_type 
+                    # if it does have monster_stat_type(weapon_stat_index) in description, it will convert it to the emoji
+                    weapon_description = weapon_description.replace(f"[monster_stat_type({index})]", stat_emojis[stat["monster_stat_type"]])
+
+            passive_descriptions = []
+
+            for passive_data in weapon_data.passives:
+                passive_config = get_passive_config(p_type = passive_data.p_type)
+
+                if (not passive_config):
+                    raise ValueError(f"Passive with type {passive_data.p_type} does not exist in config!")
+                
+                _, passive_rarity_info = get_quality_info(passive_data.qualities)
+
+                passive_description : str = passive_config["desc"]
+                passive_emoji = passive_config["emojis"][passive_rarity_info["type"]]
+
+                for index, quality in enumerate(passive_data.qualities):
+                    stat = passive_config["stats"][index]
+                    passive_description = passive_description.replace(f"[{index}]", f"**{quality}**")
                     
                     if ("monster_stat_type" in stat):
-                         # finds stat at index, and checks if it has monster_stat_type 
-                        # if it does have monster_stat_type(weapon_stat_index) in description, it will convert it to the emoji
-                        weapon_description = weapon_description.replace(f"[monster_stat_type({index})]", stat_emojis[stat["monster_stat_type"]])
+                        # finds stat at index, and checks if it has monster_stat_type 
+                        # if it does have monster_stat_type(passive_stat_index) in description, it will convert it to the emoji
+                        passive_description = passive_description.replace(f"[monster_stat_type({index})]", stat_emojis[stat["monster_stat_type"]])
 
-                passive_descriptions = []
+                passive_description = f"{passive_emoji} **{passive_config["name"]}:**\n > {passive_description}\n"
+                passive_descriptions.append(passive_description)
 
-                for passive_data in weapon_data.passives:
-                    passive_config = get_passive_config(p_type = passive_data.p_type)
+            effect_descriptions = []
+            for e_type in weapon_config["effect_types"]:
+                effect_config = get_effect_config(e_type = e_type)
 
-                    if (not passive_config):
-                        raise ValueError(f"Passive with type {passive_data.p_type} does not exist in config!")
-                    
-                    _, passive_rarity_info = get_quality_info(passive_data.qualities)
+                effect_description = f"{effect_config['emoji']} **{effect_config['name']}:**\n > {effect_config['desc']}"
+                effect_description = effect_description.replace(f"[duration]", f"**{effect_config['duration']}**")
 
-                    passive_description : str = passive_config["desc"]
-                    passive_emoji = passive_config["emojis"][passive_rarity_info["type"]]
+                effect_descriptions.append(effect_description)
+            
+            embed.add_field(name = "", value = f"**ID:** **`{to_base36(weapon_data.w_id)}`**", inline = False)
+            embed.add_field(name = "", value = f"**Owner:** {interaction.user.name}", inline = False)
+            embed.add_field(name = "", value = f"**Mana cost:** {stats[0]} {stat_emojis[3]}", inline = False)
+            embed.add_field(name = "", value = f"**Description:**\n > {weapon_description}", inline = False)
 
-                    for index, quality in enumerate(passive_data.qualities):
-                        stat = passive_config["stats"][index]
-                        passive_description = passive_description.replace(f"[{index}]", f"**{quality}**")
-                        
-                        if ("monster_stat_type" in stat):
-                            # finds stat at index, and checks if it has monster_stat_type 
-                            # if it does have monster_stat_type(passive_stat_index) in description, it will convert it to the emoji
-                            passive_description = passive_description.replace(f"[monster_stat_type({index})]", stat_emojis[stat["monster_stat_type"]])
-
-                    passive_description = f"{passive_emoji} **{passive_config["name"]}:**\n > {passive_description}\n"
-                    passive_descriptions.append(passive_description)
-
-                effect_descriptions = []
-                for e_type in weapon_config["effect_types"]:
-                    effect_config = get_effect_config(e_type = e_type)
-
-                    effect_description = f"{effect_config['emoji']} **{effect_config['name']}:**\n > {effect_config['desc']}"
-                    effect_description = effect_description.replace(f"[duration]", f"**{effect_config['duration']}**")
-
-                    effect_descriptions.append(effect_description)
-                
-                embed.add_field(name = "", value = f"**ID:** **`{to_base36(weapon_data.w_id)}`**", inline = False)
-                embed.add_field(name = "", value = f"**Owner:** {interaction.user.name}", inline = False)
-                embed.add_field(name = "", value = f"**Mana cost:** {stats[0]} {stat_emojis[3]}", inline = False)
-                embed.add_field(name = "", value = f"**Description:**\n > {weapon_description}", inline = False)
-
-                if (passive_descriptions):
-                    embed.add_field(name = "", value = f"**Passives:**\n {''.join(passive_descriptions)}", inline = False)
-                else:
-                    embed.add_field(name = "", value = f"**Passives:**\n None", inline = False)
-
-                if (effect_descriptions):
-                    embed.add_field(name = "", value = f"**Effects:**\n {''.join(effect_descriptions)}", inline = False)
-                await interaction.followup.send(embed = embed)
+            if (passive_descriptions):
+                embed.add_field(name = "", value = f"**Passives:**\n {''.join(passive_descriptions)}", inline = False)
             else:
-                raise ValueError("Missing user in database!")
+                embed.add_field(name = "", value = f"**Passives:**\n None", inline = False)
+
+            if (effect_descriptions):
+                embed.add_field(name = "", value = f"**Effects:**\n {''.join(effect_descriptions)}", inline = False)
+            await interaction.followup.send(embed = embed)
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While viewing weapon, message: {e}")
 
@@ -155,6 +163,11 @@ class Weapon(commands.Cog):
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
+
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
             user = await get_user(interaction.user.id)
 
             if (user is not None):
@@ -177,19 +190,23 @@ class Weapon(commands.Cog):
 
     async def weapon_unequip(self, interaction:discord.Interaction, id:str):
         try:
-            # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
-            user = await get_user(interaction.user.id)
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
 
-            if (user is not None):
-                weapon_string = await get_weapon_string(interaction.user.id, id, "id")
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
+            user_data = await get_user(interaction.user.id)
 
-                await unequip_weapon(interaction.user.id, id)
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            weapon_string = await get_weapon_string(interaction.user.id, id, "id")
 
-                await interaction.followup.send(f"{get_emoji("success")} Successfully unequipped {weapon_string}!")
-            else:
-                raise ValueError("Missing user in database!")
+            await unequip_weapon(interaction.user.id, id)
+
+            await interaction.followup.send(f"{get_emoji("success")} Successfully unequipped {weapon_string}!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While unequipping weapon, message: {e}")
 

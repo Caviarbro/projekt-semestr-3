@@ -37,7 +37,7 @@ class Freeze(Effect):
         self.before_action(action_ctx)
 
         # it's a negative effect that's why it yields the actor's weapon unusable (and not using any target)
-        actor.weapon.unusable = True
+        actor.weapon_unusable = True
 
         battle_ctx.logs.add_entry(BattleLogEntry(
             battle_ctx.turn_number,
@@ -50,4 +50,4 @@ class Freeze(Effect):
         self.after_action(action_ctx)
 
     def on_remove(self, actor : BattleMonster):
-        actor.weapon.unusable = False
+        actor.weapon_unusable = False

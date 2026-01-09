@@ -1,8 +1,8 @@
 from __future__ import annotations
-import discord, random
+import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, save_monster
+from utils.util_file import get_user, get_config, save_monster, get_cooldown, roll_quality
 
 class Hunt(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -17,20 +17,34 @@ class Hunt(commands.Cog):
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
-            user = await get_user(interaction.user.id)
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.name, set = True, message = True)
 
-            if (user is not None):
-                new_monsters = generate_monster(10)
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
+            user_data = await get_user(interaction.user.id)
 
-                for monster in new_monsters:
-                    await save_monster(interaction.user.id, monster["type"])
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            new_monsters = generate_monster(10)
 
-                monster_emojis = [monster["emoji"] for monster in new_monsters]
+            for monster in new_monsters:
+                await save_monster(interaction.user.id, monster["type"])
 
-                await interaction.followup.send(f"Hunting for monsters! {" ".join(monster_emojis)}")
-            else:
-                raise ValueError("Missing user in database!")
+            monster_emojis = [monster["emoji"] for monster in new_monsters]
+
+            await interaction.followup.send(f"Hunting for monsters! {" ".join(monster_emojis)}")
         except Exception as e:
+            exc_type, exc_obj, exc_tb = sys.exc_info()
+            line = exc_tb.tb_lineno
+
+            full_traceback = ''.join(
+                traceback.format_exception(exc_type, exc_obj, exc_tb)
+            )
+
+            print(f"ERROR while hunting: {full_traceback} at line: {line}")
+
             await interaction.followup.send(f"[ERROR]: While hunting, message: {e}")
 
 def generate_monster(amount):
@@ -40,7 +54,10 @@ def generate_monster(amount):
     new_monsters = []
 
     for _ in range(0, amount):
-        new_monster = monster_list[random.randrange(0, len(monster_list))]   
+        generated_rarity = roll_quality(only_rarity = True)
+        rarity_monster_list = [m for m in monster_list if m["rarity"] == generated_rarity]
+
+        new_monster = rarity_monster_list[random.randrange(0, len(rarity_monster_list))]   
 
         new_monsters.append(new_monster)
 

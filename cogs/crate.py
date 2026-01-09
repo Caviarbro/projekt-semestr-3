@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, save_weapon, get_quality_info
+from utils.util_file import get_user, get_config, save_weapon, get_quality_info, get_setting, get_cooldown, roll_quality
 
 class Crate(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -17,39 +17,45 @@ class Crate(commands.Cog):
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
-            user = await get_user(interaction.user.id)
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.name, set = True, message = True)
 
-            if (user is not None):
-                generated_items = generate_weapon(amount)
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
+            user_data = await get_user(interaction.user.id)
 
-                found_weapons_text = []
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            generated_items = generate_weapon(amount)
 
-                for weapon_item in generated_items:
-                    [weapon_config, weapon_qualities] = weapon_item[0]
-                    generated_passives = weapon_item[1]
+            found_weapons_text = []
 
-                    weapon_quality, weapon_rarity_info = get_quality_info(weapon_qualities)
+            for weapon_item in generated_items:
+                [weapon_config, weapon_qualities] = weapon_item[0]
+                generated_passives = weapon_item[1]
 
-                    weapon_text = ""
-                    weapon_emoji = weapon_config["emojis"][weapon_rarity_info["type"]]
+                weapon_quality, weapon_rarity_info = get_quality_info(weapon_qualities)
 
-                    passives_text = ""
-                    for passive_item in generated_passives:
-                        [passive_config, passive_qualities] = passive_item
+                weapon_text = ""
+                weapon_emoji = weapon_config["emojis"][weapon_rarity_info["type"]]
 
-                        passive_quality, passive_rarity_info = get_quality_info(passive_qualities)
-                        passive_emoji = passive_config["emojis"][passive_rarity_info["type"]]
+                passives_text = ""
+                for passive_item in generated_passives:
+                    [passive_config, passive_qualities] = passive_item
 
-                        passives_text += passive_emoji
+                    passive_quality, passive_rarity_info = get_quality_info(passive_qualities)
+                    passive_emoji = passive_config["emojis"][passive_rarity_info["type"]]
 
-                    weapon_text = f"{weapon_emoji}{passives_text}"
+                    passives_text += passive_emoji
 
-                    found_weapons_text.append(weapon_text)
-                    await save_weapon(interaction.user.id, weapon_config["type"], weapon_qualities, generated_passives)
+                weapon_text = f"{weapon_emoji}{passives_text}"
 
-                await interaction.followup.send(f"You found following items: {", ".join(found_weapons_text)}!")
-            else:
-                raise ValueError("Missing user in database!")
+                found_weapons_text.append(weapon_text)
+                await save_weapon(interaction.user.id, weapon_config["type"], weapon_qualities, generated_passives)
+
+            await interaction.followup.send(f"You found following items: {", ".join(found_weapons_text)}!")
+                
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While opening crate, message: {e}")
 
@@ -71,14 +77,14 @@ def generate_weapon(amount):
 
         # generate qualities depending on how many stats the weapon has
         for _ in range(len(new_weapon["stats"])):
-            weapon_qualities.append(random.randrange(0, config["settings"]["max_quality"]))
+            weapon_qualities.append(roll_quality())
 
         for _ in range(new_weapon["passive_count"]):
             new_passive = passive_list[random.randrange(0, len(passive_list))]
             passive_qualities = []
 
             for _ in range(0, len(new_passive["stats"])):
-                passive_qualities.append(random.randrange(0, config["settings"]["max_quality"]))
+                passive_qualities.append(roll_quality())
 
             new_passives.append([new_passive, passive_qualities])
 

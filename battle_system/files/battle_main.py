@@ -1,5 +1,5 @@
 from random import sample
-from utils.util_file import get_config
+from utils.util_file import get_config, get_setting
 from .battle_classes import BattleMonster, BattleWeapon, BattleWeaponPassive, BattleTeam, Effect, BattleContext, ActionContext, BattleLogSnapshot
 
 class Battle:
@@ -10,11 +10,9 @@ class Battle:
         self.battle_ctx = BattleContext(actor_team, target_team, 0, "None")
 
     def process(self):
-        config = get_config()
-
-        MAX_BATTLE_TURNS = config["settings"]["max_battle_turns"]
-        MAX_MONSTERS_PER_TEAM = config["settings"]["max_monsters_per_team"]
-        TEAM_POSITION_START_INDEX = config["settings"]["team_position_start_index"]
+        MAX_BATTLE_TURNS = get_setting("max_battle_turns")
+        MAX_MONSTERS_PER_TEAM = get_setting("max_monsters_per_team")
+        TEAM_POSITION_START_INDEX = get_setting("team_position_start_index")
 
         # sort from lowest to highest position
         self.actor_team.monsters.sort(key=lambda m: m.pos)

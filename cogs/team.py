@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_rarity_info, get_level, save_team, xp_for_level, get_monster_stats, get_weapon_string, change_team, add_team_monster, remove_team_monster
+from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_level, save_team, xp_for_level, get_monster_stats, get_weapon_string, change_team, add_team_monster, remove_team_monster, get_setting, get_cooldown
 
 class Team(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -17,23 +17,30 @@ class Team(commands.Cog):
             name = "view",
             description = "View team"
     )
-    async def team_view(self, interaction:discord.Interaction):
+    async def team_view(self, interaction:discord.Interaction, team_number : int):
         try:
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
+
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
             user_data = await get_user(interaction.user.id)
 
-            if (user_data is not None):
-                # if user doesn't have any team
-                if (len(user_data.t_ids) == 0):
-                    await save_team(interaction.user.id)
-                
-                embed, team_number, user_team_ids = await show_page(interaction)
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            # if user doesn't have any team
+            if (len(user_data.t_ids) == 0):
+                await save_team(interaction.user.id)
+            
+            team_number_zero_index = team_number - 1 if team_number else None
 
-                await interaction.followup.send(embed = embed, view = InteractionHandler(team_number = team_number, user_team_ids = user_team_ids))
-            else:
-                raise ValueError("Missing user in database!")
+            embed, number_of_team, user_team_ids = await show_page(interaction, team_number_zero_index)
+
+            await interaction.followup.send(embed = embed, view = InteractionHandler(team_number = number_of_team, user_team_ids = user_team_ids))
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While viewing team, message: {e}")
 
@@ -46,20 +53,25 @@ class Team(commands.Cog):
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
 
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
+
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
             user_data = await get_user(interaction.user.id)
 
-            if (user_data is not None):
-                await add_team_monster(interaction.user.id, monster_name, position)
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
 
-                team_data, team_monsters = await get_active_team(interaction.user.id)
+            await add_team_monster(interaction.user.id, monster_name, position)
 
-                for monster in team_monsters:
-                    [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
-                    
-                    if (monster_config["name"].lower() == monster_name.lower()):
-                        return await interaction.followup.send(f"{get_emoji('success')} {monster_config['emoji']} **{monster_config['name']}** added to position **[{t_monster.pos}]**!")
-            else:
-                raise ValueError("Missing user in database!")
+            team_data, team_monsters = await get_active_team(interaction.user.id)
+
+            for monster in team_monsters:
+                [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
+                
+                if (monster_config["name"].lower() == monster_name.lower()):
+                    return await interaction.followup.send(f"{get_emoji('success')} {monster_config['emoji']} **{monster_config['name']}** added to position **[{t_monster.pos}]**!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While adding to team, message: {e}")
 
@@ -77,20 +89,20 @@ class Team(commands.Cog):
 
             user_data = await get_user(interaction.user.id)
 
-            if (user_data is not None):
-                team_data, team_monsters = await get_active_team(interaction.user.id)
+            if (not user_data):
+                raise ValueError("Missing user in the database!")
+            
+            team_data, team_monsters = await get_active_team(interaction.user.id)
 
-                for monster in team_monsters:
-                    [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
-                    
-                    lowercase_monster_name = monster_name.lower() if monster_name is not None else ""
+            for monster in team_monsters:
+                [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
+                
+                lowercase_monster_name = monster_name.lower() if monster_name is not None else ""
 
-                    if (monster_config["name"].lower() == lowercase_monster_name or t_monster.pos == position):
-                        await remove_team_monster(interaction.user.id, t_monster.pos)
+                if (monster_config["name"].lower() == lowercase_monster_name or t_monster.pos == position):
+                    await remove_team_monster(interaction.user.id, t_monster.pos)
 
-                        return await interaction.followup.send(f"{get_emoji('delete')} {monster_config['emoji']} **{monster_config['name']}** was removed from position **[{t_monster.pos}]**!")
-            else:
-                raise ValueError("Missing user in database!")
+                    return await interaction.followup.send(f"{get_emoji('delete')} {monster_config['emoji']} **{monster_config['name']}** was removed from position **[{t_monster.pos}]**!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While removing from team, message: {e}")
 
@@ -102,7 +114,7 @@ class InteractionHandler(discord.ui.View):
 
         self.user_team_ids = user_team_ids
         self.current_page = team_number
-        self.max_teams_per_user = config["settings"]["max_teams_per_user"]
+        self.max_teams_per_user = get_setting("max_teams_per_user")
 
     async def refresh_page(self, interaction: discord.Interaction):
         # Fetch the current page embed and update the user_team_ids dynamically.
