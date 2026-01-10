@@ -14,7 +14,10 @@
         "team_position_start_index": 1,
         "stat_names": ["hp", "strength", "strength_defense", "mana", "mag", "mag_defense"],
         "xp_amounts": {"win": 200, "tie": 100, "loss": 50},
-        "cooldowns": {"battle": 15, "crate": 30, "hunt": 15, "monster": 5, "team": 5, "weapon": 5}
+        "cash_amounts": {"win": 75, "tie": 40, "loss": 15},
+        "cooldowns": {"battle": 15, "crate": 30, "hunt": 15, "monster": 5, "team": 5, "weapon": 5, "cash": 10, "pay": 45, "sell": 15},
+        "cost": {"crate": 100, "hunt": 25},
+        "monsters_per_hunt": 1
     },
     "emojis": {
         "card_box": "🗃️",
@@ -32,49 +35,56 @@
             "emoji": "🇨",
             "quality": [0, 20],
             "color": "Red",
-            "chance": 45
+            "chance": 45,
+            "sell": {"monster": 10, "weapon": 25}
         },
         "uncommon": {
             "type": 1,
             "emoji": "🇺",
             "quality": [21, 40],
             "color": "Blue",
-            "chance": 30
+            "chance": 30,
+            "sell": {"monster": 20, "weapon": 45}
         },
         "rare": {
             "type": 2,
             "emoji": "🇷",
             "quality": [41, 60],
             "color": "Brown",
-            "chance": 15
+            "chance": 15,
+            "sell": {"monster": 30, "weapon": 60}
         },
         "epic": {
             "type": 3,
             "emoji": "🇪",
             "quality": [61, 80],
             "color": "Purple",
-            "chance": 7.5
+            "chance": 7.5,
+            "sell": {"monster": 40, "weapon": 85}
         },
         "mythic": {
             "type": 4,
             "emoji": "🇲",
             "quality": [81, 94],
             "color": "Green",
-            "chance": 2
+            "chance": 2,
+            "sell": {"monster": 100, "weapon": 250}
         },
         "legendary": {
             "type": 5,
             "emoji": "🇱",
             "quality": [95, 99],
             "color": "Yellow",
-            "chance": 0.49
+            "chance": 0.49,
+            "sell": {"monster": 1000, "weapon": 2500}
         },
         "platinum": {
             "type": 6,
             "emoji": "🇵",
             "quality": [100, 100],
             "color": "Orange",
-            "chance": 0.01
+            "chance": 0.01,
+            "sell": {"monster": 5000, "weapon": 10000}
         }
     },
     "monsters": [

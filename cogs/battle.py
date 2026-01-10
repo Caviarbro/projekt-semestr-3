@@ -275,32 +275,35 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
         WIN_XP = get_setting("xp_amounts", setting_index = "win")
         TIE_XP = get_setting("xp_amounts", setting_index = "tie")
         LOSS_XP = get_setting("xp_amounts", setting_index = "loss")
+        WIN_CASH = get_setting("cash_amounts", setting_index = "win")
+        TIE_CASH = get_setting("cash_amounts", setting_index = "tie")
+        LOSS_CASH = get_setting("cash_amounts", setting_index = "loss")
 
         match(end_state):
             case "actor_win":
                 if (len(user_ids) > 1):
                     footer_text = f"{fetched_users[0].name} won against {fetched_users[1].name} in {final_turn_display} turns!"
                 else:
-                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns! +{WIN_XP} XP"
+                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns! +{WIN_XP} XP & +{WIN_CASH}$"
                 embed.color = discord.Colour.green()
             case "target_win":
                 if (len(user_ids) > 1):
                     footer_text = f"{fetched_users[0].name} lost against {fetched_users[1].name} in {final_turn_display} turns!"
                 else:
-                    footer_text = f"You lost in {final_turn_display} turns! +{LOSS_XP} XP"
+                    footer_text = f"You lost in {final_turn_display} turns! +{LOSS_XP} XP & +{LOSS_CASH}$"
                 embed.color = discord.Colour.red()
             case "tie":
                 footer_text = f"The battle was too long, it's a tie!"
                 embed.color = discord.Colour.light_gray()
 
                 if (len(user_ids) == 1):
-                    footer_text += f" +{TIE_XP} XP"
+                    footer_text += f" +{TIE_XP} XP & +{TIE_CASH}$"
             case "tie_death":
                 footer_text = f"Both teams died, it's a tie!"
                 embed.color = discord.Colour.light_gray()
 
                 if (len(user_ids) == 1):
-                    footer_text += f" +{TIE_XP} XP"
+                    footer_text += f" +{TIE_XP} XP & +{TIE_CASH}$"
 
         embed.set_footer(text = f"{footer_text} [{current_turn_number + 1}/{final_turn_display}]{streak_text}")
 

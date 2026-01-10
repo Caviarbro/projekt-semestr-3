@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, save_weapon, get_quality_info, get_setting, get_cooldown, roll_quality
+from utils.util_file import get_user, get_config, save_weapon, get_quality_info, get_setting, get_cooldown, roll_quality, process_command_cost
 
 class Crate(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -21,11 +21,12 @@ class Crate(commands.Cog):
 
             if (cooldown):
                 return await interaction.followup.send(content = cooldown)
-            
-            user_data = await get_user(interaction.user.id)
 
-            if (not user_data):
-                raise ValueError("Missing user in the database!")
+            # user data check is inside of this function, so it doesn't make sense to call the function here as well
+            not_enough_to_process = await process_command_cost(interaction.user.id, interaction.command.name)
+
+            if (not_enough_to_process):
+                return await interaction.followup.send(content = not_enough_to_process)
             
             generated_items = generate_weapon(amount)
 
@@ -58,8 +59,6 @@ class Crate(commands.Cog):
                 
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While opening crate, message: {e}")
-
-# TODO: add generating qualities function which will make it harder to get better qualities
 
 def generate_weapon(amount):
     config = get_config()

@@ -873,3 +873,24 @@ def roll_quality(*, only_rarity : bool = False):
 
     return random_quality
     
+async def update_cash(user_id, amount):
+    db = get_db()
+
+    await db.users.update_one(
+        {"u_id": user_id},
+        {"$inc": {"cash": amount}}
+    )
+
+async def get_cash(user_id):
+    user_data = await get_user(user_id)
+
+    return user_data.cash
+
+async def process_command_cost(user_id, command_name):
+    user_cash = await get_cash(user_id)
+    COMMAND_COST = get_setting("cost", setting_index = command_name)
+
+    if (user_cash < COMMAND_COST):
+        return f"<@{user_id}> doesn't have enough cash, [**{user_cash}$**/**{COMMAND_COST}$**]"
+    
+    await update_cash(user_id, -COMMAND_COST)

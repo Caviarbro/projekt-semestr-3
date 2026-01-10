@@ -1,5 +1,5 @@
 from __future__ import annotations
-from utils.util_file import get_config, get_active_team, get_team, get_weapon_config, get_passive_config, xp_for_level, get_counter, get_db, add_xp, get_setting
+from utils.util_file import get_config, get_active_team, get_team, get_weapon_config, get_passive_config, xp_for_level, get_counter, get_db, add_xp, get_setting, update_cash
 from .file_loader import load_weapons, load_passives
 from typing import Optional, List
 from utils.models import TeamModel
@@ -190,6 +190,7 @@ async def execute_battle(*, actor_user_id : int = None, target_user_id : int = N
             end_state = new_battle.process()
             
             xp_to_add = 0
+            cash_to_add = 0
 
             match(end_state):
                 case "actor_win":
@@ -201,8 +202,10 @@ async def execute_battle(*, actor_user_id : int = None, target_user_id : int = N
 
                         if (actor_user_id):
                             WIN_XP = get_setting("xp_amounts", setting_index = "win")
-                            
+                            WIN_CASH = get_setting("cash_amounts", setting_index = "win")
+
                             xp_to_add += WIN_XP
+                            cash_to_add += WIN_CASH
                     pass
                 case "target_win":
                     if (count_streak):
@@ -213,21 +216,29 @@ async def execute_battle(*, actor_user_id : int = None, target_user_id : int = N
 
                         if (actor_user_id):
                             LOSS_XP = get_setting("xp_amounts", setting_index = "loss")
-                            
+                            LOSS_CASH = get_setting("cash_amounts", setting_index = "loss")
+
                             xp_to_add += LOSS_XP
+                            cash_to_add += LOSS_CASH
                     pass
                 case "tie" | "tie_death":
                     if (count_streak and actor_user_id):
                         TIE_XP = get_setting("xp_amounts", setting_index = "tie")
+                        TIE_CASH = get_setting("cash_amounts", setting_index = "tie")
                         
                         xp_to_add += TIE_XP
+                        cash_to_add += TIE_CASH
         
             if (actor_user_id and count_streak):
                 team_data, _ = await get_team(actor_user_id, team_id = actor_team.t_id)
 
+                # add xp
                 for battle_monster in actor_team.monsters:
                     await add_xp(actor_user_id, battle_monster.m_id, xp_to_add)
                 
+                # add cash
+                await update_cash(actor_user_id, cash_to_add)
+
                 new_streak = team_data.streak
 
             return new_battle, new_streak

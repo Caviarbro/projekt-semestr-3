@@ -17,7 +17,7 @@ class Team(commands.Cog):
             name = "view",
             description = "View team"
     )
-    async def team_view(self, interaction:discord.Interaction, team_number : int):
+    async def team_view(self, interaction:discord.Interaction, team_number : int = None):
         try:
             # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
@@ -118,7 +118,6 @@ class InteractionHandler(discord.ui.View):
 
     async def refresh_page(self, interaction: discord.Interaction):
         # Fetch the current page embed and update the user_team_ids dynamically.
-        print("current page", self.current_page)
         embed, team_number, user_team_ids = await show_page(interaction, self.current_page)
         self.user_team_ids = user_team_ids
 

@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, save_monster, get_cooldown, roll_quality
+from utils.util_file import get_user, get_config, save_monster, get_cooldown, roll_quality, process_command_cost, get_setting
 
 class Hunt(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -22,12 +22,14 @@ class Hunt(commands.Cog):
             if (cooldown):
                 return await interaction.followup.send(content = cooldown)
             
-            user_data = await get_user(interaction.user.id)
+            # user data check is inside of this function, so it doesn't make sense to call the function here as well
+            not_enough_to_process = await process_command_cost(interaction.user.id, interaction.command.name)
 
-            if (not user_data):
-                raise ValueError("Missing user in the database!")
+            if (not_enough_to_process):
+                return await interaction.followup.send(content = not_enough_to_process)
             
-            new_monsters = generate_monster(10)
+            MONSTERS_PER_HUNT = get_setting("monsters_per_hunt")
+            new_monsters = generate_monster(MONSTERS_PER_HUNT)
 
             for monster in new_monsters:
                 await save_monster(interaction.user.id, monster["type"])
