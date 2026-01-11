@@ -2,7 +2,7 @@ from __future__ import annotations
 import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
-from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_level, save_team, xp_for_level, get_monster_stats, get_weapon_string, change_team, add_team_monster, remove_team_monster, get_setting, get_cooldown
+from utils.util_file import get_user, get_config, get_team, get_active_team, get_emoji, get_level, save_team, xp_for_level, get_monster_stats, get_weapon_string, change_team, add_team_monster, remove_team_monster, get_setting, get_cooldown, get_db, rename
 
 class Team(commands.Cog):
     def __init__(self, bot: commands.Bot):
@@ -81,12 +81,16 @@ class Team(commands.Cog):
     )
     async def team_remove(self, interaction:discord.Interaction, monster_name:str = None, position:int = None):
         try:
-            # defer the response because we are requesting from the database and the slash command may fail
             await interaction.response.defer()
+            
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
 
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
             if (monster_name is None and position is None):
                 raise ValueError("At least one argument (monster_name / position) expected!")
-
+            
             user_data = await get_user(interaction.user.id)
 
             if (not user_data):
@@ -105,6 +109,37 @@ class Team(commands.Cog):
                     return await interaction.followup.send(f"{get_emoji('delete')} {monster_config['emoji']} **{monster_config['name']}** was removed from position **[{t_monster.pos}]**!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While removing from team, message: {e}")
+
+    @team_command.command(
+        name = "rename",
+        description = "Rename your team"
+    )
+    async def team_rename(self, interaction:discord.Interaction, name:str, team_number:int = None):
+        try:
+            await interaction.response.defer()
+                
+            cooldown = await get_cooldown(interaction.user.id, interaction.command.root_parent.name, set = True, message = True)
+
+            if (cooldown):
+                return await interaction.followup.send(content = cooldown)
+            
+            db = get_db()
+
+            team_number_zero_index = team_number - 1 if team_number else None
+            team_data, _ = await get_team(interaction.user.id, team_number = team_number_zero_index) if team_number else await get_active_team(interaction.user.id)
+
+            new_name = rename(name)
+            
+            await db.teams.update_one(
+                {"t_id": team_data.t_id},
+                {"$set": {"n": new_name}}
+            )
+
+            await interaction.followup.send(f"{get_emoji("success")} Team has been successfully renamed to: **{new_name}**")
+        except Exception as e:
+            await interaction.followup.send(f"[ERROR]: While renaming a team, message: {e}")
+
+
 
     # TODO: add team naming
 class InteractionHandler(discord.ui.View):
@@ -185,9 +220,10 @@ async def show_page(interaction : discord.Interaction, team_number = None):
             user_team_ids.append(team_data.t_id)
 
         embed = discord.Embed(
-            title = f"{'⭐' if team_active else get_emoji('error')} {interaction.user.name}'s Team!",
             color = discord.Color.dark_blue()
         )
+    
+        embed.set_author(name = f"{'⭐' if team_active else get_emoji('error')} {interaction.user.name}'s {team_data.n or "Team"}", icon_url = interaction.user.display_avatar)
 
         for monster in team_monsters:
             [monster_data, monster_config, t_monster, weapon_data, weapon_config] = monster 
@@ -207,7 +243,7 @@ async def show_page(interaction : discord.Interaction, team_number = None):
                 for stat in monster_stats
             ]
 
-            weapon_string = await get_weapon_string(interaction.user.id, weapon_data.w_id, "full") if (monster_data.e_wid != -1) else "No weapon"
+            weapon_string = await get_weapon_string(interaction.user.id, weapon_data.w_id, display = "full") if (monster_data.e_wid != -1) else "No weapon"
             spacing = f"  "
 
             embed.add_field(

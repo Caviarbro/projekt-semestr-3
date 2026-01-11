@@ -171,7 +171,7 @@ class Weapon(commands.Cog):
             user = await get_user(interaction.user.id)
 
             if (user is not None):
-                weapon_string = await get_weapon_string(interaction.user.id, id, "id")
+                weapon_string = await get_weapon_string(interaction.user.id, id, display = "id")
                 monster_config = get_monster_config(monster_name = monster_name)
 
                 equipped = await equip_weapon(interaction.user.id, id, monster_name)
@@ -202,7 +202,7 @@ class Weapon(commands.Cog):
             if (not user_data):
                 raise ValueError("Missing user in the database!")
             
-            weapon_string = await get_weapon_string(interaction.user.id, id, "id")
+            weapon_string = await get_weapon_string(interaction.user.id, id, display = "id")
 
             await unequip_weapon(interaction.user.id, id)
 

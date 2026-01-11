@@ -1,5 +1,6 @@
-import json, time, random
+import json, time, random, re
 from pymongo import ReturnDocument
+from better_profanity import profanity
 from .database import get_db
 from .models import UserModel, MonsterModel, WeaponModel, PassiveModel, TeamModel, TeamMonsterModel
 
@@ -130,7 +131,9 @@ async def save_weapon(user_id, weapon_type, weapon_qualities, generated_passives
         if (not isinstance(weapon_qualities, list) or len(weapon_qualities) <= 0):
             raise ValueError("Weapon qualities are missing!")
         
-        if (not isinstance(generated_passives, list) or len(generated_passives) <= 0):
+        weapon_config = get_weapon_config(w_type = weapon_type)
+
+        if (not isinstance(generated_passives, list) or len(generated_passives) != weapon_config["passive_count"]):
             raise ValueError("Missing passives!")
         
         db = get_db()
@@ -636,7 +639,7 @@ def get_quality_info(quality_data):
 
     return quality, rarity_info
 
-async def get_weapon_string(user_id, w_id, display = "normal", *, defined_data = None):
+async def get_weapon_string(user_id, w_id, *, display = "normal", defined_data = None):
     try:
         config = get_config()
 
@@ -886,11 +889,40 @@ async def get_cash(user_id):
 
     return user_data.cash
 
-async def process_command_cost(user_id, command_name):
+async def process_command_cost(user_id, command_name, *, multiplier = None):
     user_cash = await get_cash(user_id)
     COMMAND_COST = get_setting("cost", setting_index = command_name)
 
-    if (user_cash < COMMAND_COST):
-        return f"<@{user_id}> doesn't have enough cash, [**{user_cash}$**/**{COMMAND_COST}$**]"
+    total_cost = COMMAND_COST
+
+    if (multiplier):
+        total_cost *= multiplier
+
+    if (user_cash < total_cost):
+        return f"<@{user_id}> doesn't have enough cash, [**{user_cash}$**/**{total_cost}$**]"
     
-    await update_cash(user_id, -COMMAND_COST)
+    await update_cash(user_id, -total_cost)
+
+def rename(new_name : str):
+    MAX_LENGTH = get_setting("name_length")
+
+    if (len(new_name) <= 0):
+        raise ValueError("At least one character is required for the name!")
+    
+    if (len(new_name) > MAX_LENGTH):
+        raise ValueError(f"Name exceeded maximum character count of **{MAX_LENGTH}**!")
+
+    bold_pattern = r'(\*{2,})'
+    format_pattern = r'[`]+'
+    hide_pattern = r'(\|{2,})'
+
+    result = re.sub(bold_pattern, "", new_name)
+    result = re.sub(format_pattern, "", result)
+    result = re.sub(hide_pattern, "", result)
+
+    result = profanity.censor(result)
+
+    if (len(result) <= 0):
+        raise ValueError("Invalid name after validation!")
+
+    return result

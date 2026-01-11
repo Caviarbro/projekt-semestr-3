@@ -368,10 +368,11 @@ class BattleMonster:
 
 
 class BattleTeam:
-    def __init__(self, monsters: list[BattleMonster], t_id = None):
+    def __init__(self, monsters: list[BattleMonster], t_id = None, name = None):
         self.monsters : list[BattleMonster] = monsters
         self.t_id = t_id if t_id is not None else None
         self.bt_id = uuid.uuid4()
+        self.name = name
 
     def is_alive(self):
         for battle_monster in self.monsters:

@@ -22,8 +22,12 @@ class Crate(commands.Cog):
             if (cooldown):
                 return await interaction.followup.send(content = cooldown)
 
+            MAX_CRATES = get_setting("max_crates")
+            if (amount > MAX_CRATES):
+                amount = MAX_CRATES
+                
             # user data check is inside of this function, so it doesn't make sense to call the function here as well
-            not_enough_to_process = await process_command_cost(interaction.user.id, interaction.command.name)
+            not_enough_to_process = await process_command_cost(interaction.user.id, interaction.command.name, multiplier = amount)
 
             if (not_enough_to_process):
                 return await interaction.followup.send(content = not_enough_to_process)

@@ -284,13 +284,13 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
                 if (len(user_ids) > 1):
                     footer_text = f"{fetched_users[0].name} won against {fetched_users[1].name} in {final_turn_display} turns!"
                 else:
-                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns! +{WIN_XP} XP & +{WIN_CASH}$"
+                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns! +{WIN_XP} XP & +{WIN_CASH} {get_emoji("cash")}"
                 embed.color = discord.Colour.green()
             case "target_win":
                 if (len(user_ids) > 1):
                     footer_text = f"{fetched_users[0].name} lost against {fetched_users[1].name} in {final_turn_display} turns!"
                 else:
-                    footer_text = f"You lost in {final_turn_display} turns! +{LOSS_XP} XP & +{LOSS_CASH}$"
+                    footer_text = f"You lost in {final_turn_display} turns! +{LOSS_XP} XP & +{LOSS_CASH} {get_emoji("cash")}"
                 embed.color = discord.Colour.red()
             case "tie":
                 footer_text = f"The battle was too long, it's a tie!"
@@ -303,12 +303,12 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
                 embed.color = discord.Colour.light_gray()
 
                 if (len(user_ids) == 1):
-                    footer_text += f" +{TIE_XP} XP & +{TIE_CASH}$"
+                    footer_text += f" +{TIE_XP} XP & +{TIE_CASH} {get_emoji("cash")}"
 
         embed.set_footer(text = f"{footer_text} [{current_turn_number + 1}/{final_turn_display}]{streak_text}")
 
         for battle_team in [turn_snapshot.actor_team, turn_snapshot.target_team]:
-            team_name = battle_team.bt_id
+            team_name = battle_team.name or "Team"
             embed_value = ""
 
             for battle_monster in battle_team.monsters:
@@ -325,11 +325,13 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
                 effect_emojis = [effect.emoji for effect in battle_monster.effects if current_turn_number >= effect.start_turn]
                 stat_emojis = get_emoji("stats")
 
-                effect_string = f"\n> {''.join(effect_emojis)}" if effect_emojis else "\n"
+                effect_string = f" | {''.join(effect_emojis)}\n" if effect_emojis else "\n"
 
-                embed_value += f"""L.{monster_lvl} {monster_config["emoji"]} **{battle_monster.name}** {weapon_string} 
-                > {stat_emojis[0]}: **`{monster_hp}`** {stat_emojis[3]}: **`{monster_mana}`**{effect_string}
-                """
+                embed_value += (
+                    f"L.{monster_lvl} {monster_config["emoji"]} **{battle_monster.name}**{effect_string}"
+                    f"> {stat_emojis[0]}: **`{monster_hp}`** {stat_emojis[3]}: **`{monster_mana}`**\n"
+                    f"> {weapon_string}\n"
+                )
 
             embed.add_field(name = f"**{team_name}**", value = f"\n{embed_value}", inline = True)
 

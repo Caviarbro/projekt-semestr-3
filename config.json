@@ -15,9 +15,12 @@
         "stat_names": ["hp", "strength", "strength_defense", "mana", "mag", "mag_defense"],
         "xp_amounts": {"win": 200, "tie": 100, "loss": 50},
         "cash_amounts": {"win": 75, "tie": 40, "loss": 15},
-        "cooldowns": {"battle": 15, "crate": 30, "hunt": 15, "monster": 5, "team": 5, "weapon": 5, "cash": 10, "pay": 45, "sell": 15},
+        "cooldowns": {"battle": 15, "crate": 30, "hunt": 15, "monster": 5, "team": 5, "weapon": 5, "cash": 10, "pay": 45, "sell": 15, "coinflip": 20},
         "cost": {"crate": 100, "hunt": 25},
-        "monsters_per_hunt": 1
+        "monsters_per_hunt": 3,
+        "max_crates": 10,
+        "name_length": 20,
+        "coinflip_limit": 1000
     },
     "emojis": {
         "card_box": "🗃️",
@@ -27,7 +30,8 @@
         "weapon": "⚔️",
         "success": "✅",
         "error": "❎",
-        "delete": "🗑️"
+        "delete": "🗑️",
+        "cash": "💵"
     },
     "rarities": {
         "common": {
@@ -185,6 +189,20 @@
                 "mag": {"type": 4, "amount": 0},
                 "mag_defense": {"type": 5, "amount": 0}
             }
+        },
+        {
+            "type": 7,
+            "name": "Cockroach",
+            "rarity": "common",
+            "emoji": "🪳",
+            "stats": {
+                "hp": {"type": 0, "amount": 0},
+                "strength": {"type": 1, "amount": 0},
+                "strength_defense": {"type": 2, "amount": 0},
+                "mana": {"type": 3, "amount": 0},
+                "mag": {"type": 4, "amount": 0},
+                "mag_defense": {"type": 5, "amount": 0}
+            }
         }
     ],
     "weapons": [
@@ -212,6 +230,18 @@
             "stats": [
                 { "min": 180, "max": 100, "monster_stat_type": 3},
                 { "min": 10, "max": 25, "monster_stat_type": 4}
+            ]
+        },
+        {
+            "type": 2,
+            "name": "Nuclear Nuke",
+            "desc": "Has 1/100 chance to kill everything besides cockroaches!",
+            "default_emoji": "<:nuclearnuke:1074243914627813386>",
+            "emojis": ["<:cnuclearnuke:978791622059909130>","<:unuclearnuke:978791641257242634>","<:rnuclearnuke:978791659636674630>","<:enuclearnuke:978791684991254578", "<:mnuclearnuke:978791730415562762>","<:lnuclearnuke:978791736887365702>","<:pnuclearnuke:978791756093079603>"],
+            "passive_count": 0,
+            "effect_types": [],
+            "stats": [
+                { "min": 250, "max": 180, "monster_stat_type": 3}
             ]
         }
     ],

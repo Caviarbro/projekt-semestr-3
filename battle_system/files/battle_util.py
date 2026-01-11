@@ -44,7 +44,7 @@ def create_from_team_data(team_data, team_monsters):
             battle_monster = BattleMonster(position_in_team, monster_data.m_type, monster_data.xp, battle_weapon, monster_data.m_id)
             battle_monsters.append(battle_monster)
 
-        battle_team = BattleTeam(battle_monsters, team_data.t_id)
+        battle_team = BattleTeam(battle_monsters, team_data.t_id, team_data.n)
 
         return battle_team
     except Exception as e:

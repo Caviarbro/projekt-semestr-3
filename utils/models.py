@@ -46,6 +46,7 @@ class TeamModel(BaseModel):
     t_id: int
     active: bool = False
     streak: int = 0
+    n: str = ""
     t_monsters: List[TeamMonsterModel] = []
 
 
