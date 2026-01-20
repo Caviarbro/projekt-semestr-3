@@ -141,7 +141,6 @@ class Team(commands.Cog):
 
 
 
-    # TODO: add team naming
 class InteractionHandler(discord.ui.View):
     def __init__(self, *, team_number, user_team_ids):
         super().__init__(timeout=120)

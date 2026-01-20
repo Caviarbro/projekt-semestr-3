@@ -1,5 +1,5 @@
 from __future__ import annotations
-import discord, random, sys
+import discord, random, sys, traceback
 from discord import app_commands
 from discord.ext import commands
 from utils.util_file import get_user, get_config, get_team, get_emoji, get_level, get_weapon_string, get_monster_config, get_setting, get_cooldown, set_cooldown
@@ -267,7 +267,7 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
             embed.set_author(name = "Monster battle")
 
         final_turn_display = battle_ctx.turn_number + 1
-        streak_text = f" - Streak: {streak}" if (isinstance(streak, int)) else ""
+        streak_text = f" | Streak: {streak}" if (isinstance(streak, int)) else ""
         footer_text = ""
 
         config = get_config()
@@ -281,31 +281,33 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
 
         match(end_state):
             case "actor_win":
-                if (len(user_ids) > 1):
-                    footer_text = f"{fetched_users[0].name} won against {fetched_users[1].name} in {final_turn_display} turns!"
+                if (streak == None):
+                    footer_text = f"{fetched_users[0].name} won against {fetched_users[-1].name} in {final_turn_display} turns!"
                 else:
-                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns! +{WIN_XP} XP & +{WIN_CASH} {get_emoji("cash")}"
+                    footer_text = f"You won in {battle_ctx.turn_number + 1} turns! | +{WIN_XP} XP & +{WIN_CASH} {get_emoji("cash")} |"
+
                 embed.color = discord.Colour.green()
             case "target_win":
-                if (len(user_ids) > 1):
+                if (streak == None):
                     footer_text = f"{fetched_users[0].name} lost against {fetched_users[1].name} in {final_turn_display} turns!"
                 else:
-                    footer_text = f"You lost in {final_turn_display} turns! +{LOSS_XP} XP & +{LOSS_CASH} {get_emoji("cash")}"
+                    footer_text = f"You lost in {final_turn_display} turns! | +{LOSS_XP} XP & +{LOSS_CASH} {get_emoji("cash")} |"
+
                 embed.color = discord.Colour.red()
             case "tie":
                 footer_text = f"The battle was too long, it's a tie!"
                 embed.color = discord.Colour.light_gray()
 
-                if (len(user_ids) == 1):
-                    footer_text += f" +{TIE_XP} XP & +{TIE_CASH}$"
+                if (isinstance(streak, int)):
+                    footer_text += f" | +{TIE_XP} XP & +{TIE_CASH} {get_emoji("cash")} |"
             case "tie_death":
                 footer_text = f"Both teams died, it's a tie!"
                 embed.color = discord.Colour.light_gray()
 
-                if (len(user_ids) == 1):
-                    footer_text += f" +{TIE_XP} XP & +{TIE_CASH} {get_emoji("cash")}"
+                if (isinstance(streak, int)):
+                    footer_text += f" | +{TIE_XP} XP & +{TIE_CASH} {get_emoji("cash")} |"
 
-        embed.set_footer(text = f"{footer_text} [{current_turn_number + 1}/{final_turn_display}]{streak_text}")
+        embed.set_footer(text = f"{footer_text} Turn: [{current_turn_number + 1}/{final_turn_display}]{streak_text}")
 
         for battle_team in [turn_snapshot.actor_team, turn_snapshot.target_team]:
             team_name = battle_team.name or "Team"
@@ -337,6 +339,15 @@ async def show_page(battle_result : Battle, current_turn_number : int, *, intera
 
         return embed
     except Exception as e:
+        exc_type, exc_obj, exc_tb = sys.exc_info()
+        line = exc_tb.tb_lineno
+
+        full_traceback = ''.join(
+            traceback.format_exception(exc_type, exc_obj, exc_tb)
+        )
+
+        print("ERROR WHILE SHOWING", full_traceback, "at line:", line)
+
         raise ValueError(f"[ERROR]: While showing battle embed, message: {e}")
 
 async def setup(bot: commands.Bot):

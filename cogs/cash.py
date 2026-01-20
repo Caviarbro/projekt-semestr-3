@@ -122,7 +122,7 @@ class Cash(commands.Cog):
 
                 await update_cash(interaction.user.id, cost)
 
-            sell_string = f"You sold {sell_string} for **{sell_profit}{get_emoji("cash")}**!"
+            sell_string = f"You sold {sell_string}for **{sell_profit}{get_emoji("cash")}**!"
             await interaction.followup.send(content = sell_string)
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While selling, message: {e}")
@@ -142,17 +142,17 @@ class Cash(commands.Cog):
                 return await interaction.followup.send(content = cooldown)
             
             if (amount < 0):
-                return await interaction.followup.send(content = "You can't bet negative amount of $!")
+                return await interaction.followup.send(content = f"You can't bet negative amount of {get_emoji("cash")}!")
             
             CF_LIMIT = get_setting("coinflip_limit")
 
             if (amount > CF_LIMIT):
-                return await interaction.followup.send(content = f"You can only bet **{CF_LIMIT}** $!")
+                return await interaction.followup.send(content = f"You can only bet **{CF_LIMIT}** {get_emoji("cash")}!")
 
             user_cash = await get_cash(interaction.user.id)
 
             if (amount > user_cash):
-                return await interaction.followup.send(content = "You don't have enough $!")
+                return await interaction.followup.send(content = f"You don't have enough {get_emoji("cash")}!")
             
             sides : dict = {
                 0: ["heads", "h", "head"], 
@@ -186,7 +186,7 @@ class Cash(commands.Cog):
                 result = "LOST"
                 emoji = get_emoji("error")
 
-            await interaction.followup.send(content = f"{emoji} The coin flipped on **{sides.get(coin_side)[0]}** and you **{result}** - **{amount}** $!")
+            await interaction.followup.send(content = f"{emoji} The coin flipped on **{sides.get(coin_side)[0]}** and you **{result}** **{amount}**{get_emoji("cash")}!")
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While coinflip, message: {e}")
 async def setup(bot: commands.Bot):

@@ -122,14 +122,19 @@ class Monster(commands.Cog):
             def get_stat(name):
                 return monster_config["stats"][name]["amount"]
 
+            stat_emojis = get_emoji("stats")
             # TODO: change stat names to emojis
-            embed.add_field(name = "", value = f"**Rarity:** {rarity_info['emoji']} {monster_config['rarity']} \n", inline = False)
-            embed.add_field(name = "", value = f"**Amount:** {monster_data.seq} \n", inline = False)
-            embed.add_field(name = "", value = f"**ID:** `{monster_data.m_id}`", inline = False)
-            embed.add_field(name = "", value = "\n", inline = False)
-            embed.add_field(name = "", value = f"**HP:** {get_stat('hp')} **STR:** {get_stat('strength')} **STR DEF:** {get_stat('strength_defense')}", inline = False)
-            embed.add_field(name = "", value = f"**MN:** {get_stat('mana')} **MAG:** {get_stat('mag')} **MAG DEF:** {get_stat('mag_defense')}", inline = False)
+
+            embed_field = (
+                f"**Rarity:** {rarity_info['emoji']} {monster_config['rarity']} \n"
+                f"**Amount:** {monster_data.seq}x \n"
+                f"**ID:** `{monster_data.m_id}`\n\n"
+                f"**Stats:**\n"
+                f"**{stat_emojis[0]}: `{get_stat('hp')}` {stat_emojis[1]}: `{get_stat('strength')}` {stat_emojis[2]}: `{get_stat('strength_defense')}`**\n"
+                f"**{stat_emojis[3]}: `{get_stat('mana')}` {stat_emojis[4]}: `{get_stat('mag')}` {stat_emojis[5]}: `{get_stat('mag_defense')}`**"
+            )
             
+            embed.add_field(name = "", value = embed_field, inline = False)
             await interaction.followup.send(embed = embed)
         except Exception as e:
             await interaction.followup.send(f"[ERROR]: While viewing monster, message: {e}")
