@@ -11,11 +11,11 @@
     - Strategičnost hry je zajištěna monstrami s různými statistikami, ke kterým hráč musí strategicky zvolit zbrań a její vedlejší ability 
 
 ## Commands:
- > Battle: Bojuj proti náhodným oponentům pro odměny nebo hráčům dle tvého výběru nebo svým týmům v rámci testování
- > Hunt: Sbírej monstra
- > Cash: tvoje konto
- > Pay: Zaplať ostatním uživatelům peníze
- > Team: Zobrazení tvého týmu
- > Coinflip: hoď mincí a měj šanci na výhru
- > Weapon: Zobraz individuální zbraň nebo celou kolekci
- > Monster: Zobraz individuální monstrum nebo celou kolekci
+ - Battle: Bojuj proti náhodným oponentům pro odměny nebo hráčům dle tvého výběru nebo svým týmům v rámci testování
+ - Hunt: Sbírej monstra
+ - Cash: tvoje konto
+ - Pay: Zaplať ostatním uživatelům peníze
+ - Team: Zobrazení tvého týmu
+ - Coinflip: hoď mincí a měj šanci na výhru
+ - Weapon: Zobraz individuální zbraň nebo celou kolekci
+ - Monster: Zobraz individuální monstrum nebo celou kolekci
